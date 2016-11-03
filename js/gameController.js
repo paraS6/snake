@@ -1,10 +1,13 @@
 
 window.alert("Welcome to PrisonSnake! Start game");
 
-var stage = new createjs.Stage("myCanvas");
-var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
-stage.addChild(playingfieldImg);
-stage.update();
+
+function start() {
+    var stage = new createjs.Stage("myCanvas");
+    var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
+    stage.addChild(playingfieldImg);
+    stage.update();
+}
 
 //NameSpacing ParaS6 (= Package, to avoid name conflicts)
 var ParaS6 = {
