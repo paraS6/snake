@@ -1,29 +1,38 @@
 
 window.alert("Welcome to PrisonSnake! Start game");
 
-stage = new createjs.Stage("myCanvas");
+var stage = new createjs.Stage("myCanvas");
+var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
+stage.addChild(playingfieldImg);
+stage.update();
 
 //NameSpacing ParaS6 (= Package, to avoid name conflicts)
 var ParaS6 = {
-        PlayingField : function () {
+    
+    models : {
+
+        PlayingField: function (level, levelSpeed) {
+            var _level = level;         //Andeuten der einzuhaltenden Privatheit durch Codekonvention: _name
+            var _levelSpeed = levelSpeed;
+            this.getLevel = function () { return _level;};
+            this.setLevel = function (newLevel) { return _level = newLevel; };
+            this.getLevelSpeed = function () {return _levelSpeed;};
+            this.setLevelSpeed = function (newLevelSpeed) {return _levelSpeed = newLevelSpeed; };
+        },
+        PrisonSnake: function () {
 
         }
-}
-
-var ParaS6 = {
-    PlayingFieldView : function () {
-
+    },
+    
+    views: {
+        
+        PlayingFieldView: function () {
+            this.drawPlayingField = function () {
+            };
+            this.updatePlayingField = function () {
+            };
+        },
+        PrisonSnakeView: function () {
+        }
     }
-}
-
-var ParaS6 = {
-    PrisonSnake : function () {
-
-    }
-}
-
-var ParaS6 = {
-    PrisonSnakeView : function () {
-
-    }
-}
+};
