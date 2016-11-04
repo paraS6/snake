@@ -1,12 +1,12 @@
 
 window.alert("Welcome to PrisonSnake! Start game");
-
+var stage = new createjs.Stage("myCanvas");
+var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
 
 function start() {
-    var stage = new createjs.Stage("myCanvas");
-    var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
-    stage.addChild(playingfieldImg);
-    stage.update();
+    var field = new ParaS6.views.PlayingFieldView();
+    field.drawPlayingField();
+
 }
 
 //NameSpacing ParaS6 (= Package, to avoid name conflicts)
@@ -31,6 +31,8 @@ var ParaS6 = {
         
         PlayingFieldView: function () {
             this.drawPlayingField = function () {
+                stage.addChild(playingfieldImg);
+                stage.update();
             };
             this.updatePlayingField = function () {
             };
