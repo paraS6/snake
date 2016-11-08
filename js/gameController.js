@@ -9,7 +9,7 @@ const SNAKE_MEMBER = 1;    //Felder von Schlange besetzt
 var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
 
 function start() {
-    var field = new ParaS6.views.PlayingFieldView();
+    var field = new Snake.Views.PlayingFieldView();
     field.drawPlayingField();
 
 }
