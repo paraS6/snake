@@ -2,20 +2,22 @@
 var stage = new createjs.Stage("myCanvas");
 
 var SNAKE_HEAD = 2;
-const WIDTH = stage.width - 300; //Breite vom Spielfeld
-const HEIGHT = stage.height - 100;   // Hoehe vom Spielfeld
-const CELL = 20;    //Zellengroesse
+const WIDTH = stage.canvas.width - 300; //Breite vom Spielfeld
+const HEIGHT = stage.canvas.height - 100;   // Hoehe vom Spielfeld
+const CELL = 50;    //Zellengroesse
 var EMPTY = 0;  //leeres Feld
     //Schlangenkopf
 const SNAKE_BODY = 1;
 
+//graphics
 var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
+var dummy = new createjs.Bitmap("img/chara_dummy1.png");
 
 function start() {
     //kreiere 2D Array
-    var grid = new Array(35);
-    for(var i = 0; i < 35; i++)
-        grid[i] = new Array(20);
+    var grid = new Array(WIDTH/CELL);
+    for(var i = 0; i < WIDTH/CELL; i++)
+        grid[i] = new Array(HEIGHT/CELL);
 
     var field = new Snake.Views.PlayingFieldView();
     var prisonSnake = new Snake.Models.PrisonSnake();
@@ -56,7 +58,6 @@ var Snake = {
                     }
                 }
                 //Set Head
-                window.alert(grid.length);
                 grid[5][5]= SNAKE_HEAD;
             }
         }
@@ -80,8 +81,10 @@ var Snake = {
                     for(var j = 0; j< grid.length; j++){
                         if(grid[i][j] == 2){
                             //draw head
-                            head.graphics.beginFill("green").drawRect(i*CELL, j*CELL, CELL, CELL);
-                            stage.addChild(head);
+                            //head.graphics.beginFill("green").drawRect(i*CELL, j*CELL, CELL, CELL);
+                            dummy.x=j*CELL;
+                            dummy.y=i*CELL;
+                            stage.addChild(dummy);
                         }
                     }
                 }
