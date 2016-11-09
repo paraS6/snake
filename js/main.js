@@ -18,6 +18,11 @@ var Snake = Snake || {};//NameSpacing ParaS6 (= Package, to avoid name conflicts
     KEYCODE_UP = 38,
     KEYCODE_DOWN = 40;
 
+    //Start Richtung der Schlange
+    var direction = "right";
+    //Variable fuer Richtungsaenderung
+    var newDirection;
+
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
     // lädt die Spielfigur (Schlangenelement) ins Canvas
@@ -34,15 +39,12 @@ var Snake = Snake || {};//NameSpacing ParaS6 (= Package, to avoid name conflicts
     var field = new Snake.Views.PlayingFieldView();
     var prisonSnake = new Snake.Models.PrisonSnake();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
-    var gameController = new Snake.Controlls.GameController();
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid);
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
-    // zeichnet Spielfeld und Schlange auf die Stage
-    field.drawPlayingField();
-    prisonSnakeView.drawSnake(grid);
-    stage.update();
 
-    // nimmt die Tastaturbefehle entgegen und löst weitere Aktionen aus
-    this.document.onkeydown = gameController.keyInput(event);
+    createjs.Ticker.setFPS(2);
+    createjs.Ticker.addEventListener("tick",gameController.gameLoop);
 
- }
+
+    }
