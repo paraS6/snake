@@ -90,3 +90,15 @@ Snake.Menue.Buttons = function (label, color, x, y) {
     _bc.addChild(startB, startTxt);
     return _bc;
 }
+//GameOverScreen
+Snake.Menue.GameOver = function () {
+    var _restartButton = new Snake.Menue.Buttons("restart", "white", 0, 0); //Startbutton erstellen
+    var _gameOverWindow = new Snake.Menue.StartMenue().menueWindow("GameOver", 0, 0); //Fenster erstellen
+    var _highScore = new Snake.Menue.Buttons("HighScore", "white",0, 100); //zurueck Button erstellen
+
+    //Fenster, Buttons und Eventlistener fuer das Instructionfenster
+    this.addGameOverView = function () {
+        stage.addChild(_gameOverWindow,_restartButton, _highScore);
+        stage.update();
+    }
+}

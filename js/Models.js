@@ -22,6 +22,16 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
                 grid[i][j]= EMPTY;
             }
          }
+           //setzt Rand
+            for(var i = 0; i< grid.length; i++){
+                grid[i][0] = 3;
+                grid[i][13] = 3;
+            }
+            //setzt Rand
+            for(var i = 0; i< 10; i++){
+                grid[0][i] = 3;
+                grid[9][i] = 3;
+            }
         // Setzt den Schlangenkopf fix auf Zelle 5/5
         grid[5][5]= SNAKE_HEAD;
          }
@@ -50,21 +60,25 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
                     if(grid[i][j] == 2 && !snakeHeadFound){     //Wenn der Schlangenkopf zum 1.Mal gefunden wurde
 
                         if(direction == "right"){
+                            this.collision(grid[i][j+1]);
                             grid[i][j+1] = SNAKE_HEAD;          //Neuen Kopf setzen
                             grid[i][j] = EMPTY;                 //Alten Kopf loeschen
                             snakeHeadFound = true;              //Schlangenkopf wurde bewegt
                         }
                         else if(direction == "left"){
+                            this.collision(grid[i][j-1]);
                             grid[i][j-1] = SNAKE_HEAD;
                             grid[i][j] = EMPTY;
                             snakeHeadFound = true;
                         }
                         else if(direction == "up"){
+                            this.collision(grid[i-1][j]);
                             grid[i-1][j] = SNAKE_HEAD;
                             grid[i][j] = EMPTY;
                             snakeHeadFound = true;
                         }
                         else if(direction == "down"){
+                            this.collision(grid[i+1][j]);
                             grid[i+1][j] = SNAKE_HEAD;
                             grid[i][j] = EMPTY;
                             snakeHeadFound = true;
@@ -75,4 +89,17 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
             }//Ende der Bewegung
 
         }//Ende Move Funktion
+        //GameOverScreen
+        this.collision = function (grid) {
+            var gameOver = new Snake.Menue.GameOver();
+            var prisonSnake = new Snake.Models.PrisonSnake();
+            if(grid == 3){
+
+                stage.removeAllChildren();
+                gameOver.addGameOverView();
+                prisonSnake.startCoords(grid);
+                Ticker.off;
+            }
+
+        }
     };

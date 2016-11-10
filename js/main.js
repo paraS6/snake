@@ -11,7 +11,7 @@
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_BODY = 1; // ein Torso-Teil der Schlange
     const SNAKE_HEAD = 2; // der Kopf der Schlange
-
+    const WALL = 3;
      // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
     const   KEYCODE_LEFT = 37,
     KEYCODE_RIGHT = 39,
