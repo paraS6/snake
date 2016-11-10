@@ -39,7 +39,7 @@ Snake.Views.ScoreView = function () {
         _scoreBg.graphics.beginFill("black").drawRect(WIDTH,0,stage.canvas.width-WIDTH, stage.canvas.height);
         //Text zentrieren
         _scoreTitle.x = WIDTH + ((stage.canvas.width-WIDTH)-_b.width)/2 ;
-        _scoreTitle.y = stage.canvas.height/4 ;
+        _scoreTitle.y = stage.canvas.height/4;
         _scoreContainer.addChild(_scoreBg, _scoreTitle);
         stage.addChild(_scoreContainer);
     }

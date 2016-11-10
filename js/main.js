@@ -32,7 +32,7 @@
 
 // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
-    var gameMenue = new Snake.Menue.startMenue();
+    var gameMenue = new Snake.Menue.StartMenue();
     gameMenue.addMenueView();
 }
     function addGameView() {
