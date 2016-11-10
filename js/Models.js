@@ -12,6 +12,7 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
     this.getLevelSpeed = function () {return _levelSpeed;};
     this.setLevelSpeed = function (newLevelSpeed) {return _levelSpeed = newLevelSpeed; };
     };
+
     //Logik der Schlange
     Snake.Models.PrisonSnake = function () {
         // durchläuft das Grid und setzt alle Felder auf EMPTY

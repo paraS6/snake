@@ -1,8 +1,8 @@
-//global namespace
-var Snake = Snake || {};//NameSpacing ParaS6 (= Package, to avoid name conflicts)
+    //global namespace
+    var Snake = Snake || {};//NameSpacing ParaS6 (= Package, to avoid name conflicts)
+
     //erstellt neue Stage innerhalb des Canvas
     var stage = new createjs.Stage("myCanvas");
-
     const WIDTH = stage.canvas.width - 300; //Breite vom Spielfeld
     const HEIGHT = stage.canvas.height - 100;   // Hoehe vom Spielfeld
     const CELL = 50;    //Zellengroesse
@@ -27,9 +27,27 @@ var Snake = Snake || {};//NameSpacing ParaS6 (= Package, to avoid name conflicts
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
     // lädt die Spielfigur (Schlangenelement) ins Canvas
     var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+    //[Title View]
+    
 
-    // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
-    function start() {
+// Main-Methode, welche beim Laden der HTML-Seite getriggert wird
+function Main() {
+    var gameMenue = new Snake.Menue.startMenue();
+    gameMenue.addMenueView();
+}
+    function addGameView() {
+        dummy.x=5*CELL;
+        dummy.y=5*CELL;
+        stage.addChild(playingfieldImg, dummy);
+        stage.update();
+        //playingfieldImg.addEventListener("click", function (event) {startGame()});
+        document.onkeydown = function (event) {
+            if(event.keyCode == 37||38||39||40)
+            startGame();
+        };
+    }
+    
+function startGame() {
     //kreiere 2D Array
     var grid = new Array(WIDTH/CELL);
     for(var i = 0; i < WIDTH/CELL; i++)
@@ -42,9 +60,8 @@ var Snake = Snake || {};//NameSpacing ParaS6 (= Package, to avoid name conflicts
     var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid);
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
-
+    
     createjs.Ticker.setFPS(2);
     createjs.Ticker.addEventListener("tick",gameController.gameLoop);
-
-
     }
+
