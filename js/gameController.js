@@ -2,11 +2,12 @@
 Snake.Controlls = {};
 
         // verarbeitet die Interaktionen des Nutzers
-        Snake.Controlls.GameController=function(field, prisonSnakeView, prisonSnake, grid) {
+        Snake.Controlls.GameController=function(field, prisonSnakeView, prisonSnake, grid, scoreView) {
             var _field = field;
             var _prisonSnakeView = prisonSnakeView;
             var _prisonSnake = prisonSnake;
             var _grid = grid;
+            var _scoreView = scoreView;
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function (event) {
                 
@@ -30,6 +31,7 @@ Snake.Controlls = {};
                 }
 
                 _field.drawPlayingField();
+                _scoreView.drawScore();
                 _prisonSnake.move(newDirection,_grid);
                 _prisonSnakeView.drawSnake(_grid);
                 stage.update();

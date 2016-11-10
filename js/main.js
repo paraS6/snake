@@ -36,9 +36,12 @@ function Main() {
     gameMenue.addMenueView();
 }
     function addGameView() {
+        var prisonSnakeScore = new Snake.Views.ScoreView();
+
         dummy.x=5*CELL;
         dummy.y=5*CELL;
         stage.addChild(playingfieldImg, dummy);
+        prisonSnakeScore.drawScore();
         stage.update();
         //playingfieldImg.addEventListener("click", function (event) {startGame()});
         document.onkeydown = function (event) {
@@ -57,11 +60,12 @@ function startGame() {
     var field = new Snake.Views.PlayingFieldView();
     var prisonSnake = new Snake.Models.PrisonSnake();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid);
+    var prisonSnakeScore = new Snake.Views.ScoreView();
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid, prisonSnakeScore);
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
     
     createjs.Ticker.setFPS(2);
     createjs.Ticker.addEventListener("tick",gameController.gameLoop);
-    }
+}
 

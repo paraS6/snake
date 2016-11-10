@@ -14,7 +14,7 @@ Snake.Views.PlayingFieldView = function () {
 
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
-        var head = new createjs.Shape();
+        var _head = new createjs.Shape();
 
         this.drawSnake = function (grid) {
             // durchläuft das Array und zeichnet beim Unique Value '2' den Schlangenkopf
@@ -29,3 +29,18 @@ Snake.Views.PrisonSnakeView = function () {
             }
         }
     };
+Snake.Views.ScoreView = function () {
+    var _scoreContainer = new createjs.Container();
+    var _scoreBg = new createjs.Shape();    //Hintergrund von Score
+    var _scoreTitle = new createjs.Text("Score", "40px pixel", "white"); //Ueberschrift
+    var _scoreTXT = new createjs.Text();    //Scoreanzeige
+    var _b = _scoreTitle.getBounds();
+    this.drawScore  = function () {
+        _scoreBg.graphics.beginFill("black").drawRect(WIDTH,0,stage.canvas.width-WIDTH, stage.canvas.height);
+        //Text zentrieren
+        _scoreTitle.x = WIDTH + ((stage.canvas.width-WIDTH)-_b.width)/2 ;
+        _scoreTitle.y = stage.canvas.height/4 ;
+        _scoreContainer.addChild(_scoreBg, _scoreTitle);
+        stage.addChild(_scoreContainer);
+    }
+};
