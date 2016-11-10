@@ -27,29 +27,31 @@
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
     // lädt die Spielfigur (Schlangenelement) ins Canvas
     var dummy = new createjs.Bitmap("img/chara_dummy1.png");
-    //[Title View]
     
 
 // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
     var gameMenue = new Snake.Menue.StartMenue();
-    gameMenue.addMenueView();
+    gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
 }
+    //Spielfeld wird gezeichnet => Spiel muss mit Tastatur gestartet werden
     function addGameView() {
         var prisonSnakeScore = new Snake.Views.ScoreView();
-
+        //Figur wird gezeichnet
         dummy.x=5*CELL;
         dummy.y=5*CELL;
         stage.addChild(playingfieldImg, dummy);
-        prisonSnakeScore.drawScore();
+        prisonSnakeScore.drawScore();   //Scorefenster wird gezeichnet
         stage.update();
-        //playingfieldImg.addEventListener("click", function (event) {startGame()});
+
         document.onkeydown = function (event) {
-            if(event.keyCode == 37||38||39||40)
-            startGame();
+            if(event.keyCode == 37||38||39||40){
+                stage.removeAllChildren()   //erst alle anderen Elemente aus dem Stack entfernen
+                startGame();
+            }
         };
     }
-    
+ //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
     //kreiere 2D Array
     var grid = new Array(WIDTH/CELL);
