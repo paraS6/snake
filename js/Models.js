@@ -20,22 +20,27 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
         this.startCoords = function (grid) {
             
             //TODO: for schleife checken (x und y vertauscht)    
-        for(var i = 0; i< grid.length; i++){
-            for(var j = 0; j< grid.length; j++){
+        for(var i = 0; i < grid.length; i++){
+            for(var j = 0; j< grid[i].length; j++){
                 grid[i][j]= EMPTY;
             }
          }
 
             //TODO: Konstanten benutzen!!!
-            // setzt Rand
+            /*/ setzt Rand
+            console.log("grid.length"+grid.length);
+            console.log("W/cell"+WIDTH/CELL);
+            console.log("h/cell"+HEIGHT/CELL);
+            console.log("w"+WIDTH);
+            console.log("h"+HEIGHT);*/
             for(var i = 0; i< grid.length; i++){
                 grid[i][0] = WALL;
-                grid[i][WIDTH/CELL] = WALL;
+                grid[i][(HEIGHT/CELL) -1] = WALL;
             }
             //setzt Rand
-            for(var i = 0; i< 10; i++){
+            for(var i = 0; i< HEIGHT/CELL; i++){
                 grid[0][i] = WALL;
-                grid[HEIGHT/CELL][i] = WALL;
+                grid[(WIDTH/CELL)-1][i] = WALL;
             }
         // Setzt den Schlangenkopf fix auf Zelle 5/5
         grid[5][5]= SNAKE_HEAD;
@@ -61,30 +66,30 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
             var snakeHeadFound = false;     //Variable zum pruefen ob die Schlange bereits bewegt wurde
 
             for(var i = 0; i < grid.length; i++){
-                for(var j = 0; j < grid.length; j++){
+                for(var j = 0; j < grid[i].length; j++){
                     if(grid[i][j] == SNAKE_HEAD && !snakeHeadFound){     //Wenn der Schlangenkopf zum 1.Mal gefunden wurde
 
                         if(direction == "right"){
-                            this.collision(grid[i][j+1]);
-                            grid[i][j+1] = SNAKE_HEAD;          //Neuen Kopf setzen
+                            this.collision(grid[i+1][j]);
+                            grid[i+1][j] = SNAKE_HEAD;          //Neuen Kopf setzen
                             grid[i][j] = EMPTY;                 //Alten Kopf loeschen
                             snakeHeadFound = true;              //Schlangenkopf wurde bewegt
                         }
                         else if(direction == "left"){
-                            this.collision(grid[i][j-1]);
-                            grid[i][j-1] = SNAKE_HEAD;
-                            grid[i][j] = EMPTY;
-                            snakeHeadFound = true;
-                        }
-                        else if(direction == "up"){
                             this.collision(grid[i-1][j]);
                             grid[i-1][j] = SNAKE_HEAD;
                             grid[i][j] = EMPTY;
                             snakeHeadFound = true;
                         }
+                        else if(direction == "up"){
+                            this.collision(grid[i][j-1]);
+                            grid[i][j-1] = SNAKE_HEAD;
+                            grid[i][j] = EMPTY;
+                            snakeHeadFound = true;
+                        }
                         else if(direction == "down"){
-                            this.collision(grid[i+1][j]);
-                            grid[i+1][j] = SNAKE_HEAD;
+                            this.collision(grid[i][j+1]);
+                            grid[i][j+1] = SNAKE_HEAD;
                             grid[i][j] = EMPTY;
                             snakeHeadFound = true;
                         }

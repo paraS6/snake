@@ -38,9 +38,9 @@ function Main() {
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
     //kreiere 2D Array
-    var grid = new Array(WIDTH/CELL);
+    var grid = new Array(WIDTH/CELL); //grid.length = 14;
     for(var i = 0; i < WIDTH/CELL; i++)
-    grid[i] = new Array(HEIGHT/CELL);
+    grid[i] = new Array(HEIGHT/CELL); //grid.length = 10;
 
     // erstellt Instanzen folgender Klassen
     var field = new Snake.Views.PlayingFieldView();

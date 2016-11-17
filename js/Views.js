@@ -19,14 +19,24 @@ Snake.Views.PrisonSnakeView = function () {
         this.drawSnake = function (grid) {
             // durchläuft das Array und zeichnet beim Unique Value '2' den Schlangenkopf
             for(var i = 0; i< grid.length; i++){
-                for(var j = 0; j< grid.length; j++){
+                for(var j = 0; j< grid[i].length; j++){
                     if(grid[i][j] == SNAKE_HEAD){
-                        dummy.x=j*CELL;
-                        dummy.y=i*CELL;
+                        dummy.x=i*CELL;
+                        dummy.y=j*CELL;
+                        console.log("x: "+i*CELL);
+                        console.log("y: "+j*CELL);
                         stage.addChild(dummy);
+                    }
+                    if(grid[i][j] == WALL){
+                        var wall = new createjs.Shape();
+                        wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
+                        stage.addChild(wall);
                     }
                 }
             }
+
+
+
         }
     };
 Snake.Views.ScoreView = function () {
