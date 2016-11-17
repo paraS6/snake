@@ -134,10 +134,13 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
 
         //setzt Collectibles auf eine zufällige Position
         this.randomPosition = function () {
-            var randX = Math.floor(Math.random()*700);
-            var randY = Math.floor(Math.random()*600);
+            var randX = Math.floor(Math.random()*13);
+            var randY = Math.floor(Math.random()*9);
+            
+            if(grid[randX][randY] == ITEM){
 
-            grid[randX][randY];
+                grid[randX][randY];
+            }
         }
 
     }; //Ende Snake.Models.Collectibles

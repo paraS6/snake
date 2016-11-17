@@ -53,7 +53,7 @@ Snake.Views.CollectiblesView = function () {
     this.drawItem = function (grid) {
         for(var i = 0; i< grid.length; i++){
             for(var j = 0; j< grid.length; j++){
-                if(grid[i][j] == 4){
+                if(grid[i][j] == ITEM){
                     dummyItem.x=j*CELL;
                     dummyItem.y=i*CELL;
                     stage.addChild(dummyItem);

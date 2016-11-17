@@ -45,7 +45,7 @@ function Main() {
         //Figur wird gezeichnet
         dummy.x=5*CELL;
         dummy.y=5*CELL;
-      
+        
         stage.addChild(playingfieldImg, dummy);
         prisonSnakeScore.drawScore();   //Scorefenster wird gezeichnet
         stage.update();
