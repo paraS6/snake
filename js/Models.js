@@ -14,15 +14,20 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
     };
 
     //Logik der Schlange
+    
     Snake.Models.PrisonSnake = function () {
         // durchläuft das Grid und setzt alle Felder auf EMPTY
         this.startCoords = function (grid) {
+            
+            //TODO: for schleife checken (x und y vertauscht)    
         for(var i = 0; i< grid.length; i++){
             for(var j = 0; j< grid.length; j++){
                 grid[i][j]= EMPTY;
             }
          }
-           //setzt Rand
+
+            //TODO: Konstanten benutzen!!!
+            // setzt Rand
             for(var i = 0; i< grid.length; i++){
                 grid[i][0] = 3;
                 grid[i][13] = 3;

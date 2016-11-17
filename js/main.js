@@ -43,7 +43,8 @@ function Main() {
         stage.addChild(playingfieldImg, dummy);
         prisonSnakeScore.drawScore();   //Scorefenster wird gezeichnet
         stage.update();
-
+        
+        //TODO: keyCodes in mehrere if-Anweisungen auslagern
         document.onkeydown = function (event) {
             if(event.keyCode == 37||38||39||40){
                 stage.removeAllChildren()   //erst alle anderen Elemente aus dem Stack entfernen

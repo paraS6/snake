@@ -10,7 +10,8 @@ Snake.Controlls = {};
             var _scoreView = scoreView;
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function (event) {
-                
+
+                //TODO: onkeydown in eigene Methode auslagern
                 document.onkeydown = function (event) {
                     var keyCode = window.event.keyCode;
                         keyCode = event.keyCode;
