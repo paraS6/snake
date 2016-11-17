@@ -11,26 +11,7 @@ Snake.Controlls = {};
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function (event) {
 
-                //TODO: onkeydown in eigene Methode auslagern
-                document.onkeydown = function (event) {
-                    var keyCode = window.event.keyCode;
-                        keyCode = event.keyCode;
-                    switch(keyCode) {
-                        case KEYCODE_LEFT:
-                            newDirection = "left";
-                            break;
-                        case KEYCODE_RIGHT:
-                            newDirection = "right";
-                            break;
-                        case KEYCODE_UP:
-                            newDirection = "up";
-                            break;
-                        case KEYCODE_DOWN:
-                            newDirection = "down";
-                            break;
-                    }
-                }
-
+                document.onkeydown = keyInput;
                 _field.drawPlayingField();
                 _scoreView.drawScore();
                 _prisonSnake.move(newDirection,_grid);
@@ -38,26 +19,24 @@ Snake.Controlls = {};
                 stage.update();
             };
 
-            // übersetzt keyInput in direction                  Kann nicht direkt aus dem Gameloop aufgerufen werden, deshalb die unbenamte Funktion(macht genau das gleiche)
- /*           this.keyInput = function(event){
-
+            // übersetzt keyInput in newDirection
+            function keyInput(event){
 
                 switch(event.keyCode) {
                     case KEYCODE_LEFT:
-                        direction = "left";
+                        newDirection = "left";
                         break;
                     case KEYCODE_RIGHT:
-                        direction = "right";
+                        newDirection = "right";
                         break;
                     case KEYCODE_UP:
-                        direction = "up";
+                        newDirection = "up";
                         break;
                     case KEYCODE_DOWN:
-                        direction = "down";
+                        newDirection = "down";
                         break;
                 }
-                console.log(event.keyCode);
 
-            }; */
+            }; 
         }
     
