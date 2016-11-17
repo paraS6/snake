@@ -34,24 +34,7 @@ function Main() {
     var gameMenue = new Snake.Menue.StartMenue();
     gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
 }
-    //Spielfeld wird gezeichnet => Spiel muss mit Tastatur gestartet werden
-    function addGameView() {
-        var prisonSnakeScore = new Snake.Views.ScoreView();
-        //Figur wird gezeichnet
-        dummy.x=5*CELL;
-        dummy.y=5*CELL;
-        stage.addChild(playingfieldImg, dummy);
-        prisonSnakeScore.drawScore();   //Scorefenster wird gezeichnet
-        stage.update();
-        
-        //TODO: keyCodes in mehrere if-Anweisungen auslagern
-        document.onkeydown = function (event) {
-            if(event.keyCode == 37||38||39||40){
-                stage.removeAllChildren()   //erst alle anderen Elemente aus dem Stack entfernen
-                startGame();
-            }
-        };
-    }
+
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
     //kreiere 2D Array

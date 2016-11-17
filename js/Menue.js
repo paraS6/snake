@@ -30,7 +30,7 @@ Snake.Menue.StartMenue = function() {
 
             // Button Listeners
             _startButton.addEventListener("click", function (event) {   //startet Spiel
-                addGameView();
+                startGame();
                 stage.removeAllChildren()
             });
             _instButton.addEventListener("click", function (event) {    //fuehrt zum Instructionfenster
