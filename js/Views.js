@@ -10,7 +10,7 @@ Snake.Views.PlayingFieldView = function () {
         };
         this.updatePlayingField = function () {
         };
-    };
+};
 
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
@@ -28,7 +28,8 @@ Snake.Views.PrisonSnakeView = function () {
                 }
             }
         }
-    };
+};
+
 Snake.Views.ScoreView = function () {
     var _scoreContainer = new createjs.Container();
     var _scoreBg = new createjs.Shape();    //Hintergrund von Score
@@ -42,5 +43,22 @@ Snake.Views.ScoreView = function () {
         _scoreTitle.y = stage.canvas.height/4;
         _scoreContainer.addChild(_scoreBg, _scoreTitle);
         stage.addChild(_scoreContainer);
+    }
+};
+
+Snake.Views.CollectiblesView = function () {
+    var _item = new createjs.Shape();
+
+    //zeichnet Items auf das Spielfeld beim Value 4
+    this.drawItem = function (grid) {
+        for(var i = 0; i< grid.length; i++){
+            for(var j = 0; j< grid.length; j++){
+                if(grid[i][j] == 4){
+                    dummyItem.x=j*CELL;
+                    dummyItem.y=i*CELL;
+                    stage.addChild(dummyItem);
+                }
+            }
+        }
     }
 };

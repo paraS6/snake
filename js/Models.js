@@ -16,12 +16,14 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
     //Logik der Schlange
     Snake.Models.PrisonSnake = function () {
         // durchläuft das Grid und setzt alle Felder auf EMPTY
+        //TODO: for schleife checken (x und y vertauscht)
         this.startCoords = function (grid) {
         for(var i = 0; i< grid.length; i++){
             for(var j = 0; j< grid.length; j++){
                 grid[i][j]= EMPTY;
             }
          }
+            //TODO: Konstanten benutzen!!!
            //setzt Rand
             for(var i = 0; i< grid.length; i++){
                 grid[i][0] = 3;
@@ -103,3 +105,39 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
 
         }
     };
+
+    //Model der Klasse Collectibles
+    Snake.Models.Collectibles = function () {
+
+        //Variablen
+        var _id, _type, _disappear, _collision;
+
+        //setzt die ID auf die aktuelle ID
+        this.setCollectiblesId = function(id){
+            _id = id;
+        }
+
+        //gibt die aktuelle ID zurück
+        this.getCollectiblesId = function () {
+            return _id;
+        }
+
+        //gibt die aktuelle Collision zurück
+        this.getCollectiblesCollision= function () {
+            return _collision;
+        }
+
+        //setzt die Variable disappear
+        this.setCollectiblesDisappear = function (disappear) {
+            _disappear = disappear;
+        }
+
+        //setzt Collectibles auf eine zufällige Position
+        this.randomPosition = function () {
+            var randX = Math.floor(Math.random()*700);
+            var randY = Math.floor(Math.random()*600);
+
+            grid[randX][randY];
+        }
+
+    }; //Ende Snake.Models.Collectibles

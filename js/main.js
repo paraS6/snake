@@ -11,8 +11,10 @@
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_BODY = 1; // ein Torso-Teil der Schlange
     const SNAKE_HEAD = 2; // der Kopf der Schlange
-    const WALL = 3;
-     // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
+    const WALL = 3; // die Wand
+    const ITEM = 4; //ein Item
+    
+    // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
     const   KEYCODE_LEFT = 37,
     KEYCODE_RIGHT = 39,
     KEYCODE_UP = 38,
@@ -28,6 +30,9 @@
     // lädt die Spielfigur (Schlangenelement) ins Canvas
     var dummy = new createjs.Bitmap("img/chara_dummy1.png");
     
+    //lädt Item ins Canvas
+    var dummyItem = new createjs.Bitmap("img/chara_dummy1.png");
+    
 
 // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
@@ -40,10 +45,12 @@ function Main() {
         //Figur wird gezeichnet
         dummy.x=5*CELL;
         dummy.y=5*CELL;
+      
         stage.addChild(playingfieldImg, dummy);
         prisonSnakeScore.drawScore();   //Scorefenster wird gezeichnet
         stage.update();
 
+        //TODO: keyCodes in mehrere if-Anweisungen auslagern
         document.onkeydown = function (event) {
             if(event.keyCode == 37||38||39||40){
                 stage.removeAllChildren()   //erst alle anderen Elemente aus dem Stack entfernen
@@ -63,6 +70,8 @@ function startGame() {
     var prisonSnake = new Snake.Models.PrisonSnake();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
     var prisonSnakeScore = new Snake.Views.ScoreView();
+    //var collectiblesView = new Snake.CollectiblesView();
+    //var collectibles = new Snake.Collectibles();
     var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid, prisonSnakeScore);
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
