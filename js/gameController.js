@@ -8,15 +8,22 @@ Snake.Controlls = {};
             var _prisonSnake = prisonSnake;
             var _grid = grid;
             var _scoreView = scoreView;
+            var _gameOver = new Snake.Menue.GameOver();
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function (event) {
-
+                if(createjs.Ticker.paused == false){
                 document.onkeydown = keyInput;
                 _field.drawPlayingField();
                 _scoreView.drawScore();
                 _prisonSnake.move(newDirection,_grid);
                 _prisonSnakeView.drawSnake(_grid);
                 stage.update();
+                }else{
+                    _gameOver.addGameOverView();
+                    //prisonSnake.startCoords(grid);
+                    //createjs.Ticker.removeEventListener("tick", gameLoop());
+                    console.log("tick");
+                }
             };
 
             // übersetzt keyInput in newDirection

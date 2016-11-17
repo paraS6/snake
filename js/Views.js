@@ -20,7 +20,7 @@ Snake.Views.PrisonSnakeView = function () {
             // durchläuft das Array und zeichnet beim Unique Value '2' den Schlangenkopf
             for(var i = 0; i< grid.length; i++){
                 for(var j = 0; j< grid.length; j++){
-                    if(grid[i][j] == 2){
+                    if(grid[i][j] == SNAKE_HEAD){
                         dummy.x=j*CELL;
                         dummy.y=i*CELL;
                         stage.addChild(dummy);
