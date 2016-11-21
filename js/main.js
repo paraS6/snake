@@ -38,7 +38,9 @@ function Main() {
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
 
-
+    
+    //GameOverScreen erstellen
+    var gameOver = new Snake.Menue.GameOver();
     //kreiere 2D Array
     var grid = new Array((gridWidth)); //grid.length = 14;
     for(var i = 0; i < gridWidth; i++)
@@ -55,6 +57,20 @@ function startGame() {
     prisonSnake.startCoords(grid);
 
     createjs.Ticker.setFPS(2);
-    createjs.Ticker.addEventListener("tick",gameController.gameLoop);
+    createjs.Ticker.addEventListener("tick",handleTick);
+    createjs.Ticker.paused = false;
+    
+    //Ueberpruefen des Tickers
+    function handleTick(){
+        if(createjs.Ticker.paused == false){
+            gameController.gameLoop();
+        }
+        else{
+            console.log("tot");
+            createjs.Ticker.removeEventListener("tick",handleTick);
+            gameOver.addGameOverView();
+        }
+    }//end handleTick
+    
 }//end startGame
 

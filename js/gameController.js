@@ -8,11 +8,9 @@ Snake.Controlls = {};
             var _prisonSnake = prisonSnake;
             var _grid = grid;
             var _scoreView = scoreView;
-            var _gameOver = new Snake.Menue.GameOver();
+            
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {
-
-                if(createjs.Ticker.paused == false){
 
                 document.onkeydown = keyInput;
                 _field.drawPlayingField();
@@ -21,11 +19,6 @@ Snake.Controlls = {};
                 _prisonSnakeView.drawSnake(_grid);
                 stage.update();
 
-                }else{
-                    createjs.Ticker.paused = true;
-                    _gameOver.addGameOverView();
-                    console.log("tick");
-                }
             }; //end gameLoop
            
             // übersetzt keyInput in newDirection

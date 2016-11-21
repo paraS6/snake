@@ -106,6 +106,7 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
 
                 stage.removeAllChildren();
                 createjs.Ticker.paused = true;
+                
             }
         }
     };//end PrisonSnake
