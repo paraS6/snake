@@ -18,12 +18,10 @@
     KEYCODE_RIGHT = 39,
     KEYCODE_UP = 38,
     KEYCODE_DOWN = 40;
-
-    //Start Richtung der Schlange
-    var direction = "right";
+    
     //Variable fuer Richtungsaenderung
     var newDirection;
-
+    var _direction;
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
     // lädt die Spielfigur (Schlangenelement) ins Canvas
@@ -37,7 +35,6 @@ function Main() {
 
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
-
 
     //kreiere 2D Array
     var grid = new Array((gridWidth)); //grid.length = 14;
@@ -54,7 +51,7 @@ function startGame() {
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
 
-    createjs.Ticker.setFPS(2);
+    createjs.Ticker.setFPS(20);
     createjs.Ticker.addEventListener("tick",gameController.gameLoop);
 }//end startGame
 

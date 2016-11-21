@@ -9,17 +9,20 @@ Snake.Controlls = {};
             var _grid = grid;
             var _scoreView = scoreView;
             var _gameOver = new Snake.Menue.GameOver();
+            var _direction;
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {
 
                 if(createjs.Ticker.paused == false){
+                    document.onkeydown = keyInput;
+                    _direction = _prisonSnake.nextDirection(newDirection, dummy.x, dummy.y);
+                    _field.drawPlayingField();
+                    _scoreView.drawScore();
+                    _prisonSnake.move(_direction, _grid);
+                    _prisonSnakeView.drawSnake(_direction,_grid);
 
-                document.onkeydown = keyInput;
-                _field.drawPlayingField();
-                _scoreView.drawScore();
-                _prisonSnake.move(newDirection,_grid);
-                _prisonSnakeView.drawSnake(_grid);
-                stage.update();
+
+                    stage.update();
 
                 }else{
                     createjs.Ticker.paused = true;
