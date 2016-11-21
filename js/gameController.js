@@ -2,7 +2,7 @@
 Snake.Controlls = {};
 
         // verarbeitet die Interaktionen des Nutzers
-        Snake.Controlls.GameController=function(field, prisonSnakeView, prisonSnake, grid, scoreView) {
+        Snake.Controlls.GameController=function(field, prisonSnakeView, prisonSnake, grid, scoreView, gameController) {
             var _field = field;
             var _prisonSnakeView = prisonSnakeView;
             var _prisonSnake = prisonSnake;
@@ -10,22 +10,24 @@ Snake.Controlls = {};
             var _scoreView = scoreView;
             var _gameOver = new Snake.Menue.GameOver();
             //Pro Loop wird folgendes ausgefuehrt
-            this.gameLoop = function (event) {
+            this.gameLoop = function () {
+
                 if(createjs.Ticker.paused == false){
+
                 document.onkeydown = keyInput;
                 _field.drawPlayingField();
                 _scoreView.drawScore();
                 _prisonSnake.move(newDirection,_grid);
                 _prisonSnakeView.drawSnake(_grid);
                 stage.update();
+
                 }else{
+                    createjs.Ticker.paused = true;
                     _gameOver.addGameOverView();
-                    //prisonSnake.startCoords(grid);
-                    //createjs.Ticker.removeEventListener("tick", gameLoop());
                     console.log("tick");
                 }
-            };
-
+            }; //end gameLoop
+           
             // übersetzt keyInput in newDirection
             function keyInput(event){
 
@@ -44,6 +46,6 @@ Snake.Controlls = {};
                         break;
                 }
 
-            }; 
-        }
+            }; //end keyInput
+        }//end GameController
     

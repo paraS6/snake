@@ -34,11 +34,8 @@ Snake.Views.PrisonSnakeView = function () {
                     }
                 }
             }
-
-
-
-        }
-    };
+        }//end drawSnake
+    }; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
     var _scoreContainer = new createjs.Container();
     var _scoreBg = new createjs.Shape();    //Hintergrund von Score
@@ -52,5 +49,5 @@ Snake.Views.ScoreView = function () {
         _scoreTitle.y = stage.canvas.height/4;
         _scoreContainer.addChild(_scoreBg, _scoreTitle);
         stage.addChild(_scoreContainer);
-    }
-};
+    }//end drawScore
+}; //end ScoreView

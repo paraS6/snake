@@ -11,7 +11,7 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
     this.setLevel = function (newLevel) { return _level = newLevel; };
     this.getLevelSpeed = function () {return _levelSpeed;};
     this.setLevelSpeed = function (newLevelSpeed) {return _levelSpeed = newLevelSpeed; };
-    };
+    };//end PlayingField
 
     //Logik der Schlange
     
@@ -35,16 +35,16 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
             console.log("h"+HEIGHT);*/
             for(var i = 0; i< grid.length; i++){
                 grid[i][0] = WALL;
-                grid[i][(HEIGHT/CELL) -1] = WALL;
+                grid[i][(gridHeigth) -1] = WALL;
             }
             //setzt Rand
-            for(var i = 0; i< HEIGHT/CELL; i++){
+            for(var i = 0; i< gridHeigth; i++){
                 grid[0][i] = WALL;
-                grid[(WIDTH/CELL)-1][i] = WALL;
+                grid[(gridWidth)-1][i] = WALL;
             }
         // Setzt den Schlangenkopf fix auf Zelle 5/5
         grid[5][5]= SNAKE_HEAD;
-         }
+         }//end startCoords
         //staendige Fortbewegung der Schlange
         this.move = function (newDirection, grid) {
             
@@ -105,9 +105,7 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
             if(grid == WALL){
 
                 stage.removeAllChildren();
-                
                 createjs.Ticker.paused = true;
             }
-
         }
-    };
+    };//end PrisonSnake
