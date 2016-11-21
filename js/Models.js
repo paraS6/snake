@@ -44,6 +44,10 @@ Snake.Models.PrisonSnake = function () {
         }
         // Setzt den Schlangenkopf fix auf Zelle 5/5
         grid[5][5]= SNAKE_HEAD;
+       var s = new Snake.Models.Collectibles();
+        s.randomPosition(grid);
+        
+
     }//end startCoords
     //staendige Fortbewegung der Schlange
     this.move = function (newDirection, grid) {
@@ -138,14 +142,14 @@ Snake.Models.PrisonSnake = function () {
         }
 
         //setzt Collectibles auf eine zufällige Position
-        this.randomPosition = function () {
-            var randX = Math.floor(Math.random()*13);
-            var randY = Math.floor(Math.random()*9);
+        this.randomPosition = function (grid) {
+            var randX = Math.floor(Math.random()*18);
+            var randY = Math.floor(Math.random()*12);
             
-            if(grid[randX][randY] == ITEM){
+           // if(grid[randX][randY] == ITEM){
 
-                grid[randX][randY];
-            }
+               return grid[randX][randY];
+            //}
         }
 
     }; //Ende Snake.Models.Collectibles

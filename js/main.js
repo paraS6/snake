@@ -54,8 +54,9 @@ function startGame() {
     var prisonSnake = new Snake.Models.PrisonSnake();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
     var prisonSnakeScore = new Snake.Views.ScoreView();
-
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid, prisonSnakeScore);
+    var collectibles = new Snake.Models.Collectibles();
+    var collectibleView = new Snake.Views.CollectibleView();
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid, prisonSnakeScore, collectibleView, collectibles);
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
 

@@ -52,7 +52,8 @@ Snake.Views.ScoreView = function () {
         stage.addChild(_scoreContainer);
     }//end drawScore
 }; //end ScoreView
-Snake.Views.CollectiblesView = function () {
+
+Snake.Views.CollectibleView = function () {
     var _item = new createjs.Shape();
 
     //zeichnet Items auf das Spielfeld beim Value 4

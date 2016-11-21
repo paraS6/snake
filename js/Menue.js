@@ -4,44 +4,47 @@ Snake.Menue = {};
 //StartMenue, Instructions & Fenster, Buttons
 Snake.Menue.StartMenue = function() {
 
-        var _startButton = new Snake.Menue.Buttons("start", "white", 0, 0); //Startbutton erstellen
-        var _instButton = new Snake.Menue.Buttons("about", "white", 0, 100); //Instructionbutton erstellen
+    var _startButton = new Snake.Menue.Buttons("start", "white", 0, 0); //Startbutton erstellen
+    var _instButton = new Snake.Menue.Buttons("about", "white", 0, 100); //Instructionbutton erstellen
 
-        //erstellt ein MenueFenster mit Ueberschrift
-        this.menueWindow = function (title, x, y) {
-            var _window = new createjs.Container(); //Containerelement, das dann Hintergrund und Ueberschrift enthaelt
-            var _mainbg = new createjs.Shape(); //Hintergrund vom Fenster
-            var _title = new createjs.Text(title, "80px pixel", "white");   //Ueberschrift
-            var _x = x; //verschiebt Ueberschrift auf xAchse
-            var _y = y; //verschiebt Ueberschrift auf yAchse
-            //Text zentrieren
-            var b = _title.getBounds();
-            _title.x = (stage.canvas.width - b.width)/2 +x;
-            _title.y = (stage.canvas.height/4) +y;
-            _mainbg.graphics.beginFill("black").drawRect(0,0,stage.canvas.width, stage.canvas.height); //Hintergrund
-             _window.addChild(_mainbg, _title);
-            return _window;
-        }
-        //erstellt Startfenster den Spiels
-        this.addMenueView = function () {
-            var startWindow = this.menueWindow("PrisonSnake", 0, 0); //erstellt neues Menuefenster
-            stage.addChild(startWindow, _startButton, _instButton);
-            stage.update();
+    //erstellt ein MenueFenster mit Ueberschrift
+    this.menueWindow = function (title, x, y) {
+        var _window = new createjs.Container(); //Containerelement, das dann Hintergrund und Ueberschrift enthaelt
+        var _mainbg = new createjs.Shape(); //Hintergrund vom Fenster
+        var _title = new createjs.Text(title, "80px pixel", "white");   //Ueberschrift
+        var _x = x; //verschiebt Ueberschrift auf xAchse
+        var _y = y; //verschiebt Ueberschrift auf yAchse
+        //Text zentrieren
+        var b = _title.getBounds();
+        _title.x = (stage.canvas.width - b.width)/2 +x;
+        _title.y = (stage.canvas.height/4) +y;
+        _mainbg.graphics.beginFill("black").drawRect(0,0,stage.canvas.width, stage.canvas.height); //Hintergrund
+        _window.addChild(_mainbg, _title);
+        return _window;
+    }//endMenueWindow
+    //erstellt Startfenster den Spiels
+    this.addMenueView = function () {
+        var startWindow = this.menueWindow("PrisonSnake", 0, 0); //erstellt neues Menuefenster
+        stage.addChild(startWindow, _startButton, _instButton);
+        stage.update();
 
-            // Button Listeners
-            _startButton.addEventListener("click", function (event) {   //startet Spiel
-                addGameView();
-                stage.removeAllChildren()
-            });
-            _instButton.addEventListener("click", function (event) {    //fuehrt zum Instructionfenster
-                var _instWindow = new Snake.Menue.Instructions;
-                stage.removeAllChildren();
-                _instWindow.addInstructionView();
+        // Button Listeners
+        _startButton.addEventListener("click", function (event) {   //startet Spiel
+            stage.removeAllChildren();
+            startGame();
 
-            });
-    }
-    
-}
+        });
+        _instButton.addEventListener("click", function (event) {    //fuehrt zum Instructionfenster
+            var _instWindow = new Snake.Menue.Instructions;
+            stage.removeAllChildren();
+            _instWindow.addInstructionView();
+
+        });
+        //End ButtonListeners
+
+    }//end addMenueView
+
+}//end StartMenue
 //Klasse fuegt Instructionfenster hinzu
 Snake.Menue.Instructions = function () {
     var _startButton = new Snake.Menue.Buttons("start", "white", 0, 0); //Startbutton erstellen
@@ -56,17 +59,17 @@ Snake.Menue.Instructions = function () {
         //Button Listeners
         _startButton.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren()   //erst alle Elemente von Stage entfernen
-            addGameView();  //Spielfeld wird gezeichntet
+            startGame();  //Spielfeld wird gezeichntet
 
         })
         _instBack.addEventListener("click", function (event) {      //zurueck zum Startmenue
             var gameMenue = new Snake.Menue.StartMenue();
             stage.removeAllChildren() //erst alle Elemente von Stage entfernen
             gameMenue.addMenueView();
-
         })
-    }
-}
+        //end Button Listeners
+    }//end addInstructionsView
+}//end Instructions
 
 
 //Klasse um neue Buttons zur erstellen
@@ -89,7 +92,7 @@ Snake.Menue.Buttons = function (label, color, x, y) {
     startB.y = (stage.canvas.height/2)+y;
     _bc.addChild(startB, startTxt);
     return _bc;
-}
+}//Buttons
 //GameOverScreen
 Snake.Menue.GameOver = function () {
     var _restartButton = new Snake.Menue.Buttons("restart", "white", 0, 0); //Startbutton erstellen
@@ -98,7 +101,17 @@ Snake.Menue.GameOver = function () {
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addGameOverView = function () {
+
         stage.addChild(_gameOverWindow,_restartButton, _highScore);
         stage.update();
-    }
-}
+
+        //Button Listeners
+        _restartButton.addEventListener("click", function (event) {   //startet Spiel
+            //console.log("restart");
+            stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+            startGame(); //Spielfeld wird gezeichntet
+
+        })
+        //End Button Listeners
+    }//end addGameOverView
+}//end GameOver
