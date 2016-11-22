@@ -10,25 +10,16 @@
     const gridHeigth = parseInt(HEIGHT/CELL);
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
-    const SNAKE_BODY = 1; // ein Torso-Teil der Schlange
     const SNAKE_HEAD = 2; // der Kopf der Schlange
-    const WALL = -1;
     const PRISONER = 3;
      // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
-    const   KEYCODE_LEFT = 37,
+    const KEYCODE_LEFT = 37,
     KEYCODE_RIGHT = 39,
     KEYCODE_UP = 38,
     KEYCODE_DOWN = 40;
 
-    //Start Richtung der Schlange
-    var direction = "right";
-    //Variable fuer Richtungsaenderung
-    var newDirection;
-
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
-    // lädt die Spielfigur (Schlangenelement) ins Canvas
-    
 
 // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
@@ -42,29 +33,23 @@ function startGame() {
     
     //GameOverScreen erstellen
     var gameOver = new Snake.Menue.GameOver();
-    //kreiere 2D Array
-    var grid = new Array((gridWidth)); //grid.length = 14;
-    for(var i = 0; i < gridWidth; i++){
-    grid[i] = new Array(gridHeigth); }//grid.length = 10;
 
     // erstellt Instanzen folgender Klassen
     var field = new Snake.Views.PlayingFieldView();
-    var prisonSnake = new Snake.Models.PrisonSnake();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
     var prisonSnakeScore = new Snake.Views.ScoreView();
 
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnake, grid, prisonSnakeScore);
-    // setzt die Startkoordinaten des Kopfes im Grid
-    prisonSnake.startCoords(grid);
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore);
 
     //init
     Snake.Models.Grid.init(EMPTY, gridWidth, gridHeigth);
     var startPos = {x:Math.floor(gridWidth/2), y:(gridHeigth/2) -1};
     Snake.Models.PSnake.init("right", startPos.x, startPos.y);
     Snake.Models.Grid.set(SNAKE_HEAD, startPos.x, startPos.y);
+    //end init
     
     setPrisoner();
-    createjs.Ticker.setFPS(20);
+    createjs.Ticker.setFPS(30);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;
     

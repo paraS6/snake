@@ -2,17 +2,14 @@
 Snake.Controlls = {};
 
         // verarbeitet die Interaktionen des Nutzers
-        Snake.Controlls.GameController=function(field, prisonSnakeView, prisonSnake, grid, scoreView, gameController) {
+        Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
             var _field = field;
             var _prisonSnakeView = prisonSnakeView;
-            var _prisonSnake = prisonSnake;
-            var _grid = grid;
             var _scoreView = scoreView;
             var _frames = 0;
             
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {
-
                 document.onkeydown = keyInput;
                 update();
                 _field.drawPlayingField();
@@ -25,22 +22,21 @@ Snake.Controlls = {};
            
             // übersetzt keyInput in newDirection
             function keyInput(event){
-
                 switch(event.keyCode) {
                     case KEYCODE_LEFT:
-                        newDirection = "left";
+                        if(Snake.Models.PSnake.direction != "right")
                         Snake.Models.PSnake.direction = "left";
                         break;
                     case KEYCODE_RIGHT:
-                        newDirection = "right";
+                        if(Snake.Models.PSnake.direction != "left")
                         Snake.Models.PSnake.direction = "right";
                         break;
                     case KEYCODE_UP:
-                        newDirection = "up";
+                        if(Snake.Models.PSnake.direction != "down")
                         Snake.Models.PSnake.direction = "up";
                         break;
                     case KEYCODE_DOWN:
-                        newDirection = "down";
+                        if(Snake.Models.PSnake.direction != "up")
                         Snake.Models.PSnake.direction = "down";
                         break;
                 }
@@ -67,7 +63,8 @@ Snake.Controlls = {};
                 }
 
                     if(nx < 0 || nx > Snake.Models.Grid.width -1 || ny < 0 || ny > Snake.Models.Grid.heigth -1){
-                        return startGame();
+                        stage.removeAllChildren();
+                        createjs.Ticker.paused = true;
                     }
 
                     if(Snake.Models.Grid.get(nx, ny) == PRISONER){
