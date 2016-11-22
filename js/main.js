@@ -13,6 +13,7 @@
     const SNAKE_BODY = 1; // ein Torso-Teil der Schlange
     const SNAKE_HEAD = 2; // der Kopf der Schlange
     const WALL = -1;
+    const PRISONER = 3;
      // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
     const   KEYCODE_LEFT = 37,
     KEYCODE_RIGHT = 39,
@@ -27,7 +28,7 @@
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
     // lädt die Spielfigur (Schlangenelement) ins Canvas
-    var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+    
 
 // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
@@ -43,8 +44,8 @@ function startGame() {
     var gameOver = new Snake.Menue.GameOver();
     //kreiere 2D Array
     var grid = new Array((gridWidth)); //grid.length = 14;
-    for(var i = 0; i < gridWidth; i++)
-    grid[i] = new Array(gridHeigth); //grid.length = 10;
+    for(var i = 0; i < gridWidth; i++){
+    grid[i] = new Array(gridHeigth); }//grid.length = 10;
 
     // erstellt Instanzen folgender Klassen
     var field = new Snake.Views.PlayingFieldView();
@@ -56,7 +57,14 @@ function startGame() {
     // setzt die Startkoordinaten des Kopfes im Grid
     prisonSnake.startCoords(grid);
 
-    createjs.Ticker.setFPS(2);
+    //init
+    Snake.Models.Grid.init(EMPTY, gridWidth, gridHeigth);
+    var startPos = {x:Math.floor(gridWidth/2), y:(gridHeigth/2) -1};
+    Snake.Models.PSnake.init("right", startPos.x, startPos.y);
+    Snake.Models.Grid.set(SNAKE_HEAD, startPos.x, startPos.y);
+    
+    setPrisoner();
+    createjs.Ticker.setFPS(20);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;
     
