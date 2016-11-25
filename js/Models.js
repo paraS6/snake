@@ -94,11 +94,11 @@ Snake.Models.PlayingField = function (level, levelSpeed) {
                             snakeHeadFound = true;
                         }
 
-                    }//Ende IF
+                    }//end if
                 }
             }//Ende der Bewegung
 
-        }//Ende Move Funktion
+        }//end move
         //GameOverScreen
         this.collision = function (grid) {
             var prisonSnake = new Snake.Models.PrisonSnake();

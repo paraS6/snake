@@ -6,8 +6,8 @@
     const WIDTH = stage.canvas.width - 200; //Breite vom Spielfeld, 200 Pxel für Scorebereich reserviert
     const HEIGHT = stage.canvas.height - 40;   // Hoehe vom Spielfeld
     const CELL = 40;    //Zellengroesse
-    const gridWidth = parseInt(WIDTH/CELL);
-    const gridHeigth = parseInt(HEIGHT/CELL);
+    const GRIDWIDTH= parseInt(WIDTH/CELL);
+    const GRIDHEIGHT = parseInt(HEIGHT/CELL);
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_BODY = 1; // ein Torso-Teil der Schlange
@@ -42,9 +42,9 @@ function startGame() {
     //GameOverScreen erstellen
     var gameOver = new Snake.Menue.GameOver();
     //kreiere 2D Array
-    var grid = new Array((gridWidth)); //grid.length = 14;
-    for(var i = 0; i < gridWidth; i++)
-    grid[i] = new Array(gridHeigth); //grid.length = 10;
+    var grid = new Array((GRIDWIDTH)); //grid.length = 14;
+    for(var i = 0; i < GRIDWIDTH; i++)
+    grid[i] = new Array(GRIDHEIGHT); //grid.length = 10;
 
     // erstellt Instanzen folgender Klassen
     var field = new Snake.Views.PlayingFieldView();

@@ -40,7 +40,7 @@ Snake.Menue.StartMenue = function() {
                 _instWindow.addInstructionView();
 
             });
-            //End ButtonListeners
+            //end ButtonListeners
 
     }//end addMenueView
     
@@ -92,7 +92,7 @@ Snake.Menue.Buttons = function (label, color, x, y) {
     startB.y = (stage.canvas.height/2)+y;
     _bc.addChild(startB, startTxt);
     return _bc;
-}//Buttons
+}//end Buttons
 //GameOverScreen
 Snake.Menue.GameOver = function () {
     var _restartButton = new Snake.Menue.Buttons("restart", "white", 0, 0); //Startbutton erstellen
@@ -112,6 +112,6 @@ Snake.Menue.GameOver = function () {
             startGame(); //Spielfeld wird gezeichntet
 
         })
-        //End Button Listeners
+        //end Button Listeners
     }//end addGameOverView
 }//end GameOver

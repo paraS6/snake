@@ -10,7 +10,7 @@ Snake.Views.PlayingFieldView = function () {
         };
         this.updatePlayingField = function () {
         };
-    };
+}; //end playingFieldView
 
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
@@ -35,7 +35,7 @@ Snake.Views.PrisonSnakeView = function () {
                 }
             }
         }//end drawSnake
-    }; //end PrisonSnakeView
+}; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
     var _scoreContainer = new createjs.Container();
     var _scoreBg = new createjs.Shape();    //Hintergrund von Score
