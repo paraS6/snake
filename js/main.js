@@ -6,8 +6,8 @@
     const WIDTH = stage.canvas.width - 200; //Breite vom Spielfeld, 200 Pxel für Scorebereich reserviert
     const HEIGHT = stage.canvas.height - 40;   // Hoehe vom Spielfeld
     const CELL = 40;    //Zellengroesse
-    const gridWidth = parseInt(WIDTH/CELL);
-    const gridHeigth = parseInt(HEIGHT/CELL);
+    const GRIDWIDTH= parseInt(WIDTH/CELL);
+    const GRIDHEIGHT = parseInt(HEIGHT/CELL);
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_HEAD = 2; // der Kopf der Schlange
@@ -42,8 +42,8 @@ function startGame() {
     var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore);
 
     //init
-    Snake.Models.Grid.init(EMPTY, gridWidth, gridHeigth);
-    var startPos = {x:Math.floor(gridWidth/2), y:(gridHeigth/2) -1};
+    Snake.Models.Grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
+    var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
     Snake.Models.PSnake.init("right", startPos.x, startPos.y);
     Snake.Models.Grid.set(SNAKE_HEAD, startPos.x, startPos.y);
     //end init

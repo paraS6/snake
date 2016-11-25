@@ -79,6 +79,6 @@ Snake.Controlls = {};
                     Snake.Models.Grid.set(SNAKE_HEAD, tail.x, tail.y);
                     Snake.Models.PSnake.insert(tail.x, tail.y);
                 }
-            }; //end keyInput
+            }; //end update
         }//end GameController
     

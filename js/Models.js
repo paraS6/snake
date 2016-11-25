@@ -28,7 +28,8 @@ Snake.Models.Grid = {
     get: function (x, y) {
         return this._grid[x][y];
     }
-}
+}//end Grid
+
 Snake.Models.PSnake = {
     direction: null,
     last: null,
@@ -46,7 +47,7 @@ Snake.Models.PSnake = {
     remove: function () {
         return this._queue.pop();
     }
-}
+}//end PSnake
 
 function setPrisoner() {
     var empty = [];
@@ -60,4 +61,4 @@ function setPrisoner() {
     }
     var randpos = empty[Math.floor(Math.random()*empty.length)];
     Snake.Models.Grid.set(PRISONER, randpos.x, randpos.y);
-}
+}//end setPrisoner
