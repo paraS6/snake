@@ -1,4 +1,3 @@
-
 //MVC-Klasse Views
 Snake.Views = {};
 
@@ -11,28 +10,53 @@ Snake.Views.PlayingFieldView = function () {
     };
     this.updatePlayingField = function () {
     };
-};
+}; //end PlayingFieldView
 
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
     var _head = new createjs.Shape();
 
-    this.drawSnake = function (grid) {
+    this.drawSnake = function () {
         // durchläuft das Array und zeichnet beim Unique Value '2' den Schlangenkopf
-        for(var i = 0; i< grid.length; i++){
-            for(var j = 0; j< grid[i].length; j++){
-                if(grid[i][j] == SNAKE_HEAD){
-                    dummy.x=i*CELL;
-                    dummy.y=j*CELL;
-                    console.log("x: "+i*CELL);
-                    console.log("y: "+j*CELL);
-                    stage.addChild(dummy);
+        for(var i = 0; i< Snake.Models.Grid.width; i++){
+            for(var j = 0; j< Snake.Models.Grid.heigth; j++){
+                switch(Snake.Models.Grid.get(i, j)){
+                    case SNAKE_HEAD:
+                        /*var sn = new createjs.Shape();
+                         sn.graphics.beginFill("green").drawRect(i*CELL, j*CELL, CELL, CELL);
+                         stage.addChild(sn);*/
+                        var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                        dummy.x=i*CELL;
+                        dummy.y=j*CELL;
+                        stage.addChild(dummy);
+                        break;
+                    case PRISONER:
+                        var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                        dummy.x=i*CELL;
+                        dummy.y=j*CELL;
+                        stage.addChild(dummy);
+                    /*var wall = new createjs.Shape();
+                     wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
+                     stage.addChild(wall);
+                     break;*/
+                    case EMPTY:
+                        break;
+                    default:
+                        break;
                 }
-                if(grid[i][j] == WALL){
-                    var wall = new createjs.Shape();
-                    wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
-                    stage.addChild(wall);
-                }
+
+                /*if(grid[i][j] == SNAKE_HEAD){
+                 dummy.x=i*CELL;
+                 dummy.y=j*CELL;
+                 console.log("x: "+i*CELL);
+                 console.log("y: "+j*CELL);
+                 stage.addChild(dummy);
+                 }
+                 if(grid[i][j] == WALL){
+                 var wall = new createjs.Shape();
+                 wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
+                 stage.addChild(wall);
+                 }*/
             }
         }
     }//end drawSnake
@@ -52,20 +76,3 @@ Snake.Views.ScoreView = function () {
         stage.addChild(_scoreContainer);
     }//end drawScore
 }; //end ScoreView
-
-Snake.Views.CollectibleView = function () {
-    var _item = new createjs.Shape();
-
-    //zeichnet Items auf das Spielfeld beim Value 4
-    this.drawItem = function (grid) {
-        for(var i = 0; i< grid.length; i++){
-            for(var j = 0; j< grid.length; j++){
-                if(grid[i][j] == ITEM){
-                    dummyItem.x=j*CELL;
-                    dummyItem.y=i*CELL;
-                    stage.addChild(dummyItem);
-                }
-            }
-        }
-    }
-};
