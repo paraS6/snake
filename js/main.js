@@ -42,21 +42,22 @@ function startGame() {
     var field = new Snake.Views.PlayingFieldView();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
     var prisonSnakeScore = new Snake.Views.ScoreView();
-
+    var grid = new Snake.Models.Grid();
+    var prisonSnake = new Snake.Models.PrisonSnake();
+    var collect = new Snake.Models.Collectibles();
     var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore);
 
     //init
-    Snake.Models.Grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
+    grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
     var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
-    Snake.Models.PrisonSnake.init("right", startPos.x, startPos.y);
-    Snake.Models.Grid.set(SNAKE_HEAD, startPos.x, startPos.y);
+    prisonSnake.init("right", startPos.x, startPos.y);
+    grid.set(SNAKE_HEAD, startPos.x, startPos.y);
     //end init
 
-    setPrisoner();
+    collect.setPrisoner();
     createjs.Ticker.setFPS(30);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;
-
     //Ueberpruefen des Tickers
     function handleTick(){
         if(createjs.Ticker.paused == false){

@@ -56,16 +56,25 @@ Snake.Models.PrisonSnake = function(){
     };
 }//end PSnake
 
-this.setPrisoner = function() {
-    var empty = [];
-    for(var x = 0; x < Snake.Models.Grid.width; x++){
-        for(var y = 0; y < Snake.Models.Grid.heigth; y++){
-            if(Snake.Models.Grid.get(x, y) == EMPTY){
-                empty.push({x:x, y:y});
-            }
-        }
+Snake.Models.Collectibles = function () {
 
-    }
-    var randposition = empty[Math.floor(Math.random()*empty.length)];
-    Snake.Models.Grid.set(PRISONER, randposition.x, randposition.y);
-}//end setPrisoner
+
+    this.setPrisoner = function() {
+        var grid =  new Snake.Models.Grid();
+        
+        var empty = [];
+        for(var x = 0; x < grid.width; x++){
+            for(var y = 0; y < grid.heigth; y++){
+                if(grid.get(x, y) == EMPTY){
+
+                    empty.push({x1:x, y1:y});
+                }
+            }
+    
+        }
+        var randpos = empty[Math.floor(Math.random()*empty.length)];
+        
+        grid.set(PRISONER, randpos.x1, randpos.y1);
+    }//end setPrisoner
+
+}
