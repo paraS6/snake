@@ -11,7 +11,7 @@
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_HEAD = 2; // der Kopf der Schlange
-    const PRISONER = 3;
+    const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
      // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
     const KEYCODE_LEFT = 37,
     KEYCODE_RIGHT = 39,
@@ -49,15 +49,18 @@ function startGame() {
     //end init
     
     setPrisoner();
+    // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
     createjs.Ticker.setFPS(30);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;
     
     //Ueberpruefen des Tickers
     function handleTick(){
+        // solange Ticker nicht pausiert wird, wird der gameLoop fortgesetzt
         if(createjs.Ticker.paused == false){
             gameController.gameLoop();
         }
+        // sobald pausiert wird (Schlange ist tot), wird Ticker entfernt und GameOver Screen eingeblendet
         else{
             console.log("tot");
             createjs.Ticker.removeEventListener("tick",handleTick);

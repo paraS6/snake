@@ -17,19 +17,18 @@ Snake.Views.PrisonSnakeView = function () {
         var _head = new createjs.Shape();
 
         this.drawSnake = function () {
-            // durchläuft das Array und zeichnet beim Unique Value '2' den Schlangenkopf
+            // durchläuft das Array und gleicht ab, welches Feld wie besetzt ist
             for(var i = 0; i< Snake.Models.Grid.width; i++){
                 for(var j = 0; j< Snake.Models.Grid.heigth; j++){
                     switch(Snake.Models.Grid.get(i, j)){
+                        // lädt die Bitmap des Schlangenkopfs und setzt es auf das Spielfeld
                         case SNAKE_HEAD:
-                            /*var sn = new createjs.Shape();
-                            sn.graphics.beginFill("green").drawRect(i*CELL, j*CELL, CELL, CELL);
-                            stage.addChild(sn);*/
                             var dummy = new createjs.Bitmap("img/chara_dummy1.png");
                             dummy.x=i*CELL;
                             dummy.y=j*CELL;
                             stage.addChild(dummy);
                             break;
+                        // lädt die Bitmap des Schlangenelements und setzt es auf das Spielfeld
                         case PRISONER:
                             var dummy = new createjs.Bitmap("img/chara_dummy1.png");
                             dummy.x=i*CELL;
@@ -45,18 +44,6 @@ Snake.Views.PrisonSnakeView = function () {
                             break;
                     }
 
-                    /*if(grid[i][j] == SNAKE_HEAD){
-                        dummy.x=i*CELL;
-                        dummy.y=j*CELL;
-                        console.log("x: "+i*CELL);
-                        console.log("y: "+j*CELL);
-                        stage.addChild(dummy);
-                    }
-                    if(grid[i][j] == WALL){
-                        var wall = new createjs.Shape();
-                        wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
-                        stage.addChild(wall);
-                    }*/
                 }
             }
         }//end drawSnake
