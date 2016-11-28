@@ -2,10 +2,13 @@
 Snake.Controlls = {};
 
         // verarbeitet die Interaktionen des Nutzers
-        Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
+        Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid, prisonSnake, collectibles) {
             var _field = field;
             var _prisonSnakeView = prisonSnakeView;
             var _scoreView = scoreView;
+            var _grid = grid;
+            var _prisonSnake = prisonSnake;
+            var _collectibles = collectibles;
             var _frames = 0;
             
             //Pro Loop wird folgendes ausgefuehrt
@@ -17,7 +20,7 @@ Snake.Controlls = {};
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
                 _field.drawPlayingField();
                 _scoreView.drawScore();
-                _prisonSnakeView.drawSnake();
+                _prisonSnakeView.drawSnake(_grid);
                 stage.update();
 
             }; //end gameLoop
@@ -27,20 +30,20 @@ Snake.Controlls = {};
                 switch(event.keyCode) {
                     // setzt alle Richtungswechsel um, mit Ausnahme genau entgesetzter Steuerungsbefehle
                     case KEYCODE_LEFT:
-                        if(Snake.Models.PSnake.direction != "right")
-                        Snake.Models.PSnake.direction = "left";
+                        if(_prisonSnake.direction != "right")
+                            _prisonSnake.direction = "left";
                         break;
                     case KEYCODE_RIGHT:
-                        if(Snake.Models.PSnake.direction != "left")
-                        Snake.Models.PSnake.direction = "right";
+                        if(_prisonSnake.direction != "left")
+                            _prisonSnake.direction = "right";
                         break;
                     case KEYCODE_UP:
-                        if(Snake.Models.PSnake.direction != "down")
-                        Snake.Models.PSnake.direction = "up";
+                        if(_prisonSnake.direction != "down")
+                            _prisonSnake.direction = "up";
                         break;
                     case KEYCODE_DOWN:
-                        if(Snake.Models.PSnake.direction != "up")
-                        Snake.Models.PSnake.direction = "down";
+                        if(_prisonSnake.direction != "up")
+                            _prisonSnake.direction = "down";
                         break;
                 }
 
@@ -48,10 +51,10 @@ Snake.Controlls = {};
             function update(event){
            
                 // speichert X-/Y-Koordinaten des letzten Schlangenelements zwischen
-                var nx = Snake.Models.PSnake.last.x;
-                var ny = Snake.Models.PSnake.last.y;
+                var nx = _prisonSnake.last.x;
+                var ny = _prisonSnake.last.y;
                 // zieht das Schlangenende jeweils eins hinter sich her
-                switch(Snake.Models.PSnake.direction) {
+                switch(_prisonSnake.direction) {
                     case "left":
                         nx--;
                         break;
@@ -66,7 +69,7 @@ Snake.Controlls = {};
                         break;
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand --> GameOver
-                    if(nx < 0 || nx > Snake.Models.Grid.width -1 || ny < 0 || ny > Snake.Models.Grid.heigth -1 || Snake.Models.Grid.get(nx, ny) == SNAKE_HEAD){
+                    if(nx < 0 || nx > _grid.width -1 || ny < 0 || ny > _grid.heigth -1 || _grid.get(nx, ny) == SNAKE_HEAD){
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
@@ -74,21 +77,21 @@ Snake.Controlls = {};
                     }
                     
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
-                    if(Snake.Models.Grid.get(nx, ny) == PRISONER){
+                    if(_grid.get(nx, ny) == PRISONER){
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny};
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
-                        setPrisoner();
+                        _collectibles.setPrisoner(_grid);
                     }else{
                         // beim Laufen über leere Felder wird das letzte Schlangenelement immer wieder gelöscht und durch die aktualisierte Endposition ersetzt
-                        var tail = Snake.Models.PSnake.remove();
-                        Snake.Models.Grid.set(EMPTY, tail.x, tail.y);
+                        var tail = _prisonSnake.remove();
+                        _grid.set(EMPTY, tail.x, tail.y);
                         tail.x = nx;
                         tail.y = ny;
                     }
                     // Schlangenposition wird im Model aktualisiert
-                    Snake.Models.Grid.set(SNAKE_HEAD, tail.x, tail.y);
-                    Snake.Models.PSnake.insert(tail.x, tail.y);
+                     _grid.set(SNAKE_HEAD, tail.x, tail.y);
+                    _prisonSnake.insert(tail.x, tail.y);
             }; //end update
         }//end GameController
     

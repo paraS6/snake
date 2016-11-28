@@ -38,17 +38,19 @@ function startGame() {
     var field = new Snake.Views.PlayingFieldView();
     var prisonSnakeView = new Snake.Views.PrisonSnakeView();
     var prisonSnakeScore = new Snake.Views.ScoreView();
-
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore);
+    var grid = new Snake.Models.Grid();
+    var prisonSnake = new Snake.Models.PrisonSnake();
+    var collectibles = new Snake.Models.Collectibles();
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore, grid, prisonSnake, collectibles);
 
     //init
-    Snake.Models.Grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
+    grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
     var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
-    Snake.Models.PSnake.init("right", startPos.x, startPos.y);
-    Snake.Models.Grid.set(SNAKE_HEAD, startPos.x, startPos.y);
+    prisonSnake.init("right", startPos.x, startPos.y);
+    grid.set(SNAKE_HEAD, startPos.x, startPos.y);
     //end init
     
-    setPrisoner();
+    collectibles.setPrisoner(grid);
     // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
     createjs.Ticker.setFPS(5);
     createjs.Ticker.addEventListener("tick",handleTick);
