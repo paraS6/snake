@@ -58,15 +58,25 @@ Snake.Views.PrisonSnakeView = function () {
 Snake.Views.ScoreView = function () {
     var _scoreContainer = new createjs.Container();
     var _scoreBg = new createjs.Shape();    //Hintergrund von Score
-    var _scoreTitle = new createjs.Text("Score", "40px pixel", "white"); //Ueberschrift
-    var _scoreTXT = new createjs.Text();    //Scoreanzeige
-    var _b = _scoreTitle.getBounds();
-    this.drawScore  = function () {
+    var _scoreTitle = new createjs.Text("Score", "50px pixel", "white"); //Ueberschrift
+    var _scoreTXT;    // Scoreanzeige
+    var _b = _scoreTitle.getBounds(); // gibt Breite des Textfeldes der Überschrift zurück
+    var _b2; // gibt Breite des Textfeldes des Scores zurück
+
+    this.drawScore  = function (score) {
         _scoreBg.graphics.beginFill("black").drawRect(WIDTH,0,stage.canvas.width-WIDTH, stage.canvas.height);
         //Text zentrieren
         _scoreTitle.x = WIDTH + ((stage.canvas.width-WIDTH)-_b.width)/2 ;
         _scoreTitle.y = stage.canvas.height/4;
-        _scoreContainer.addChild(_scoreBg, _scoreTitle);
+        // Dynamisch den Score angeben
+        _scoreTXT = new createjs.Text(score, "40px pixel","white");
+        //Score zentrieren
+        _b2 = _scoreTXT.getBounds();
+        // Score platzieren
+        _scoreTXT.x = WIDTH + ((stage.canvas.width-WIDTH)-_b2.width)/2 ;
+        _scoreTXT.y = stage.canvas.height/4+60;
+        // Background, Titel und Score zum Canvas hinzufügen
+        _scoreContainer.addChild(_scoreBg, _scoreTitle, _scoreTXT);
         stage.addChild(_scoreContainer);
     }//end drawScore
 }; //end ScoreView

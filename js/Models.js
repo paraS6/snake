@@ -39,7 +39,30 @@ Snake.Models.Grid = function(){
     }
 }//end Grid
 
-//
+// Logik der Spielstandberechnung
+Snake.Models.Score = function() {
+
+    // initialer Spielstand
+    // TODO: über Variable initialisieren
+    var _score = 0;
+
+    // erhöht den Spielstand nach speziellen Ereignissen im gameController
+    // TODO: Funktion ermöglichen, um unterschiedliche Collectibles unterschiedlich zu bewerten
+    this.set = function (newScore) {
+        _score += newScore;
+    },
+        
+    // Setter-Funktion, um Spielstand in anderen Klassen abzufragen
+    this.get = function () {
+        return _score;
+    }
+
+
+}// end Score
+
+
+
+// 
 Snake.Models.PrisonSnake = function () {
 
     direction =null; // Laufrichtung der Schlange

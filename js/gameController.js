@@ -2,7 +2,7 @@
 Snake.Controlls = {};
 
         // verarbeitet die Interaktionen des Nutzers
-        Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid, prisonSnake, collectibles) {
+        Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid, prisonSnake, collectibles, score) {
             var _field = field;
             var _prisonSnakeView = prisonSnakeView;
             var _scoreView = scoreView;
@@ -10,7 +10,9 @@ Snake.Controlls = {};
             var _prisonSnake = prisonSnake;
             var _collectibles = collectibles;
             var _frames = 0;
-            
+            var _score = score;
+
+
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {
                 // nimmt Tastatureingabe auf
@@ -19,7 +21,7 @@ Snake.Controlls = {};
                 update();
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
                 _field.drawPlayingField();
-                _scoreView.drawScore();
+                _scoreView.drawScore(_score.get());
                 _prisonSnakeView.drawSnake(_grid);
                 stage.update();
 
@@ -80,6 +82,9 @@ Snake.Controlls = {};
                     if(_grid.get(nx, ny) == PRISONER){
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny};
+                        // ...der Score erhöht und...
+                        _score.set(10);
+                        console.log(_score.get());
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
                         _collectibles.setPrisoner(_grid);
                     }else{

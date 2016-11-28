@@ -41,7 +41,9 @@ function startGame() {
     var grid = new Snake.Models.Grid();
     var prisonSnake = new Snake.Models.PrisonSnake();
     var collectibles = new Snake.Models.Collectibles();
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore, grid, prisonSnake, collectibles);
+    var score = new Snake.Models.Score();
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore, grid, prisonSnake, collectibles, score);
+
 
     //init
     grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
