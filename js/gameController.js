@@ -70,21 +70,22 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
                 stage.removeAllChildren();
                 createjs.Ticker.paused = true;
             }
-          // var counter = null;
+            
+            
             if(grid.get(nx, ny) == PRISONER){
                 var tail = {x:nx, y:ny};
                _collect.setPrisoner(grid);
-                
-               counter++;
-                
-            }else{
+
+                counter++;
+            }
+            else{
                 var tail = prisonSnake.remove();
                 grid.set(EMPTY, tail.x, tail.y);
                 tail.x = nx;
                 tail.y = ny;
             }
-            
-            if(grid.get(nx,ny) == ITEM && counter > 3){
+        
+            if (grid.get(nx, ny) == ITEM) {
                 _collect.setCollectibles(grid);
             }
             

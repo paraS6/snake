@@ -1,5 +1,6 @@
 //MVC-Klasse Views
 Snake.Views = {};
+var prisonerIMG = new createjs.Bitmap("img/chara_dummy1.png");
 
 // Zeichnet das Spielfeld
 Snake.Views.PlayingFieldView = function () {
@@ -22,18 +23,21 @@ Snake.Views.PrisonSnakeView = function () {
             for(var j = 0; j< grid.heigth; j++){
                 switch(grid.get(i, j)){
                     case SNAKE_HEAD:
-                        var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                        var dummy = new createjs.Bitmap;
+                        dummy = prisonerIMG.clone();
                         dummy.x=i*CELL;
                         dummy.y=j*CELL;
                         stage.addChild(dummy);
                         break;
                     case PRISONER:
-                        var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                        var dummy = new createjs.Bitmap;
+                        dummy = prisonerIMG.clone();
                         dummy.x=i*CELL;
                         dummy.y=j*CELL;
                         stage.addChild(dummy);
                     case ITEM:
-                        var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                        var dummy = new createjs.Bitmap;
+                        dummy = prisonerIMG.clone();
                         dummy.x=i*CELL;
                         dummy.y=j*CELL;
                         stage.addChild(dummy);

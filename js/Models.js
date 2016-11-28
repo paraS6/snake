@@ -57,7 +57,17 @@ Snake.Models.PrisonSnake = function(){
 }//end PSnake
 
 Snake.Models.Collectibles = function () {
+    var _id;
+    
+    //setzt die ID auf die aktuelle ID
+    this.setCollectiblesId = function(id){
+        _id = id;
+    }
 
+    //gibt die aktuelle ID zurück
+    this.getCollectiblesId = function () {
+        return _id;
+    }
 
     this.setPrisoner = function(grid) {
         
@@ -78,7 +88,7 @@ Snake.Models.Collectibles = function () {
     }//end setPrisoner
 
     this.setCollectibles = function(grid) {
-        
+
         var empty = [];
         for(var x = 0; x < grid.width; x++){
             for(var y = 0; y < grid.heigth; y++){
