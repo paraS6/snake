@@ -70,7 +70,7 @@ Snake.Controlls = {};
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
-                        createjs.Ticker.paused = true;
+                        return createjs.Ticker.paused = true;
                     }
                     
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
