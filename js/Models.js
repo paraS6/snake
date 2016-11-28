@@ -59,22 +59,22 @@ Snake.Models.PrisonSnake = function(){
 Snake.Models.Collectibles = function () {
 
 
-    this.setPrisoner = function() {
-        var grid =  new Snake.Models.Grid();
+    this.setPrisoner = function(grid) {
+        
         
         var empty = [];
         for(var x = 0; x < grid.width; x++){
             for(var y = 0; y < grid.heigth; y++){
                 if(grid.get(x, y) == EMPTY){
 
-                    empty.push({x1:x, y1:y});
+                    empty.push({x:x, y:y});
                 }
             }
     
         }
         var randpos = empty[Math.floor(Math.random()*empty.length)];
         
-        grid.set(PRISONER, randpos.x1, randpos.y1);
+        grid.set(PRISONER, randpos.x, randpos.y);
     }//end setPrisoner
 
 }

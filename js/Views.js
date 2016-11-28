@@ -15,12 +15,12 @@ Snake.Views.PlayingFieldView = function () {
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
     var _head = new createjs.Shape();
-
-    this.drawSnake = function () {
+    
+    this.drawSnake = function (grid) {
         // durchläuft das Array und zeichnet beim Unique Value '2' den Schlangenkopf
-        for(var i = 0; i< Snake.Models.Grid.width; i++){
-            for(var j = 0; j< Snake.Models.Grid.heigth; j++){
-                switch(Snake.Models.Grid.get(i, j)){
+        for(var i = 0; i< grid.width; i++){
+            for(var j = 0; j< grid.heigth; j++){
+                switch(grid.get(i, j)){
                     case SNAKE_HEAD:
                         /*var sn = new createjs.Shape();
                          sn.graphics.beginFill("green").drawRect(i*CELL, j*CELL, CELL, CELL);

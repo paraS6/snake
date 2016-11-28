@@ -2,10 +2,13 @@
 Snake.Controlls = {};
 
 // verarbeitet die Interaktionen des Nutzers
-Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
+Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid, prisonSnake, collect) {
     var _field = field;
     var _prisonSnakeView = prisonSnakeView;
     var _scoreView = scoreView;
+    var grid = grid;
+    var prisonSnake = prisonSnake;
+    var _collect = collect;
     var _frames = 0;
 
     //Pro Loop wird folgendes ausgefuehrt
@@ -15,7 +18,7 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
         _field.drawPlayingField();
         _scoreView.drawScore();
         //_prisonSnake.move(newDirection,_grid);
-        _prisonSnakeView.drawSnake();
+        _prisonSnakeView.drawSnake(grid);
         stage.update();
 
     }; //end gameLoop
@@ -24,20 +27,20 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
     function keyInput(event){
         switch(event.keyCode) {
             case KEYCODE_LEFT:
-                if(Snake.Models.PSnake.direction != "right")
-                    Snake.Models.PSnake.direction = "left";
+                if(prisonSnake.direction != "right")
+                    prisonSnake.direction = "left";
                 break;
             case KEYCODE_RIGHT:
-                if(Snake.Models.PSnake.direction != "left")
-                    Snake.Models.PSnake.direction = "right";
+                if(prisonSnake.direction != "left")
+                    prisonSnake.direction = "right";
                 break;
             case KEYCODE_UP:
-                if(Snake.Models.PSnake.direction != "down")
-                    Snake.Models.PSnake.direction = "up";
+                if(prisonSnake.direction != "down")
+                    prisonSnake.direction = "up";
                 break;
             case KEYCODE_DOWN:
-                if(Snake.Models.PSnake.direction != "up")
-                    Snake.Models.PSnake.direction = "down";
+                if(prisonSnake.direction != "up")
+                    prisonSnake.direction = "down";
                 break;
         }
 
@@ -45,9 +48,9 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
     function update(event){
         _frames++;
         if(_frames%10 == 0){
-            var nx = Snake.Models.PSnake.last.x;
-            var ny = Snake.Models.PSnake.last.y;
-            switch(Snake.Models.PSnake.direction) {
+            var nx = prisonSnake.last.x;
+            var ny = prisonSnake.last.y;
+            switch(prisonSnake.direction) {
                 case "left":
                     nx--;
                     break;
@@ -62,22 +65,22 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView) {
                     break;
             }
 
-            if(nx < 0 || nx > Snake.Models.Grid.width -1 || ny < 0 || ny > Snake.Models.Grid.heigth -1){
+            if(nx < 0 || nx > grid.width -1 || ny < 0 || ny > grid.heigth -1){
                 stage.removeAllChildren();
                 createjs.Ticker.paused = true;
             }
 
-            if(Snake.Models.Grid.get(nx, ny) == PRISONER){
+            if(grid.get(nx, ny) == PRISONER){
                 var tail = {x:nx, y:ny};
-                setPrisoner();
+               _collect.setPrisoner(grid);
             }else{
-                var tail = Snake.Models.PSnake.remove();
-                Snake.Models.Grid.set(EMPTY, tail.x, tail.y);
+                var tail = prisonSnake.remove();
+                grid.set(EMPTY, tail.x, tail.y);
                 tail.x = nx;
                 tail.y = ny;
             }
-            Snake.Models.Grid.set(SNAKE_HEAD, tail.x, tail.y);
-            Snake.Models.PSnake.insert(tail.x, tail.y);
+            grid.set(SNAKE_HEAD, tail.x, tail.y);
+            prisonSnake.insert(tail.x, tail.y);
         }
     }; //end update
 }//end GameController

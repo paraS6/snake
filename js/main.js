@@ -45,7 +45,7 @@ function startGame() {
     var grid = new Snake.Models.Grid();
     var prisonSnake = new Snake.Models.PrisonSnake();
     var collect = new Snake.Models.Collectibles();
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore);
+    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore, grid, prisonSnake, collect);
 
     //init
     grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
@@ -54,7 +54,7 @@ function startGame() {
     grid.set(SNAKE_HEAD, startPos.x, startPos.y);
     //end init
 
-    collect.setPrisoner();
+    collect.setPrisoner(grid);
     createjs.Ticker.setFPS(30);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;
