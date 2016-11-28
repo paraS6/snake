@@ -22,9 +22,6 @@ Snake.Views.PrisonSnakeView = function () {
             for(var j = 0; j< grid.heigth; j++){
                 switch(grid.get(i, j)){
                     case SNAKE_HEAD:
-                        /*var sn = new createjs.Shape();
-                         sn.graphics.beginFill("green").drawRect(i*CELL, j*CELL, CELL, CELL);
-                         stage.addChild(sn);*/
                         var dummy = new createjs.Bitmap("img/chara_dummy1.png");
                         dummy.x=i*CELL;
                         dummy.y=j*CELL;
@@ -35,28 +32,18 @@ Snake.Views.PrisonSnakeView = function () {
                         dummy.x=i*CELL;
                         dummy.y=j*CELL;
                         stage.addChild(dummy);
-                    /*var wall = new createjs.Shape();
-                     wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
-                     stage.addChild(wall);
-                     break;*/
+                    case ITEM:
+                        var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                        dummy.x=i*CELL;
+                        dummy.y=j*CELL;
+                        stage.addChild(dummy);
+                    
                     case EMPTY:
                         break;
                     default:
                         break;
                 }
-
-                /*if(grid[i][j] == SNAKE_HEAD){
-                 dummy.x=i*CELL;
-                 dummy.y=j*CELL;
-                 console.log("x: "+i*CELL);
-                 console.log("y: "+j*CELL);
-                 stage.addChild(dummy);
-                 }
-                 if(grid[i][j] == WALL){
-                 var wall = new createjs.Shape();
-                 wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
-                 stage.addChild(wall);
-                 }*/
+                
             }
         }
     }//end drawSnake

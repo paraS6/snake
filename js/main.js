@@ -15,6 +15,7 @@ const GRIDHEIGHT = parseInt(HEIGHT/CELL); //Höhe des Grids
 const EMPTY = 0; // ein leeres Feld
 const SNAKE_HEAD = 2; // der Kopf der Schlange
 const PRISONER = 3;
+const ITEM = 4;
 
 // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
 const KEYCODE_LEFT = 37,
@@ -55,6 +56,7 @@ function startGame() {
     //end init
 
     collect.setPrisoner(grid);
+    collect.setCollectibles(grid);
     createjs.Ticker.setFPS(30);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;

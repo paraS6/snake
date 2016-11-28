@@ -47,6 +47,7 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
     }; //end keyInput
     function update(event){
         _frames++;
+        var counter = null;
         if(_frames%10 == 0){
             var nx = prisonSnake.last.x;
             var ny = prisonSnake.last.y;
@@ -69,16 +70,24 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
                 stage.removeAllChildren();
                 createjs.Ticker.paused = true;
             }
-
+          // var counter = null;
             if(grid.get(nx, ny) == PRISONER){
                 var tail = {x:nx, y:ny};
                _collect.setPrisoner(grid);
+                
+               counter++;
+                
             }else{
                 var tail = prisonSnake.remove();
                 grid.set(EMPTY, tail.x, tail.y);
                 tail.x = nx;
                 tail.y = ny;
             }
+            
+            if(grid.get(nx,ny) == ITEM && counter > 3){
+                _collect.setCollectibles(grid);
+            }
+            
             grid.set(SNAKE_HEAD, tail.x, tail.y);
             prisonSnake.insert(tail.x, tail.y);
         }
