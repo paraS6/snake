@@ -74,19 +74,29 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
             
             if(grid.get(nx, ny) == PRISONER){
                 var tail = {x:nx, y:ny};
-               _collect.setPrisoner(grid);
+                _collect.setPrisoner(grid);
+                //counter++;
+               
 
-                counter++;
+
+               
+                
             }
-            else{
+            else {
                 var tail = prisonSnake.remove();
                 grid.set(EMPTY, tail.x, tail.y);
                 tail.x = nx;
                 tail.y = ny;
             }
         
+          
+            
             if (grid.get(nx, ny) == ITEM) {
                 _collect.setCollectibles(grid);
+                
+            }
+            else{
+                grid.set(EMPTY, nx,ny);
             }
             
             grid.set(SNAKE_HEAD, tail.x, tail.y);
