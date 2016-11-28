@@ -1,5 +1,7 @@
 //MVC-Klasse Views
 Snake.Views = {};
+var prisonerIMG = new createjs.Bitmap("img/chara_dummy1.png");
+
 
 // Zeichnet das Spielfeld
 Snake.Views.PlayingFieldView = function () {
@@ -23,14 +25,16 @@ Snake.Views.PrisonSnakeView = function () {
                     switch(Snake.Models.Grid.get(i, j)){
                         // lädt die Bitmap des Schlangenkopfs und setzt es auf das Spielfeld
                         case SNAKE_HEAD:
-                            var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                            var dummy = new createjs.Bitmap;
+                            dummy = prisonerIMG.clone(); 
                             dummy.x=i*CELL;
                             dummy.y=j*CELL;
                             stage.addChild(dummy);
                             break;
                         // lädt die Bitmap des Schlangenelements und setzt es auf das Spielfeld
                         case PRISONER:
-                            var dummy = new createjs.Bitmap("img/chara_dummy1.png");
+                            var dummy = new createjs.Bitmap;
+                            dummy = prisonerIMG.clone();
                             dummy.x=i*CELL;
                             dummy.y=j*CELL;
                             stage.addChild(dummy);

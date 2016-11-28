@@ -46,10 +46,7 @@ Snake.Controlls = {};
 
             }; //end keyInput
             function update(event){
-                // alte unperformante Methodik, um Spielfeld upzudaten
-                // TODO: Jana, bitte ersetzen mit neuer Methodik
-                _frames++;
-                if(_frames%10 == 0){
+           
                 // speichert X-/Y-Koordinaten des letzten Schlangenelements zwischen
                 var nx = Snake.Models.PSnake.last.x;
                 var ny = Snake.Models.PSnake.last.y;
@@ -69,7 +66,7 @@ Snake.Controlls = {};
                         break;
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand --> GameOver
-                    if(nx < 0 || nx > Snake.Models.Grid.width -1 || ny < 0 || ny > Snake.Models.Grid.heigth -1){
+                    if(nx < 0 || nx > Snake.Models.Grid.width -1 || ny < 0 || ny > Snake.Models.Grid.heigth -1 || Snake.Models.Grid.get(nx, ny) == SNAKE_HEAD){
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
@@ -92,7 +89,6 @@ Snake.Controlls = {};
                     // Schlangenposition wird im Model aktualisiert
                     Snake.Models.Grid.set(SNAKE_HEAD, tail.x, tail.y);
                     Snake.Models.PSnake.insert(tail.x, tail.y);
-                }
             }; //end update
         }//end GameController
     

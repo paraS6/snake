@@ -50,7 +50,7 @@ function startGame() {
     
     setPrisoner();
     // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
-    createjs.Ticker.setFPS(30);
+    createjs.Ticker.setFPS(5);
     createjs.Ticker.addEventListener("tick",handleTick);
     createjs.Ticker.paused = false;
     
