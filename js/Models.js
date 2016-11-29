@@ -1,112 +1,118 @@
 // MVC-Klasse Model
 Snake.Models = {};
-
-// setzt die Parameter der drei Level
-Snake.Models.PlayingField = function (level, levelSpeed) {
-    var _level = level;
-    var _levelSpeed = levelSpeed;
-    // Getter/Setter, um Koordinaten upzudaten
-
-    this.getLevel = function () { return _level;};
-    this.setLevel = function (newLevel) { return _level = newLevel; };
-    this.getLevelSpeed = function () {return _levelSpeed;};
-    this.setLevelSpeed = function (newLevelSpeed) {return _levelSpeed = newLevelSpeed; };
-    };//end PlayingField
-
-    //Logik der Schlange
     
-    Snake.Models.PrisonSnake = function () {
-        // durchläuft das Grid und setzt alle Felder auf EMPTY
-        this.startCoords = function (grid) {
-            
-            //TODO: for schleife checken (x und y vertauscht)    
-        for(var i = 0; i < grid.length; i++){
-            for(var j = 0; j< grid[i].length; j++){
-                grid[i][j]= EMPTY;
-            }
-         }
+//Logik der Schlange
+//TODO eignene Dateien für die jeweiligen Models
+Snake.Models.Grid = function(){
+    
+    
+    width = null;
+    heigth = null;
+    _grid = null;
 
-            //TODO: Konstanten benutzen!!!
-            /*/ setzt Rand
-            console.log("grid.length"+grid.length);
-            console.log("W/cell"+WIDTH/CELL);
-            console.log("h/cell"+HEIGHT/CELL);
-            console.log("w"+WIDTH);
-            console.log("h"+HEIGHT);*/
-            for(var i = 0; i< grid.length; i++){
-                grid[i][0] = WALL;
-                grid[i][(gridHeigth) -1] = WALL;
-            }
-            //setzt Rand
-            for(var i = 0; i< gridHeigth; i++){
-                grid[0][i] = WALL;
-                grid[(gridWidth)-1][i] = WALL;
-            }
-        // Setzt den Schlangenkopf fix auf Zelle 5/5
-        grid[5][5]= SNAKE_HEAD;
-         }//end startCoords
-        //staendige Fortbewegung der Schlange
-        this.move = function (newDirection, grid) {
-            
-            //Richtungen
-            if(direction != "down" && newDirection == "up"){
-                direction = "up";
-            }
-            else if(direction != "up" && newDirection == "down"){
-                direction = "down";
-            }
-            else if(direction != "right" && newDirection == "left"){
-                direction = "left";
-            }
-            else if(direction != "left" && newDirection == "right"){
-                direction = "right";
-            }
+    // initialisiert das Spielfeld Grid
+    this.init = function (d, c, r) {
+        this.width = c;
+        this.heigth = r;
+        // Grid als einfaches Array
+        this._grid = [];
 
-            //Bewegung
-            var snakeHeadFound = false;     //Variable zum pruefen ob die Schlange bereits bewegt wurde
-
-            for(var i = 0; i < grid.length; i++){
-                for(var j = 0; j < grid[i].length; j++){
-                    if(grid[i][j] == SNAKE_HEAD && !snakeHeadFound){     //Wenn der Schlangenkopf zum 1.Mal gefunden wurde
-
-                        if(direction == "right"){
-                            this.collision(grid[i+1][j]);
-                            grid[i+1][j] = SNAKE_HEAD;          //Neuen Kopf setzen
-                            grid[i][j] = EMPTY;                 //Alten Kopf loeschen
-                            snakeHeadFound = true;              //Schlangenkopf wurde bewegt
-                        }
-                        else if(direction == "left"){
-                            this.collision(grid[i-1][j]);
-                            grid[i-1][j] = SNAKE_HEAD;
-                            grid[i][j] = EMPTY;
-                            snakeHeadFound = true;
-                        }
-                        else if(direction == "up"){
-                            this.collision(grid[i][j-1]);
-                            grid[i][j-1] = SNAKE_HEAD;
-                            grid[i][j] = EMPTY;
-                            snakeHeadFound = true;
-                        }
-                        else if(direction == "down"){
-                            this.collision(grid[i][j+1]);
-                            grid[i][j+1] = SNAKE_HEAD;
-                            grid[i][j] = EMPTY;
-                            snakeHeadFound = true;
-                        }
-
-                    }//end if
-                }
-            }//Ende der Bewegung
-
-        }//end move
-        //GameOverScreen
-        this.collision = function (grid) {
-            var prisonSnake = new Snake.Models.PrisonSnake();
-            if(grid == WALL){
-
-                stage.removeAllChildren();
-                createjs.Ticker.paused = true;
-                
+        // baut 2d Array zusammen
+        for(var x = 0; x < c; x++){
+            // Spalten auf X-Achse als 1. Dimension im Array
+            this._grid.push([]);
+            // Zeilen auf Y-Achse als 2. Dimension im Array
+            for(var y = 0; y < r; y++){
+                this._grid[x].push(d);
             }
         }
-    };//end PrisonSnake
+    },
+
+    // Setter-Methode, um von außerhalb das Grid zu bearbeiten
+    this.set = function (val, x, y) {
+        this._grid[x][y] = val;
+    },
+
+    // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
+    this.get = function (x, y) {
+        return this._grid[x][y];
+    }
+}//end Grid
+
+// Logik der Spielstandberechnung
+Snake.Models.Score = function() {
+
+    // initialer Spielstand
+    // TODO: über Variable initialisieren
+    var _score = 0;
+
+
+    // erhöht den Spielstand nach speziellen Ereignissen im gameController
+    // TODO: Funktion ermöglichen, um unterschiedliche Collectibles unterschiedlich zu bewerten
+    this.set = function (newScore) {
+        _score += newScore;
+    },
+        
+    // Setter-Funktion, um Spielstand in anderen Klassen abzufragen
+    this.get = function () {
+        return _score;
+    }
+
+
+}// end Score
+
+
+
+// 
+Snake.Models.PrisonSnake = function () {
+
+    direction =null; // Laufrichtung der Schlange
+    last = null; // Pointer auf das letzte Element der Schlange
+    _queue = null; // Array der Schlange als FIFO Queue
+
+    //
+    this.init = function (d, x, y) {
+       this.direction = d;
+        this._queue = [];
+        this.insert(x, y);
+    },
+
+    // fügt der Schlange ein neues Element hinzu, indem dieses mit unshift an ERSTER Stelle im Array eingefügt wird --> FIFO
+    this.insert = function (x, y) {
+        this._queue.unshift({x:x, y:y});
+        this.last = this._queue[0];
+    },
+
+    // Gibt das erste Element des Arrays (also der Schlangenschwanz) zurück
+    this.remove =function () {
+        return this._queue.pop();
+    }
+}//end PSnake
+
+Snake.Models.Collectibles = function () {
+
+
+// Setzt ein einzusammelndes Schlangenelement auf das Spielfeld
+    this.setPrisoner = function (grid){
+        
+        var _grid = grid;
+        // Array-Variable für alle leeren Felder
+        var empty = [];
+        // Schleife zum Durchlauf über das gesamte Spielfeld
+        for (var x = 0; x < _grid.width; x++) {
+            for (var y = 0; y < _grid.heigth; y++) {
+                // Über Setter-Methode wird abgeglichen ob jeweilige Position leer ist
+                if (_grid.get(x, y) == EMPTY) {
+                    // wenn ja, wird Position ins Array gepusht
+                    empty.push({x: x, y: y});
+                }
+            }
+
+        }
+
+        // Randomizer geht durch alle leeren Felder
+        var randpos = empty[Math.floor(Math.random() * empty.length)];
+        // Über Setter-Methode wird ein Prisoner an eine zufällige leere Positon gesetzt
+        _grid.set(PRISONER, randpos.x, randpos.y);
+    }//end setPrisoner
+}//end Snake.Models.Collectibles

@@ -93,6 +93,8 @@ Snake.Menue.Buttons = function (label, color, x, y) {
     _bc.addChild(startB, startTxt);
     return _bc;
 }//end Buttons
+
+
 //GameOverScreen
 Snake.Menue.GameOver = function () {
     var _restartButton = new Snake.Menue.Buttons("restart", "white", 0, 0); //Startbutton erstellen
@@ -111,7 +113,8 @@ Snake.Menue.GameOver = function () {
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
             startGame(); //Spielfeld wird gezeichntet
 
-        })
-        //end Button Listeners
+
+        })//End Button Listeners
+
     }//end addGameOverView
 }//end GameOver
