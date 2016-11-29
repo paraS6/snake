@@ -13,6 +13,7 @@
     const SNAKE_HEAD = 2; // der Kopf der Schlange
     const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
      // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
+    //TODO Konstanten in GameController
     const KEYCODE_LEFT = 37,
     KEYCODE_RIGHT = 39,
     KEYCODE_UP = 38,
@@ -27,6 +28,7 @@ function Main() {
     gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
 }//end Main
 
+    //TODO startGame() in Controller auslagern
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
 
