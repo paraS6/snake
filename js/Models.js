@@ -2,7 +2,7 @@
 Snake.Models = {};
     
 //Logik der Schlange
-
+//TODO eignene Dateien für die jeweiligen Models
 Snake.Models.Grid = function(){
     
     

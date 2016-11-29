@@ -2,6 +2,7 @@
 Snake.Views = {};
 var prisonerIMG = new createjs.Bitmap("img/chara_dummy1.png");
 
+//TODO Views auslangern Separation of concern
 
 // Zeichnet das Spielfeld
 Snake.Views.PlayingFieldView = function () {
