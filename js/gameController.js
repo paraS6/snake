@@ -45,8 +45,8 @@ Snake.Controlls = {};
                 }
                 // sobald pausiert wird (Schlange ist tot), wird Ticker entfernt und GameOver Screen eingeblendet
                 else{
-                    console.log("tot");
-                    createjs.Ticker.removeEventListener("tick", this.handleTick);
+                    console.log("tot"+this+that);
+                    createjs.Ticker.removeEventListener("tick", that.handleTick);
                     gameOver.addGameOverView();
                 }
             }//end handleTick
