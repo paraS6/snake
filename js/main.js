@@ -22,12 +22,40 @@
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
 
-// Main-Methode, welche beim Laden der HTML-Seite getriggert wird
+/*/ Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
     var gameMenue = new Snake.Menue.StartMenue();
     gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
-}//end Main
+}//end Main*/
 
+    // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
+    function Main() {
+        var gameMenue = new Snake.Menue.StartMenue();
+        gameMenue.addMenueView();
+        var loadWebFont = function() {
+            var request = new XMLHttpRequest();
+            request.open('GET', './css/index.css', true);
+            request.send(null);
+            request.onreadystatechange = function () {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        var headNode = document.getElementsByTagName('head')[0];
+                        var newNode = document.createElement('link');
+                        newNode.setAttribute('href', './css/index.css');
+                        newNode.setAttribute('rel', 'stylesheet');
+                        newNode.setAttribute('type', 'text/css');
+                        headNode.appendChild(newNode);
+                        console.log("erfolgreich");
+                        createjs.Ticker.on("tick", stage);
+                    }
+                    else {
+                        alert("Die angegebene Schriftart existiert nicht! Bitte versuchen sie es erneut!");
+                    }
+                }
+            }
+        }
+        loadWebFont();
+    }//end Main
     //TODO startGame() in Controller auslagern
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {

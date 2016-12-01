@@ -1,6 +1,9 @@
 @font-face {
     font-family: 'pixel';
-    src: url('../font/pixel.otf') format('opentype');
+    src: url('../font/pixel-webfont.woff2') format('woff2'),
+        url('../font/pixel-webfont.woff') format('woff'),
+        url('../font/pixel-webfont.ttf') format('truetype'),
+        url('../font/pixel.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
