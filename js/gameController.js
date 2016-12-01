@@ -2,16 +2,54 @@
 Snake.Controlls = {};
 
         // verarbeitet die Interaktionen des Nutzers
-        Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid, prisonSnake, collectibles, score) {
-            var _field = field;
-            var _prisonSnakeView = prisonSnakeView;
-            var _scoreView = scoreView;
-            var _grid = grid;
-            var _prisonSnake = prisonSnake;
-            var _collectibles = collectibles;
+        Snake.Controlls.GameController=function() {
+            // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
+            const KEYCODE_LEFT = 37,
+                KEYCODE_RIGHT = 39,
+                KEYCODE_UP = 38,
+                KEYCODE_DOWN = 40;
+            
+            // erstellt Instanzen folgender Klassen
+            var _field = new Snake.Views.PlayingFieldView();
+            var _prisonSnakeView = new Snake.Views.PrisonSnakeView();
+            var _scoreView = new Snake.Views.ScoreView();
+            var _score = new Snake.Models.Score();
+            var gameOver = new Snake.Menue.GameOver();
+            var _collectibles = new Snake.Models.Collectibles();
+            var _prisonSnake = new Snake.Models.PrisonSnake();
+            var _grid = new Snake.Models.Grid();
+    
             var _frames = 0;
-            var _score = score;
 
+            //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
+            this.init = function () {
+                var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
+                _grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
+                _prisonSnake.init("right", startPos.x, startPos.y);
+                _grid.set(SNAKE_HEAD, startPos.x, startPos.y);
+                _collectibles.setPrisoner(_grid);
+
+                // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
+                createjs.Ticker.setFPS(5);
+                createjs.Ticker.addEventListener("tick", this.handleTick);
+                createjs.Ticker.paused = false;
+            }//end init
+
+            var that = this;    //Hilfsvariable, um das richtige "this" zu referenzieren
+
+            //Ueberpruefen des Tickers
+            this.handleTick = function () {
+                // solange Ticker nicht pausiert wird, wird der gameLoop fortgesetzt
+                if(createjs.Ticker.paused == false){
+                    that.gameLoop();
+                }
+                // sobald pausiert wird (Schlange ist tot), wird Ticker entfernt und GameOver Screen eingeblendet
+                else{
+                    console.log("tot");
+                    createjs.Ticker.removeEventListener("tick", this.handleTick);
+                    gameOver.addGameOverView();
+                }
+            }//end handleTick
 
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {

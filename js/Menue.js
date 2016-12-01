@@ -22,6 +22,7 @@ Snake.Menue.StartMenue = function() {
              _window.addChild(_mainbg, _title);
             return _window;
         }//endMenueWindow
+    
         //erstellt Startfenster den Spiels
         this.addMenueView = function () {
             var startWindow = this.menueWindow("PrisonSnake", 0, 0); //erstellt neues Menuefenster

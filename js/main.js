@@ -12,12 +12,7 @@
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_HEAD = 2; // der Kopf der Schlange
     const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
-     // speichert den jeweiligen .keyCode der Pfeiltasten als Variable ab
-    //TODO Konstanten in GameController
-    const KEYCODE_LEFT = 37,
-    KEYCODE_RIGHT = 39,
-    KEYCODE_UP = 38,
-    KEYCODE_DOWN = 40;
+
 
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
@@ -56,52 +51,13 @@ function Main() {
         }
         loadWebFont();
     }//end Main
-    //TODO startGame() in Controller auslagern
+
+    
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame() {
-
     
-    //GameOverScreen erstellen
-    var gameOver = new Snake.Menue.GameOver();
-
-
-    // erstellt Instanzen folgender Klassen
-    var field = new Snake.Views.PlayingFieldView();
-    var prisonSnakeView = new Snake.Views.PrisonSnakeView();
-    var prisonSnakeScore = new Snake.Views.ScoreView();
-    var grid = new Snake.Models.Grid();
-    var prisonSnake = new Snake.Models.PrisonSnake();
-    var collectibles = new Snake.Models.Collectibles();
-    var score = new Snake.Models.Score();
-    var gameController = new Snake.Controlls.GameController(field, prisonSnakeView, prisonSnakeScore, grid, prisonSnake, collectibles, score);
-
-
-    //init
-    grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
-    var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
-    prisonSnake.init("right", startPos.x, startPos.y);
-    grid.set(SNAKE_HEAD, startPos.x, startPos.y);
-    //end init
-    
-    collectibles.setPrisoner(grid);
-    // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
-    createjs.Ticker.setFPS(5);
-    createjs.Ticker.addEventListener("tick",handleTick);
-    createjs.Ticker.paused = false;
-    
-    //Ueberpruefen des Tickers
-    function handleTick(){
-        // solange Ticker nicht pausiert wird, wird der gameLoop fortgesetzt
-        if(createjs.Ticker.paused == false){
-            gameController.gameLoop();
-        }
-        // sobald pausiert wird (Schlange ist tot), wird Ticker entfernt und GameOver Screen eingeblendet
-        else{
-            console.log("tot");
-            createjs.Ticker.removeEventListener("tick",handleTick);
-            gameOver.addGameOverView();
-        }
-    }//end handleTick
+    var gameController = new Snake.Controlls.GameController();      //Whuuup whuuup so kurz :D
+    gameController.init();
     
 }//end startGame
 
