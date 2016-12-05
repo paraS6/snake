@@ -57,7 +57,15 @@ function Main() {
 function startGame() {
     
     var gameController = new Snake.Controlls.GameController();      //Whuuup whuuup so kurz :D
-    gameController.init();
-    
+
+    gameController.init(5);
+
+    /*
+    var score1 = Snake.Models.Score.get();
+
+        if (score1 > 20){
+            gameController.init(15);
+        }
+*/
 }//end startGame
 

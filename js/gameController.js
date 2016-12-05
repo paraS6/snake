@@ -19,10 +19,17 @@ Snake.Controlls = {};
             var _prisonSnake = new Snake.Models.PrisonSnake();
             var _grid = new Snake.Models.Grid();
     
-            var _frames = 0;
+            //var fps = 0;
+            
+            this.speed = function (fps) {
+                createjs.Ticker.setFPS(fps);
+                createjs.Ticker.addEventListener("tick", this.handleTick);
+                createjs.Ticker.paused = false;
+            }
 
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
-            this.init = function () {
+            this.init = function (fps) {
+                this.speed(fps);
                 var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
                 _grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
                 _prisonSnake.init("right", startPos.x, startPos.y);
@@ -30,9 +37,9 @@ Snake.Controlls = {};
                 _collectibles.setPrisoner(_grid);
 
                 // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
-                createjs.Ticker.setFPS(5);
-                createjs.Ticker.addEventListener("tick", this.handleTick);
-                createjs.Ticker.paused = false;
+                
+
+
             }//end init
 
             var that = this;    //Hilfsvariable, um das richtige "this" zu referenzieren
