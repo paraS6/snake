@@ -112,7 +112,7 @@ Snake.Menue.GameOver = function () {
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
             //console.log("restart");
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
-            startGame(); //Spielfeld wird gezeichntet
+            Snake.startGame(); //Spielfeld wird gezeichntet
 
 
         })//End Button Listeners

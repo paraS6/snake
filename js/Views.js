@@ -48,13 +48,14 @@ Snake.Views.PrisonSnakeView = function () {
                             wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
                             stage.addChild(wall);
                             break;*/
-                            
+                            break;
                         case ITEM:
                             var item = new createjs.Bitmap;
                             item = tunaIMG.clone();
                             item.x = i*CELL;
                             item.y = j*CELL;
                             stage.addChild(item);
+                            break;
                         case EMPTY:
                             break;
                         default:

@@ -28,6 +28,7 @@ Snake.Controlls = {};
                 _prisonSnake.init("right", startPos.x, startPos.y);
                 _grid.set(SNAKE_HEAD, startPos.x, startPos.y);
                 _collectibles.setPrisoner(_grid);
+                _collectibles.setCollectibles(_grid);
 
                 // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
                 createjs.Ticker.setFPS(5);
@@ -134,7 +135,7 @@ Snake.Controlls = {};
                     }
                 
                     if(_grid.get(nx,ny) == ITEM){
-                        _collectibles.setCollectibles();
+                        _collectibles.setCollectibles(_grid);
                     }
                     else{
                         _grid.set(EMPTY, nx,ny);
