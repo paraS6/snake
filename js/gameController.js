@@ -132,6 +132,13 @@ Snake.Controlls = {};
                         tail.x = nx;
                         tail.y = ny;
                     }
+                
+                    if(_grid.get(nx,ny) == ITEM){
+                        _collectibles.setCollectibles();
+                    }
+                    else{
+                        _grid.set(EMPTY, nx,ny);
+                    }
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);
                     _prisonSnake.insert(tail.x, tail.y);
