@@ -47,7 +47,8 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
     }; //end keyInput
     function update(event){
         _frames++;
-        var counter = null;
+        var counter = 0;
+        
         if(_frames%10 == 0){
             var nx = prisonSnake.last.x;
             var ny = prisonSnake.last.y;
@@ -75,7 +76,7 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
             if(grid.get(nx, ny) == PRISONER){
                 var tail = {x:nx, y:ny};
                 _collect.setPrisoner(grid);
-                //counter++;
+                counter++;
                
 
 
@@ -89,9 +90,7 @@ Snake.Controlls.GameController=function(field, prisonSnakeView, scoreView, grid,
                 tail.y = ny;
             }
         
-          
-            
-            if (grid.get(nx, ny) == ITEM) {
+            if (counter < 3 && grid.get(nx, ny) == ITEM) {
                 _collect.setCollectibles(grid);
                 
             }
