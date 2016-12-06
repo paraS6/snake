@@ -8,12 +8,14 @@
     const CELL = 40;    //Zellengroesse
     const GRIDWIDTH= parseInt(WIDTH/CELL);
     const GRIDHEIGHT = parseInt(HEIGHT/CELL);
+    
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_HEAD = 2; // der Kopf der Schlange
     const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
-    const ITEM = 4;
-
+    const TUNA = 4;
+    const CIGARETTES  = 5;
+    const KNIFE = 6;
 
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");

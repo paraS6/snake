@@ -91,7 +91,9 @@ Snake.Models.PrisonSnake = function () {
 
 Snake.Models.Collectibles = function () {
 
-
+    var _counter;
+    var _cnt = 1;
+    
 // Setzt ein einzusammelndes Schlangenelement auf das Spielfeld
     this.setPrisoner = function (grid){
         
@@ -125,12 +127,42 @@ Snake.Models.Collectibles = function () {
 
                     empty.push({x:x, y:y});
                 }
+
             }
 
         }
         var randpos = empty[Math.floor(Math.random()*empty.length)];
 
-        grid.set(ITEM, randpos.x, randpos.y);
+        grid.set(TUNA, randpos.x, randpos.y);
+        //grid.set(CIGARETTES, randpos.x, randpos.y);
     }//end setCollectibles
     
+    this.getCounter = function (_counter) {
+        return _counter;
+    }//end getCounter
+    
+    
+    this.setCounter = function (counter) {
+        _counter = counter;
+    }//end setCounter
+    
+    this.setRandomItem = function (grid) {
+        
+        if(_counter%6 == 0){
+            _counter = 1;
+            this.setCollectibles(grid);
+        }
+       
+    }//end setRandomItem
+
+    this.trackItem = function () {
+
+
+        if(grid.get(x,y) == TUNA){
+            _cnt++;
+            if(_cnt%25 == 0){
+                grid.set(x,y) == TUNA;
+            }
+        }
+    }
 }//end Snake.Models.Collectibles

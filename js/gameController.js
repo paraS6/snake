@@ -20,6 +20,7 @@ Snake.Controlls = {};
             var _grid = new Snake.Models.Grid();
     
             var _frames = 0;
+            var _counter = 1;
 
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
             this.init = function () {
@@ -123,9 +124,14 @@ Snake.Controlls = {};
                         var tail = {x:nx, y:ny};
                         // ...der Score erhöht und...
                         _score.set(10);
-                        console.log(_score.get());
+                        _counter++;
+                        console.log(_counter);
+                        
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
                         _collectibles.setPrisoner(_grid);
+                        
+                        _collectibles.setCounter(_counter);
+                        _collectibles.setRandomItem( _grid);
                     }else{
                         // beim Laufen über leere Felder wird das letzte Schlangenelement immer wieder gelöscht und durch die aktualisierte Endposition ersetzt
                         var tail = _prisonSnake.remove();
@@ -134,12 +140,17 @@ Snake.Controlls = {};
                         tail.y = ny;
                     }
                 
-                    if(_grid.get(nx,ny) == ITEM){
+                
+                   
+                    
+                /*
+                    if(_counter%6 == 0){
+                        _counter = 1;
                         _collectibles.setCollectibles(_grid);
                     }
                     else{
                         _grid.set(EMPTY, nx,ny);
-                    }
+                    }*/
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);
                     _prisonSnake.insert(tail.x, tail.y);
