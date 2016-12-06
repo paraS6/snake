@@ -12,6 +12,8 @@
     const EMPTY = 0; // ein leeres Feld
     const SNAKE_HEAD = 2; // der Kopf der Schlange
     const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
+    const TUNA = 4;
+    const CIGARETTES  = 5;
 
 
     // lädt den Spielfeldhintergrund ins Canvas

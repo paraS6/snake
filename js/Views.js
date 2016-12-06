@@ -1,6 +1,8 @@
 //MVC-Klasse Views
 Snake.Views = {};
 var prisonerIMG = new createjs.Bitmap("img/chara_dummy1.png");
+var tunaIMG = new createjs.Bitmap("img/items_tuna.png");
+var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
 
 //TODO Views auslangern Separation of concern
 
@@ -47,6 +49,21 @@ Snake.Views.PrisonSnakeView = function () {
                             wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
                             stage.addChild(wall);
                             break;*/
+                            break;
+                        case TUNA:
+                            var item = new createjs.Bitmap;
+                            item = tunaIMG.clone();
+                            item.x = i*CELL;
+                            item.y = j*CELL;
+                            stage.addChild(item);
+                            break;
+                        case CIGARETTES:
+                            var item = new createjs.Bitmap;
+                            item = cigIMG.clone();
+                            item.x = i*CELL;
+                            item.y = j*CELL;
+                            stage.addChild(item);
+                            break;
                         case EMPTY:
                             break;
                         default:
