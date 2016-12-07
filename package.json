@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/paraS6/snake/issues"
   },
-  "homepage": "https://github.com/paraS6/snake#readme"
+  "homepage": "https://github.com/paraS6/snake#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
