@@ -17,7 +17,7 @@
 
 
     // lädt den Spielfeldhintergrund ins Canvas
-    var playingfieldImg = new createjs.Bitmap("img/dummyGround.jpg");
+    var playingfieldImg = new createjs.Bitmap("img/playingfield.png");
 
 /*/ Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {
