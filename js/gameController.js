@@ -115,6 +115,9 @@ Snake.Controlls = {};
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
                         return createjs.Ticker.paused = true;
                     }
+                
+                
+                    
                     
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
                     if(_grid.get(nx, ny) == PRISONER){
@@ -122,24 +125,42 @@ Snake.Controlls = {};
                         var tail = {x:nx, y:ny};
                         // ...der Score erhöht und...
                         _score.set(10);
+                        // ...der Counter erhöht, der das Erscheinen von Items triggert und...
                         _counter++;
                         console.log(_score.get());
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
                         _collectibles.setPrisoner(_grid);
 
+                        //gibt den Counter an die Collectibles weiter
                         _collectibles.setCounter(_counter);
 
-                        _collectibles.setRandomItem( _grid);
-                    }else{
+                    }
+
+                    else{
                         // beim Laufen über leere Felder wird das letzte Schlangenelement immer wieder gelöscht und durch die aktualisierte Endposition ersetzt
                         var tail = _prisonSnake.remove();
                         _grid.set(EMPTY, tail.x, tail.y);
                         tail.x = nx;
                         tail.y = ny;
                     }
+
+                    //setzt ein zufälliges Item
+                    _collectibles.setRandomItem( _grid);
+
+                    if(_grid.get(nx, ny) == TUNA){
+                        _score.set(30);
+                    }
+
+
+                    if(_grid.get(nx, ny) == CIGARETTES){
+                        _score.set(-50);
+                    }
+
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);
                     _prisonSnake.insert(tail.x, tail.y);
             }; //end update
+            
+            
         }//end GameController
     

@@ -90,10 +90,27 @@ Snake.Models.PrisonSnake = function () {
 }//end PSnake
 
 Snake.Models.Collectibles = function () {
+    
+    var _counter; // erhöht sich beim Einsammeln eines Prisoners
+    // var _cnt = 1;
 
-    var _counter;
-    var _cnt = 1;
+    /*
+    this.collectibleAction = function (_coll){
+        switch(_coll){
+            case "PRISONER":
+                _score.set(10);
+                _counter++;
+                console.log(_score.get());
+                // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
+                _collectibles.setPrisoner(_grid);
 
+                _collectibles.setCounter(_counter);
+        }
+
+
+    }*/
+    
+    
     // Setzt ein einzusammelndes Schlangenelement auf das Spielfeld
     this.setPrisoner = function (grid){
 
@@ -103,7 +120,7 @@ Snake.Models.Collectibles = function () {
         // Schleife zum Durchlauf über das gesamte Spielfeld
         for (var x = 0; x < _grid.width; x++) {
             for (var y = 0; y < _grid.heigth; y++) {
-                // Über Setter-Methode wird abgeglichen ob jeweilige Position leer ist
+                // Über Getter-Methode wird abgeglichen ob jeweilige Position leer ist
                 if (_grid.get(x, y) == EMPTY) {
                     // wenn ja, wird Position ins Array gepusht
                     empty.push({x: x, y: y});
@@ -117,26 +134,38 @@ Snake.Models.Collectibles = function () {
         // Über Setter-Methode wird ein Prisoner an eine zufällige leere Positon gesetzt
         _grid.set(PRISONER, randpos.x, randpos.y);
     }//end setPrisoner
-
+    
+    //setzt ein zufälliges Item auf das Spielfeld
     this.setCollectibles = function(grid) {
-
+        //Array-Variable für alle leeren Felder
         var empty = [];
+        //Schleife zum Durchlauf über das gesamte Spielfeld
         for(var x = 0; x < grid.width; x++){
             for(var y = 0; y < grid.heigth; y++){
+                //Über Getter-Methode wird abgeglichen ob jeweilige Position leer ist
                 if(grid.get(x, y) == EMPTY){
-
+                    //wenn ja wird eine Position ins Array gepusht
                     empty.push({x:x, y:y});
                 }
 
             }
 
         }
+        //Variable speichert zufällige Position
         var randpos = empty[Math.floor(Math.random()*empty.length)];
-
-        grid.set(TUNA, randpos.x, randpos.y);
-        //grid.set(CIGARETTES, randpos.x, randpos.y);
+        //zufälliges Item wird aufgerufen
+        var randomItem = this.generateRandomItem();
+        //Item wird an zufällige leer Position gesetzt
+        grid.set(randomItem, randpos.x, randpos.y);
+        
     }//end setCollectibles
 
+    //generiert ein zufälliges Item und gibt es zurück
+    this.generateRandomItem = function () {
+        var r = Math.floor((Math.random()*2)+4);
+        return r;
+    }
+    
     this.getCounter = function (_counter) {
         return _counter;
     }//end getCounter
@@ -146,8 +175,10 @@ Snake.Models.Collectibles = function () {
         _counter = counter;
     }//end setCounter
 
+    //ruft nachdem eine bestimmte Anzahl von Prisonern eingesammelt wurde die Funktion
+    //zum Setzten eines zufälligen Items auf
     this.setRandomItem = function (grid) {
-
+        this.getCounter(_counter);
         if(_counter%6 == 0){
             _counter = 1;
             this.setCollectibles(grid);
@@ -155,7 +186,8 @@ Snake.Models.Collectibles = function () {
 
     }//end setRandomItem
 
-    
+    /*
+    //bewirkt, dass jeweiliges Item zeitlich begrenzt auf dem Spielfeld erscheint
     this.trackItem = function () {
 
 
@@ -165,5 +197,5 @@ Snake.Models.Collectibles = function () {
                 grid.set(x,y) == TUNA;
             }
         }
-    }
+    }*/
 }//end Snake.Models.Collectibles
