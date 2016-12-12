@@ -124,7 +124,7 @@ Snake.Controlls = {};
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny};
                         // ...der Score erhöht und...
-                        _score.set(10);
+                        //_score.set(10);
                         // ...der Counter erhöht, der das Erscheinen von Items triggert und...
                         _counter++;
                         console.log(_score.get());
@@ -147,14 +147,10 @@ Snake.Controlls = {};
                     //setzt ein zufälliges Item
                     _collectibles.setRandomItem( _grid);
 
-                    if(_grid.get(nx, ny) == TUNA){
-                        _score.set(30);
-                    }
-
-
-                    if(_grid.get(nx, ny) == CIGARETTES){
-                        _score.set(-50);
-                    }
+                    //setzt den Score individuell für jedes Element
+                    _score.setScore(_grid, nx , ny);    
+                
+                  
 
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);

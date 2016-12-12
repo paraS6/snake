@@ -58,6 +58,21 @@ Snake.Models.Score = function() {
         return _score;
     }
 
+    //setzt den Score in Abhängigkeit des Collectibles
+    this.setScore = function(_grid, nx, ny){
+        
+        if(_grid.get(nx, ny) == TUNA){
+            this.set(30);
+        }
+        else if(_grid.get(nx, ny) == CIGARETTES){
+            this.set(-50);
+        }
+        else if(_grid.get(nx,ny) == PRISONER){
+            this.set(10);
+        }
+        
+    }//end setScore
+
 
 }// end Score
 
