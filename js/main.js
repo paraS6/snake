@@ -14,10 +14,11 @@
     const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
     const TUNA = 4;
     const CIGARETTES  = 5;
+    const KNIFE = 6;
 
 
     // lädt den Spielfeldhintergrund ins Canvas
-    var playingfieldImg = new createjs.Bitmap("img/playingfield.png");
+    var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
 
 /*/ Main-Methode, welche beim Laden der HTML-Seite getriggert wird
 function Main() {

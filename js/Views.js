@@ -1,8 +1,9 @@
 //MVC-Klasse Views
 Snake.Views = {};
-var prisonerIMG = new createjs.Bitmap("img/chara_dummy1.png");
+var prisonerIMG = new createjs.Bitmap("img/prisoner.png");
 var tunaIMG = new createjs.Bitmap("img/items_tuna.png");
 var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
+var knifeIMG = new createjs.Bitmap("img/item_knife.png");
 
 //TODO Views auslangern Separation of concern
 
@@ -64,6 +65,12 @@ Snake.Views.PrisonSnakeView = function () {
                             item.y = j*CELL;
                             stage.addChild(item);
                             break;
+                        case KNIFE:
+                            var item = new createjs.Bitmap;
+                            item = knifeIMG.clone();
+                            item.x = i*CELL;
+                            item.y = j*CELL;
+                            stage.addChild(item);
                         case EMPTY:
                             break;
                         default:
@@ -76,14 +83,14 @@ Snake.Views.PrisonSnakeView = function () {
 }; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
     var _scoreContainer = new createjs.Container();
-    var _scoreBg = new createjs.Shape();    //Hintergrund von Score
     var _scoreTitle = new createjs.Text("Score", "50px pixel", "white"); //Ueberschrift
     var _scoreTXT;    // Scoreanzeige
     var _b = _scoreTitle.getBounds(); // gibt Breite des Textfeldes der Überschrift zurück
     var _b2; // gibt Breite des Textfeldes des Scores zurück
 
     this.drawScore  = function (score) {
-        _scoreBg.graphics.beginFill("black").drawRect(WIDTH,0,stage.canvas.width-WIDTH, stage.canvas.height);
+
+        /*_scoreBg.graphics.beginFill("black").drawRect(WIDTH,0,stage.canvas.width-WIDTH, stage.canvas.height);*/
         //Text zentrieren
         _scoreTitle.x = WIDTH + ((stage.canvas.width-WIDTH)-_b.width)/2 ;
         _scoreTitle.y = stage.canvas.height/4;
@@ -95,7 +102,7 @@ Snake.Views.ScoreView = function () {
         _scoreTXT.x = WIDTH + ((stage.canvas.width-WIDTH)-_b2.width)/2 ;
         _scoreTXT.y = stage.canvas.height/4+60;
         // Background, Titel und Score zum Canvas hinzufügen
-        _scoreContainer.addChild(_scoreBg, _scoreTitle, _scoreTXT);
+        _scoreContainer.addChild(playingfieldImg, _scoreTitle, _scoreTXT);
         stage.addChild(_scoreContainer);
     }//end drawScore
 }; //end ScoreView

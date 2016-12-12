@@ -65,10 +65,13 @@ Snake.Models.Score = function() {
             this.set(30);
         }
         else if(_grid.get(nx, ny) == CIGARETTES){
-            this.set(-50);
+            this.set(20);
         }
         else if(_grid.get(nx,ny) == PRISONER){
             this.set(10);
+        }
+        else if(_grid.get(nx,ny) == KNIFE) {
+            this.set(-50);
         }
         
     }//end setScore
@@ -177,7 +180,7 @@ Snake.Models.Collectibles = function () {
 
     //generiert ein zufälliges Item und gibt es zurück
     this.generateRandomItem = function () {
-        var r = Math.floor((Math.random()*2)+4);
+        var r = Math.floor((Math.random()*3)+4);
         return r;
     }
     
