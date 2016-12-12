@@ -24,7 +24,7 @@ Snake.Controlls = {};
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
             this.init = function () {
                 var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
-                _grid.init(EMPTY, GRIDWIDTH, GRIDHEIGHT);
+                _grid.init(WALL, EMPTY, GRIDWIDTH, GRIDHEIGHT);
                 _prisonSnake.init("right", startPos.x, startPos.y);
                 _grid.set(SNAKE_HEAD, startPos.x, startPos.y);
                 _collectibles.setPrisoner(_grid);
@@ -109,7 +109,7 @@ Snake.Controlls = {};
                         break;
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand --> GameOver
-                    if(nx < 0 || nx > _grid.width -1 || ny < 0 || ny > _grid.heigth -1 || _grid.get(nx, ny) == SNAKE_HEAD){
+                    if(nx < 1 || nx > _grid.width -2 || ny < 1 || ny > _grid.heigth -2 || _grid.get(nx, ny) == SNAKE_HEAD){
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()

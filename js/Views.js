@@ -46,10 +46,6 @@ Snake.Views.PrisonSnakeView = function () {
                             dummy.x=i*CELL;
                             dummy.y=j*CELL;
                             stage.addChild(dummy);
-                            /*var wall = new createjs.Shape();
-                            wall.graphics.beginFill("red").drawRect(i*CELL, j*CELL, CELL, CELL);
-                            stage.addChild(wall);
-                            break;*/
                             break;
                         case TUNA:
                             var item = new createjs.Bitmap;

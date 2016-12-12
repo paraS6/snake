@@ -11,7 +11,7 @@ Snake.Models.Grid = function(){
     _grid = null;
 
     // initialisiert das Spielfeld Grid
-    this.init = function (d, c, r) {
+    this.init = function (w, d, c, r) {
         this.width = c;
         this.heigth = r;
         // Grid als einfaches Array
@@ -23,7 +23,13 @@ Snake.Models.Grid = function(){
             this._grid.push([]);
             // Zeilen auf Y-Achse als 2. Dimension im Array
             for(var y = 0; y < r; y++){
-                this._grid[x].push(d);
+                if(x ==0 || y == 0 || x == c-1 || y == r-1){
+                    this._grid[x].push(w);
+                }
+                else{
+                    this._grid[x].push(d);
+                }
+
             }
         }
     },
