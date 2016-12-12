@@ -118,23 +118,8 @@ Snake.Models.PrisonSnake = function () {
 Snake.Models.Collectibles = function () {
     
     var _counter; // erhöht sich beim Einsammeln eines Prisoners
-    var _cnt = 1;
-    var _key = false;
-    /*
-    this.collectibleAction = function (_coll){
-        switch(_coll){
-            case "PRISONER":
-                _score.set(10);
-                _counter++;
-                console.log(_score.get());
-                // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
-                _collectibles.setPrisoner(_grid);
-
-                _collectibles.setCounter(_counter);
-        }
-
-
-    }*/
+    var _cnt = 1; // Zähler für die Präsenzdauer eines Items
+    var _keySetOnGrid = false; // wurde der Schlüssel bereits aufs Grid gesetzt?
     
     
     // Setzt den Schlüssel auf das Spielfeld
@@ -158,7 +143,6 @@ Snake.Models.Collectibles = function () {
         // Randomizer geht durch alle leeren Felder
         var randpos = empty[Math.floor(Math.random() * empty.length)];
         // Über Setter-Methode wird ein Prisoner an eine zufällige leere Positon gesetzt
-       
         _grid.set(KEY, randpos.x, randpos.y);
    
        
@@ -166,10 +150,11 @@ Snake.Models.Collectibles = function () {
     
     //ruft die Funktion zum Setzen des Keys auf sobald der Score über 500 ist
     this.keySetter = function (score, grid) {
-        
-        if(_key == false && score > 40){
+        // !!zu Testzwecken wird der Wert auf 40 gesetzt!!
+        if(_keySetOnGrid == false && score >= 40){
             this.setKey(grid);
-            _key = true;
+            // true = der Schlüssel wurde auf das Grid gesetzt
+            _keySetOnGrid = true;
         }
     }
     
@@ -226,6 +211,44 @@ Snake.Models.Collectibles = function () {
         
     }//end setCollectibles
 
+    // Durchläuft das Grid und löscht Items nach definierter Zeit vom Grid
+    this.trackItems = function(grid) {
+        // verschachtelte Schleife durchläuft das Feld
+        for (var x = 0; x < grid.width; x++){
+            for (var y = 0; y < grid.heigth; y++){
+                // Wenn ein Feld von einem Item belegt ist, wird folgende Aktion ausgeführt
+                switch(grid.get(x,y)){
+                    case CIGARETTES:
+                        // Counter wird im Takt der framerate hochgezählt
+                        _cnt++;
+                        // nach x update-Durchläufen im Controller...
+                        if(_cnt%35 == 0){
+                            //... wird die Zelle wieder auf leer gesetzt
+                            grid.set(EMPTY,x,y);
+                            //... und der Counter wieder auf Anfangswert gesetzt
+                            _cnt = 1;
+                        }
+                        break;
+                    case TUNA:
+                        _cnt++;
+                        if(_cnt%35 == 0){
+                            grid.set(EMPTY,x,y);
+                            _cnt = 1;
+                        }
+                    case KNIFE:
+                        _cnt++;
+                        if(_cnt%75 == 0){
+                            grid.set(EMPTY,x,y);
+                            _cnt = 1;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+    
+    
     /*
     this.remove = function (randomItem, x, y,grid) {
 

@@ -123,9 +123,10 @@ Snake.Controlls = {};
                         return createjs.Ticker.paused = true;
                     }
                 
+                    // trackt, welche Items auf dem Grid liegen und entfernt diese nach vorgegebener Zeit
+                    _collectibles.trackItems(_grid);
                 
-                    
-                    
+
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
                     if(_grid.get(nx, ny) == PRISONER){
                         // ...wird der Schwanz verlängert und...
@@ -157,8 +158,9 @@ Snake.Controlls = {};
                     //setzt den Score individuell für jedes Element
                     _score.setScore(_grid, nx , ny);
                     
+                    
                     var scoreKey = _score.get();
-                
+                    // setzt den Schlüssel auf das Grid, sobald der scoreKey erreicht wird
                    _collectibles.keySetter(scoreKey, _grid);
             
 
