@@ -18,9 +18,13 @@ Snake.Controlls = {};
             var _collectibles = new Snake.Models.Collectibles();
             var _prisonSnake = new Snake.Models.PrisonSnake();
             var _grid = new Snake.Models.Grid();
-    
+            
             var _frames = 0;
             var _counter = 1;
+            var keySet = false;
+            var minScore = _score.get();
+          
+            
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
             this.init = function () {
                 var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
@@ -88,6 +92,9 @@ Snake.Controlls = {};
                 }
 
             }; //end keyInput
+
+        
+            
             function update(event){
            
                 // speichert X-/Y-Koordinaten des letzten Schlangenelements zwischen
@@ -146,11 +153,14 @@ Snake.Controlls = {};
 
                     //setzt ein zufälliges Item
                     _collectibles.setRandomItem( _grid);
-
-                    //setzt den Score individuell für jedes Element
-                    _score.setScore(_grid, nx , ny);    
                 
-                  
+                    //setzt den Score individuell für jedes Element
+                    _score.setScore(_grid, nx , ny);
+                    
+                    var scoreKey = _score.get();
+                
+                   _collectibles.keySetter(scoreKey, _grid);
+            
 
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);

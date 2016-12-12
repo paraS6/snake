@@ -4,6 +4,7 @@ var prisonerIMG = new createjs.Bitmap("img/prisoner.png");
 var tunaIMG = new createjs.Bitmap("img/items_tuna.png");
 var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
 var knifeIMG = new createjs.Bitmap("img/item_knife.png");
+var keyIMG = new createjs.Bitmap("img/key.png");
 
 //TODO Views auslangern Separation of concern
 
@@ -71,6 +72,14 @@ Snake.Views.PrisonSnakeView = function () {
                             item.x = i*CELL;
                             item.y = j*CELL;
                             stage.addChild(item);
+                            break;
+                        case KEY:
+                            var key = new createjs.Bitmap;
+                            key = keyIMG.clone();
+                            key.x = i*CELL;
+                            key.y = j*CELL;
+                            stage.addChild(key);  
+                            break;
                         case EMPTY:
                             break;
                         default:

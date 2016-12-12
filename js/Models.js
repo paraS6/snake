@@ -33,7 +33,9 @@ Snake.Models.Grid = function(){
         this._grid[x][y] = val;
     },
 
-    // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
+       
+
+            // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
     this.get = function (x, y) {
         return this._grid[x][y];
     }
@@ -110,8 +112,8 @@ Snake.Models.PrisonSnake = function () {
 Snake.Models.Collectibles = function () {
     
     var _counter; // erhöht sich beim Einsammeln eines Prisoners
-    // var _cnt = 1;
-
+    var _cnt = 1;
+    var _key = false;
     /*
     this.collectibleAction = function (_coll){
         switch(_coll){
@@ -128,6 +130,42 @@ Snake.Models.Collectibles = function () {
 
     }*/
     
+    
+    // Setzt den Schlüssel auf das Spielfeld
+    this.setKey = function (grid){
+        
+        var _grid = grid;
+        // Array-Variable für alle leeren Felder
+        var empty = [];
+        // Schleife zum Durchlauf über das gesamte Spielfeld
+        for (var x = 0; x < _grid.width; x++) {
+            for (var y = 0; y < _grid.heigth; y++) {
+                // Über Getter-Methode wird abgeglichen ob jeweilige Position leer ist
+                if (_grid.get(x, y) == EMPTY) {
+                    // wenn ja, wird Position ins Array gepusht
+                    empty.push({x: x, y: y});
+                }
+            }
+
+        }
+        
+        // Randomizer geht durch alle leeren Felder
+        var randpos = empty[Math.floor(Math.random() * empty.length)];
+        // Über Setter-Methode wird ein Prisoner an eine zufällige leere Positon gesetzt
+       
+        _grid.set(KEY, randpos.x, randpos.y);
+   
+       
+    }//end setKey
+    
+    //ruft die Funktion zum Setzen des Keys auf sobald der Score über 500 ist
+    this.keySetter = function (score, grid) {
+        
+        if(_key == false && score > 40){
+            this.setKey(grid);
+            _key = true;
+        }
+    }
     
     // Setzt ein einzusammelndes Schlangenelement auf das Spielfeld
     this.setPrisoner = function (grid){
@@ -169,15 +207,32 @@ Snake.Models.Collectibles = function () {
             }
 
         }
+
+     
         //Variable speichert zufällige Position
         var randpos = empty[Math.floor(Math.random()*empty.length)];
         //zufälliges Item wird aufgerufen
         var randomItem = this.generateRandomItem();
         //Item wird an zufällige leer Position gesetzt
         grid.set(randomItem, randpos.x, randpos.y);
+      
+        //this.remove(randomItem,randpos.x, randpos.y, grid);
         
     }//end setCollectibles
 
+    /*
+    this.remove = function (randomItem, x, y,grid) {
+
+            _cnt++;
+            console.log("Remove Counter: "+_cnt);
+            if(_cnt >= 3){
+                    
+                grid.set(EMPTY,x,y);
+            }
+        
+
+    }*/
+    
     //generiert ein zufälliges Item und gibt es zurück
     this.generateRandomItem = function () {
         var r = Math.floor((Math.random()*3)+4);
