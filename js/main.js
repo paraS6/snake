@@ -10,6 +10,7 @@
     const GRIDHEIGHT = parseInt(HEIGHT/CELL);
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
+    const WALL = 1; // Mauer, Rand
     const SNAKE_HEAD = 2; // der Kopf der Schlange
     const PRISONER = 3; // ein einzusammelndes Schlangenelement (Collectible)
     const TUNA = 4;
