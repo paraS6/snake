@@ -96,10 +96,13 @@ Snake.Controlls = {};
         
             
             function update(event){
-           
+
+
                 // speichert X-/Y-Koordinaten des letzten Schlangenelements zwischen
                 var nx = _prisonSnake.last.x;
                 var ny = _prisonSnake.last.y;
+                //console.log(this._grid.get(nx,ny));
+
                 // zieht das Schlangenende jeweils eins hinter sich her
                 switch(_prisonSnake.direction) {
                     case "left":
@@ -115,14 +118,15 @@ Snake.Controlls = {};
                         ny++;
                         break;
                 }
-                    // Fall: Schlange stößt gegen Spielfeldrand --> GameOver
-                    if(nx < 1 || nx > _grid.width -2 || ny < 1 || ny > _grid.heigth -2 || _grid.get(nx, ny) == SNAKE_HEAD){
+                    // Fall: Schlange stößt gegen Spielfeldrand oder Schlange selbst--> GameOver
+                    if(_grid.get(nx, ny) == WALL || _grid.get(nx, ny) == SNAKE_HEAD){
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
                         return createjs.Ticker.paused = true;
                     }
-                
+
+
                     // trackt, welche Items auf dem Grid liegen und entfernt diese nach vorgegebener Zeit
                     _collectibles.trackItems(_grid);
                 
@@ -160,8 +164,15 @@ Snake.Controlls = {};
                     
                     
                     var scoreKey = _score.get();
-                    // setzt den Schlüssel auf das Grid, sobald der scoreKey erreicht wird
+                    // setzt den Schlüssel auf das Grid, sobald der erforderliche scoreKey erreicht wird
                    _collectibles.keySetter(scoreKey, _grid);
+
+                    // Überprüft ob Schlüssel eingesammelt wurde. True --> Tor wird auf das Grid gesetzt
+                    if (_score.getKeyStatus()){
+                        // setzt Tor auf die feste Stelle
+                        _grid.set(GATE,9,0);
+                        console.log("Gate open!");
+                    }
             
 
                     // Schlangenposition wird im Model aktualisiert

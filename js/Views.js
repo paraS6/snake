@@ -48,6 +48,7 @@ Snake.Views.PrisonSnakeView = function () {
                             dummy.y=j*CELL;
                             stage.addChild(dummy);
                             break;
+                        // lädt die Bitmaps der Items
                         case TUNA:
                             var item = new createjs.Bitmap;
                             item = tunaIMG.clone();
@@ -75,6 +76,14 @@ Snake.Views.PrisonSnakeView = function () {
                             key.x = i*CELL;
                             key.y = j*CELL;
                             stage.addChild(key);  
+                            break;
+                        // !!! Provisorisch markiert ein Messer das offene Tor !!!
+                        case GATE:
+                            var gate = new createjs.Bitmap;
+                            gate = knifeIMG.clone();
+                            gate.x = i*CELL;
+                            gate.y = j*CELL;
+                            stage.addChild(gate);
                             break;
                         case EMPTY:
                             break;

@@ -17,6 +17,7 @@
     const CIGARETTES  = 5;
     const KNIFE = 6;
     const KEY = 8;
+    const GATE = 9;
 
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");

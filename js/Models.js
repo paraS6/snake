@@ -37,11 +37,9 @@ Snake.Models.Grid = function(){
     // Setter-Methode, um von außerhalb das Grid zu bearbeiten
     this.set = function (val, x, y) {
         this._grid[x][y] = val;
-    },
-
-       
-
-            // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
+    }, 
+        
+    // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
     this.get = function (x, y) {
         return this._grid[x][y];
     }
@@ -53,7 +51,7 @@ Snake.Models.Score = function() {
     // initialer Spielstand
     // TODO: über Variable initialisieren
     var _score = 0;
-
+    var _keyCollected = false;
 
     // erhöht den Spielstand nach speziellen Ereignissen im gameController
     // TODO: Funktion ermöglichen, um unterschiedliche Collectibles unterschiedlich zu bewerten
@@ -69,6 +67,7 @@ Snake.Models.Score = function() {
     //setzt den Score in Abhängigkeit des Collectibles
     this.setScore = function(_grid, nx, ny){
         
+
         if(_grid.get(nx, ny) == TUNA){
             this.set(30);
         }
@@ -81,9 +80,21 @@ Snake.Models.Score = function() {
         else if(_grid.get(nx,ny) == KNIFE) {
             this.set(-50);
         }
+        // Sonderfall Schlüssel
+        else if(_grid.get(nx,ny) == KEY) {
+            //this.set(0);
+            // gibt an, dass der Schlüssel eingesammelt wurde --> Tor soll sich öffnen
+            _keyCollected = true;
+            console.log("Key Collected");
+        }
+        
         
     }//end setScore
 
+    // Getter-Methode, gibt an, ob der Schlüssel schon eingesammelt wurde
+    this.getKeyStatus = function (){
+        return _keyCollected;
+    }
 
 }// end Score
 
@@ -157,6 +168,8 @@ Snake.Models.Collectibles = function () {
             _keySetOnGrid = true;
         }
     }
+    
+    
     
     // Setzt ein einzusammelndes Schlangenelement auf das Spielfeld
     this.setPrisoner = function (grid){
