@@ -15,18 +15,23 @@ Snake.Controlls = {};
             var _scoreView = new Snake.Views.ScoreView();
             var _score = new Snake.Models.Score();
             var gameOver = new Snake.Menue.GameOver();
+            var nextLevel = new Snake.Menue.NextLevel();
             var _collectibles = new Snake.Models.Collectibles();
             var _prisonSnake = new Snake.Models.PrisonSnake();
             var _grid = new Snake.Models.Grid();
-            
+        
+            var hitWall = false;
+            var levelSuceeded = false;
             var _frames = 0;
             var _counter = 1;
             var keySet = false;
             var minScore = _score.get();
-          
+
+         
             
+        
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
-            this.init = function () {
+            this.init = function (speed) {
                 var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
                 _grid.init(WALL, EMPTY, GRIDWIDTH, GRIDHEIGHT);
                 _prisonSnake.init("right", startPos.x, startPos.y);
@@ -34,11 +39,51 @@ Snake.Controlls = {};
                 _collectibles.setPrisoner(_grid);
                 _collectibles.setCollectibles(_grid);
                 // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
-                createjs.Ticker.setFPS(5);
+                createjs.Ticker.setFPS(speed);
                 createjs.Ticker.addEventListener("tick", this.handleTick);
                 createjs.Ticker.paused = false;
             }//end init
+            
+            
+            
+            this.initTicker = function (_fps) {
+                // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
+                createjs.Ticker.setFPS(_fps);
+                createjs.Ticker.addEventListener("tick", this.handleTick);
+                createjs.Ticker.paused = false;
+            }
 
+            this.initLevel = function(){
+                var lF = this.levelFinished(_grid,_prisonSnake);
+
+                lF = false;
+                console.log(lF);
+                
+                createjs.Ticker.setFPS(5);
+                createjs.Ticker.addEventListener("tick", this.handleTick);
+                createjs.Ticker.paused = false;
+
+                if(lF = true){
+                    createjs.Ticker.setFPS(10);
+                    createjs.Ticker.addEventListener("tick", this.handleTick);
+                    createjs.Ticker.paused = false;
+                    console.log(lF);
+                }
+              
+            }
+
+            this.levelFinished = function (_grid,_prisonSnake) {
+                var lF = false;
+                
+                var score = _score.get();
+                
+                if (_prisonSnake.last == GATE && score > 500){
+                    lF = true;
+                }
+                return lF;
+            }
+
+            
             var that = this;    //Hilfsvariable, um das richtige "this" zu referenzieren
 
             //Ueberpruefen des Tickers
@@ -49,9 +94,18 @@ Snake.Controlls = {};
                 }
                 // sobald pausiert wird (Schlange ist tot), wird Ticker entfernt und GameOver Screen eingeblendet
                 else{
-                    console.log("tot"+this+that);
-                    createjs.Ticker.removeEventListener("tick", that.handleTick);
-                    gameOver.addGameOverView();
+                    //Anzeige des GameOverScreens falls Wand getroffen wird
+                    if(hitWall) {
+                        console.log("tot" + this + that);
+                        createjs.Ticker.removeEventListener("tick", that.handleTick);
+                        gameOver.addGameOverView();
+                    }
+                    //Level geschafft dann wird Start-Screen für das nächste Level angezeigt    
+                    else if(levelSuceeded){
+                        console.log("Geschafft!" + this + that);
+                        createjs.Ticker.removeEventListener("tick", that.handleTick);
+                        nextLevel.addNextLevelView();
+                    }
                 }
             }//end handleTick
 
@@ -120,12 +174,22 @@ Snake.Controlls = {};
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand oder Schlange selbst--> GameOver
                     if(_grid.get(nx, ny) == WALL || _grid.get(nx, ny) == SNAKE_HEAD){
+                        hitWall = true;
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
                         return createjs.Ticker.paused = true;
                     }
 
+                    //Fall: Schlange verlässt das Spielfeld durch das Gate
+                    if(_grid.get(nx, ny)== GATE){
+                        levelSuceeded = true;
+                        // Canvas Stage wird geleert
+                        stage.removeAllChildren();
+                        // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
+                        return createjs.Ticker.paused = true;
+                        console.log("Level-Ticker:"+Ticker.paused);
+                    }
 
                     // trackt, welche Items auf dem Grid liegen und entfernt diese nach vorgegebener Zeit
                     _collectibles.trackItems(_grid);
@@ -178,6 +242,7 @@ Snake.Controlls = {};
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);
                     _prisonSnake.insert(tail.x, tail.y);
+                
             }; //end update
             
             

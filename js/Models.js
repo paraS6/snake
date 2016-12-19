@@ -258,7 +258,7 @@ Snake.Models.Collectibles = function () {
                         break;
                 }
             }
-        }
+         }
     };
     
     

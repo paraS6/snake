@@ -25,6 +25,7 @@ Snake.Menue.StartMenue = function() {
     
         //erstellt Startfenster den Spiels
         this.addMenueView = function () {
+            var _level = 1;
             var startWindow = this.menueWindow("PrisonSnake", 0, 0); //erstellt neues Menuefenster
             stage.addChild(startWindow, _startButton, _instButton);
             stage.update();
@@ -32,7 +33,7 @@ Snake.Menue.StartMenue = function() {
             // Button Listeners
             _startButton.addEventListener("click", function (event) {   //startet Spiel
                 stage.removeAllChildren();
-                startGame();
+                startGame(_level);
 
             });
             _instButton.addEventListener("click", function (event) {    //fuehrt zum Instructionfenster
@@ -51,6 +52,7 @@ Snake.Menue.Instructions = function () {
     var _startButton = new Snake.Menue.Buttons("start", "white", 0, 0); //Startbutton erstellen
     var _instWindow = new Snake.Menue.StartMenue().menueWindow("Instructions", 0, 0); //Fenster erstellen
     var _instBack = new Snake.Menue.Buttons("back", "white",0, 100); //zurueck Button erstellen
+    var _level = 1;
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addInstructionView = function () {
@@ -60,7 +62,7 @@ Snake.Menue.Instructions = function () {
         //Button Listeners
         _startButton.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren()   //erst alle Elemente von Stage entfernen
-            startGame();  //Spielfeld wird gezeichntet
+            startGame(_level);  //Spielfeld wird gezeichntet
 
         })
         _instBack.addEventListener("click", function (event) {      //zurueck zum Startmenue
@@ -101,7 +103,7 @@ Snake.Menue.GameOver = function () {
     var _restartButton = new Snake.Menue.Buttons("restart", "white", 0, 0); //Startbutton erstellen
     var _gameOverWindow = new Snake.Menue.StartMenue().menueWindow("GameOver", 0, 0); //Fenster erstellen
     var _highScore = new Snake.Menue.Buttons("HighScore", "white",0, 100); //zurueck Button erstellen
-
+    var _level =1;
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addGameOverView = function () {
 
@@ -112,10 +114,36 @@ Snake.Menue.GameOver = function () {
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
             //console.log("restart");
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
-            startGame(); //Spielfeld wird gezeichntet
+            startGame(_level); //Spielfeld wird gezeichntet
 
 
         })//End Button Listeners
 
     }//end addGameOverView
 }//end GameOver
+var _level = 2;
+//Screen für das nächste Level
+Snake.Menue.NextLevel = function () {
+    var _nextLevelButton = new Snake.Menue.Buttons("next level", "white", 0, 0); //Startbutton erstellen
+    var _nextLevelWindow = new Snake.Menue.StartMenue().menueWindow("Level Succeeded!", 0, 0); //Fenster erstellen
+    var _highScore = new Snake.Menue.Buttons("HighScore", "white",0, 100); //zurueck Button erstellen
+    
+    
+    //Fenster, Buttons und Eventlistener fuer das Instructionfenster
+    this.addNextLevelView = function () {
+
+        stage.addChild(_nextLevelWindow,_nextLevelButton, _highScore);
+        stage.update();
+
+        //Button Listeners
+
+        _nextLevelButton.addEventListener("click", function (event) {   //startet Spiel
+            //console.log("restart");
+            stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+            startGame(_level); //Spielfeld wird 
+            console.log("level"+_level);
+            _level++;
+        })//End Button Listeners
+
+    }//end NextLevelView
+}//end NextLevel

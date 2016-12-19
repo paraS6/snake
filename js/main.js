@@ -56,13 +56,19 @@ function Main() {
         }
         loadWebFont();
     }//end Main
+     
 
-    
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
-function startGame() {
+function startGame(levelId) {
     
+    var _level = new Snake.Levels.Level();
+    //setzt die Geschwindigkeit je nach Id des Levels
+    _level.setSpeed(levelId);
+    var s = _level.getSpeed();
+    console.log("fps: "+_level.getSpeed());
     var gameController = new Snake.Controlls.GameController();      //Whuuup whuuup so kurz :D
-    gameController.init();
+    gameController.init(s);
+    
     
 }//end startGame
 
