@@ -7,3 +7,12 @@
     font-weight: normal;
     font-style: normal;
 }
+
+body{
+    background-color: black;
+}
+
+canvas{
+    margin: auto;
+    display: flex;
+}
