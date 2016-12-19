@@ -111,12 +111,12 @@ Snake.Models.PrisonSnake = function () {
     this.init = function (d, x, y) {
        this.direction = d;
         this._queue = [];
-        this.insert(x, y);
+        this.insert(x, y, d);
     },
 
     // fügt der Schlange ein neues Element hinzu, indem dieses mit unshift an ERSTER Stelle im Array eingefügt wird --> FIFO
-    this.insert = function (x, y) {
-        this._queue.unshift({x:x, y:y});
+    this.insert = function (x, y, d) {
+        this._queue.unshift({x:x, y:y, d:d });
         this.last = this._queue[0];
     },
 

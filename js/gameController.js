@@ -23,7 +23,8 @@ Snake.Controlls = {};
             var _counter = 1;
             var keySet = false;
             var minScore = _score.get();
-          
+
+            var prisonCounter = 1;
             
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
             this.init = function () {
@@ -64,7 +65,7 @@ Snake.Controlls = {};
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
                 _field.drawPlayingField();
                 _scoreView.drawScore(_score.get());
-                _prisonSnakeView.drawSnake(_grid);
+                _prisonSnakeView.drawSnake(_grid, _prisonSnake);
                 stage.update();
 
             }; //end gameLoop
@@ -134,7 +135,7 @@ Snake.Controlls = {};
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
                     if(_grid.get(nx, ny) == PRISONER){
                         // ...wird der Schwanz verlängert und...
-                        var tail = {x:nx, y:ny};
+                        var tail = {x:nx, y:ny, d: _prisonSnake.direction};
                         // ...der Score erhöht und...
                         //_score.set(10);
                         // ...der Counter erhöht, der das Erscheinen von Items triggert und...
@@ -146,6 +147,9 @@ Snake.Controlls = {};
                         //gibt den Counter an die Collectibles weiter
                         _collectibles.setCounter(_counter);
 
+                        _prisonSnake.insert(tail.x, tail.y, tail.d);
+                        _prisonSnakeView.addPrisonerSprite(_prisonSnake, prisonCounter);
+                        prisonCounter++;
                     }
 
                     else{
@@ -154,6 +158,9 @@ Snake.Controlls = {};
                         _grid.set(EMPTY, tail.x, tail.y);
                         tail.x = nx;
                         tail.y = ny;
+                        tail.d = _prisonSnake.direction;
+
+                        _prisonSnake.insert(tail.x, tail.y, tail.d);
                     }
 
                     //setzt ein zufälliges Item
@@ -177,7 +184,7 @@ Snake.Controlls = {};
 
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);
-                    _prisonSnake.insert(tail.x, tail.y);
+
             }; //end update
             
             
