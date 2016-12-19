@@ -36,6 +36,7 @@ Snake.Controlls = {};
                 _collectibles.setCollectibles(_grid);
                 // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
                 createjs.Ticker.setFPS(5);
+                createjs.Ticker.RAF = true;
                 createjs.Ticker.addEventListener("tick", this.handleTick);
                 createjs.Ticker.paused = false;
             }//end init

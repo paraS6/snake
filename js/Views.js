@@ -8,19 +8,19 @@ var keyIMG = new createjs.Bitmap("img/key.png");
 //Spritesheet data
 var data = {
     images: ["img/level1_sprite_schwarz.png"],
-    frames: {width:40, height: 40},
+    frames: {width: 40, height: 40},
     animations: {
-        down: [0,3],
-        left: [8,11],
-        right: [4,7],
-        up: [12,15]
+        down: [0, 2],
+        left: [9,11],
+        right: [4,6],
+        up: [12,14]
     }
 }
 //Spritesheet zusammen bauen
 var ss = new createjs.SpriteSheet(data);
 //Sprites für Prisoner
 var dummy = [];
-dummy[0] = new createjs.Sprite(ss, "right");
+dummy[0] = {s: new createjs.Sprite(ss, "right"), d: "right"};
 
 
 //TODO Views auslangern Separation of concern
@@ -40,15 +40,15 @@ Snake.Views.PlayingFieldView = function () {
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
         var _head = new createjs.Shape();
-
+        var currentDirection = "right";
     this.addPrisonerSprite = function(prisonSnake, counter){
         var _prisonSnake = prisonSnake;
         var _counter = counter;
-        dummy[_counter] = new createjs.Sprite(ss, _prisonSnake._queue[_counter].d);
+        dummy[_counter] = {s: new createjs.Sprite(ss, _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
     }
     
         this.drawSnake = function (grid, prisonSnake) {
-            
+
             var _grid = grid;
             var _prisonSnake = prisonSnake;
             // durchläuft das Array und gleicht ab, welches Feld wie besetzt ist
@@ -62,10 +62,13 @@ Snake.Views.PrisonSnakeView = function () {
                                 //Dazu werden die X/Y-Koordinaten des Grids mit denen der Queue abgeglichen
                                 if(i == _prisonSnake._queue[dummyCounter].x && j == _prisonSnake._queue[dummyCounter].y){
                                     //Wenn das richtige Queue Element gefunden ist, wird zu diesem Count ein Sprite in Blickrichtung erstellt
-                                    dummy[dummyCounter].gotoAndPlay(_prisonSnake._queue[dummyCounter].d);
-                                    dummy[dummyCounter].x=i*CELL;
-                                    dummy[dummyCounter].y=j*CELL;
-                                    stage.addChild(dummy[dummyCounter]);
+                                    if(_prisonSnake._queue[dummyCounter].d != dummy[dummyCounter].d){
+                                        dummy[dummyCounter].s.gotoAndPlay(_prisonSnake._queue[dummyCounter].d);
+                                        dummy[dummyCounter].d = _prisonSnake._queue[dummyCounter].d;
+                                    }
+                                    dummy[dummyCounter].s.x=i*CELL;
+                                    dummy[dummyCounter].s.y=j*CELL;
+                                    stage.addChild(dummy[dummyCounter].s);
                                     //console.log("Direction: "+ _prisonSnake._queue[dummyCounter].d);
                                     //console.log("SnakeXXX: "+ _prisonSnake._queue[dummyCounter].x);
                                     //console.log("SnakeYYY: "+ _prisonSnake._queue[dummyCounter].y);
