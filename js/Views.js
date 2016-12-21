@@ -1,31 +1,5 @@
 //MVC-Klasse Views
 Snake.Views = {};
-var prisonerIMG = new createjs.Bitmap("img/prisoner.png");
-var tunaIMG = new createjs.Bitmap("img/items_tuna.png");
-var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
-var knifeIMG = new createjs.Bitmap("img/item_knife.png");
-var keyIMG = new createjs.Bitmap("img/key.png");
-//Spritesheet data
-var data = {
-    images: ["img/level1_sprite_schwarz.png"],
-    frames: {width: 40, height: 40},
-    animations: {
-        down: [0, 2],
-        left: [9, 11],
-        right: [4, 6],
-        up: [12, 14],
-        down2: [1, 3],
-        left2: [8, 10],
-        right2: [5, 7],
-        up2: [13, 15]
-    }
-}
-//Spritesheet zusammen bauen
-var ss = new createjs.SpriteSheet(data);
-//Sprites für Prisoner
-var dummy = [];
-dummy[0] = {s: new createjs.Sprite(ss, "right"), d: "right"};
-
 
 //TODO Views auslangern Separation of concern
 
@@ -40,13 +14,40 @@ Snake.Views.PlayingFieldView = function () {
         };
 }; //end PlayingFieldView
 
-
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
+    var prisonerIMG = new createjs.Bitmap("img/prisoner.png");
+    var tunaIMG = new createjs.Bitmap("img/items_tuna.png");
+    var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
+    var knifeIMG = new createjs.Bitmap("img/item_knife.png");
+    var keyIMG = new createjs.Bitmap("img/key.png");
+
+    this.createSprites = function (url) {
+        //Spritesheet data
+        var data = {
+            images: [url],
+            frames: {width: 40, height: 40},
+            animations: {
+                down: [0, 2],
+                left: [9, 11],
+                right: [4, 6],
+                up: [12, 14],
+                down2: [1, 3],
+                left2: [8, 10],
+                right2: [5, 7],
+                up2: [13, 15]
+            }
+        }
+        var ss = new createjs.SpriteSheet(data);
+        return ss;//Spritesheet zusammen bauen
+    }
+    var dummy = [];
+        dummy[0]={s: new createjs.Sprite(this.createSprites("img/sprites.png"), "right"), d: "right"};
+
     this.addPrisonerSprite = function(prisonSnake, counter){
         var _prisonSnake = prisonSnake;
         var _counter = counter;
-        dummy[_counter] = {s: new createjs.Sprite(ss, _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
+        dummy[_counter] = {s: new createjs.Sprite(this.createSprites("img/level1_sprite_schwarz.png"), _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
     }
     
         this.drawSnake = function (grid, prisonSnake) {
