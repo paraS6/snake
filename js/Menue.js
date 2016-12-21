@@ -16,6 +16,8 @@ Snake.Menue.StartMenue = function() {
             var _y = y; //verschiebt Ueberschrift auf yAchse
             //Text zentrieren
             var b = _title.getBounds();
+            console.log("textbreite: " + b.width);
+            console.log("abstand links: " + (stage.canvas.width - b.width)/2);
             _title.x = (stage.canvas.width - b.width)/2 +x;
             _title.y = (stage.canvas.height/4) +y;
             _mainbg.graphics.beginFill("black").drawRect(0,0,stage.canvas.width, stage.canvas.height); //Hintergrund
@@ -89,8 +91,8 @@ Snake.Menue.Buttons = function (path, x, y) {
     _bc.scaleX = 0.5;
     _bc.scaleY = 0.5;
     console.log(_bc.x);
-    _bc.x = (stage.canvas.width/2 - 100) + x;
-    _bc.y = (stage.canvas.height/2)+y;
+    _bc.x = (stage.canvas.width-514*0.5)/2 + _x;
+    _bc.y = (stage.canvas.height/2) + _y;
     console.log(_bc.x);
     //_bc.addChild(startB, startTxt);
 
@@ -112,7 +114,7 @@ Snake.Menue.Buttons = function (path, x, y) {
 //GameOverScreen
 Snake.Menue.GameOver = function () {
     var _restartButton = new Snake.Menue.Buttons("img/spiel_starten_button.png", 0, 0); //Startbutton erstellen
-    var _gameOverWindow = new Snake.Menue.StartMenue().menueWindow("GameOver", 0, 0); //Fenster erstellen
+    var _gameOverWindow = new Snake.Menue.StartMenue().menueWindow("GameOver ", 0, 0); //Fenster erstellen
     var _level =1;
     var _highScore = new Snake.Menue.Buttons("img/highscore_button.png", 0, 100); //zurueck Button erstellen
 
@@ -136,15 +138,15 @@ Snake.Menue.GameOver = function () {
 var _level = 2;
 //Screen für das nächste Level
 Snake.Menue.NextLevel = function () {
-    var _nextLevelButton = new Snake.Menue.Buttons("next level", "white", 0, 0); //Startbutton erstellen
+    var _nextLevelButton = new Snake.Menue.Buttons("img/spiel_starten_button.png", 0, 0); //Startbutton erstellen
     var _nextLevelWindow = new Snake.Menue.StartMenue().menueWindow("Level Succeeded!", 0, 0); //Fenster erstellen
-    var _highScore = new Snake.Menue.Buttons("HighScore", "white",0, 100); //zurueck Button erstellen
+    //var _highScore = new Snake.Menue.Buttons("img/highscore_button.png",0, 100); //zurueck Button erstellen
     
     
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addNextLevelView = function () {
 
-        stage.addChild(_nextLevelWindow,_nextLevelButton, _highScore);
+        stage.addChild(_nextLevelWindow,_nextLevelButton);
         stage.update();
 
         //Button Listeners
