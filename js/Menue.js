@@ -139,24 +139,48 @@ var _level = 2;
 //Screen für das nächste Level
 Snake.Menue.NextLevel = function () {
     var _nextLevelButton = new Snake.Menue.Buttons("img/spiel_starten_button.png", 0, 0); //Startbutton erstellen
-    var _nextLevelWindow = new Snake.Menue.StartMenue().menueWindow("Level Succeeded!", 0, 0); //Fenster erstellen
+    var _nextLevelWindow = new Snake.Menue.StartMenue().menueWindow("Level Succeeded!", 0, 0); //Fenster erstellen für Zwischensequenzen der Levels
+    var _firstLevelButton = new Snake.Menue.Buttons("img/spiel_starten_button.png", 0, 0); //Startbutton erstellen um von vorne beginnen zu können
+    var _victoryWindow = new Snake.Menue.StartMenue().menueWindow("Congratulations!", 0, 0); //Fenster erstellen für Sieg-Screen
+
     //var _highScore = new Snake.Menue.Buttons("img/highscore_button.png",0, 100); //zurueck Button erstellen
     
     
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addNextLevelView = function () {
-
-        stage.addChild(_nextLevelWindow,_nextLevelButton);
+        
+        // wenn die drei Level noch nicht durchgespielt wurden...
+        if (_level<4){
+            // ...werden nextLevelWindow und nextLevelButton angezeigt
+            // !!! neuer Button mit neuem Text (zB "Next Level") erforderlich !!!
+            stage.addChild(_nextLevelWindow,_nextLevelButton);
+        }
+        // wenn das Spiel siegreich beendet wurde...
+        else {
+            // !!! neuer Button mit neuem Text (zB "Back To The Beginning") erforderlich !!!
+            // Highscore-Button muss noch hinzugefügt werden
+            stage.addChild(_victoryWindow, _firstLevelButton);
+            _level=1;
+        }
         stage.update();
+
 
         //Button Listeners
 
         _nextLevelButton.addEventListener("click", function (event) {   //startet Spiel
-            //console.log("restart");
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
-            startGame(_level); //Spielfeld wird 
-            console.log("level"+_level);
+            startGame(_level); //Spielfeld wird neu geladen mit nächstem Level
+            //console.log("level "+_level);
             _level++;
+
+        })//End Button Listeners
+
+        _firstLevelButton.addEventListener("click", function (event) {   //startet Spiel
+            stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+            _level = 1;
+            startGame(_level); //Spielfeld wird neu geladen mit erstem Level
+            //console.log("level "+_level);
+
         })//End Button Listeners
 
     }//end NextLevelView
