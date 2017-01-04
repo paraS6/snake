@@ -28,6 +28,7 @@ Snake.Controlls = {};
             var minScore = _score.get();
 
             var prisonCounter = 1;
+            var isNext = false;
 
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
             this.init = function (speed) {
@@ -129,20 +130,24 @@ Snake.Controlls = {};
                 switch(event.keyCode) {
                     // setzt alle Richtungswechsel um, mit Ausnahme genau entgesetzter Steuerungsbefehle
                     case KEYCODE_LEFT:
-                        if(_prisonSnake.direction != "right")
+                        if(_prisonSnake.direction != "right" && isNext)
                             _prisonSnake.direction = "left";
+                        isNext = false;
                         break;
                     case KEYCODE_RIGHT:
-                        if(_prisonSnake.direction != "left")
+                        if(_prisonSnake.direction != "left" && isNext)
                             _prisonSnake.direction = "right";
+                        isNext = false;
                         break;
                     case KEYCODE_UP:
-                        if(_prisonSnake.direction != "down")
+                        if(_prisonSnake.direction != "down" && isNext)
                             _prisonSnake.direction = "up";
+                        isNext = false;
                         break;
                     case KEYCODE_DOWN:
-                        if(_prisonSnake.direction != "up")
+                        if(_prisonSnake.direction != "up" && isNext)
                             _prisonSnake.direction = "down";
+                        isNext = false;
                         break;
                 }
 
@@ -162,15 +167,19 @@ Snake.Controlls = {};
                 switch(_prisonSnake.direction) {
                     case "left":
                         nx--;
+                        isNext = true;
                         break;
                     case "right":
                         nx++;
+                        isNext = true;
                         break;
                     case "up":
                         ny--;
+                        isNext = true;
                         break;
                     case "down":
                         ny++;
+                        isNext = true;
                         break;
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand oder Schlange selbst--> GameOver
