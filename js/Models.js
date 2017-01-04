@@ -86,6 +86,10 @@ Snake.Models.Score = function() {
             // gibt an, dass der Schlüssel eingesammelt wurde --> Tor soll sich öffnen
             _keyCollected = true;
             console.log("Key Collected");
+
+            //Ton für geöfnetes Tor
+            var keySound = new Snake.Sound.Soundregister();
+            keySound.playAndLoad("good_item.wav");
         }
         
         

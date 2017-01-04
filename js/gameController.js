@@ -252,8 +252,6 @@ Snake.Controlls = {};
                     // Überprüft ob Schlüssel eingesammelt wurde. True --> Tor wird auf das Grid gesetzt
                     if (_score.getKeyStatus()){
                         // setzt Tor auf die feste Stelle
-                        var keySound = new Snake.Sound.Soundregister();
-                        keySound.playAndLoad("good_item.wav");
                         _grid.set(GATE,9,0);
                         console.log("Gate open!");
                     }
