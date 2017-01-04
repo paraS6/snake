@@ -32,6 +32,10 @@ function Main() {
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
         gameMenue.addMenueView();
+
+        var soundCollection = new Snake.Sound.Soundregister();
+        soundCollection.playAndLoad("menu.mp3");
+
         var loadWebFont = function() {
             var request = new XMLHttpRequest();
             request.open('GET', './css/index.css', true);
@@ -55,20 +59,34 @@ function Main() {
             }
         }
         loadWebFont();
+
     }//end Main
      
 
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame(levelId) {
-    
+    createjs.Sound.stop();
+
     var _level = new Snake.Levels.Level();
+
+    if (levelId == 1) {
+        var level1Sound = new Snake.Sound.Soundregister();
+        level1Sound.playAndLoad("level_1.mp3");
+    }
+    if (levelId == 2) {
+        var level2Sound = new Snake.Sound.Soundregister();
+        level2Sound.playAndLoad("level_2.mp3");
+    }
+    if (levelId == 3) {
+        var level3Sound = new Snake.Sound.Soundregister();
+        level3Sound.playAndLoad("level_3.mp3");
+    }
     //setzt die Geschwindigkeit je nach Id des Levels
     _level.setSpeed(levelId);
     var s = _level.getSpeed();
     console.log("fps: "+_level.getSpeed());
     var gameController = new Snake.Controlls.GameController();      //Whuuup whuuup so kurz :D
     gameController.init(s);
-    
     
 }//end startGame
 
