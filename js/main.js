@@ -4,10 +4,8 @@
     //erstellt neue Stage innerhalb des Canvas
     var stage = new createjs.Stage("myCanvas");
     const WIDTH = stage.canvas.width - 200; //Breite vom Spielfeld, 200 Pxel für Scorebereich reserviert
-    const HEIGHT = stage.canvas.height - 40;   // Hoehe vom Spielfeld
     const CELL = 40;    //Zellengroesse
-    const GRIDWIDTH= parseInt(WIDTH/CELL);
-    const GRIDHEIGHT = parseInt(HEIGHT/CELL);
+
      // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
     const WALL = 1; // Mauer, Rand
@@ -19,15 +17,7 @@
     const KEY = 8;
     const GATE = 9;
 
-    // lädt den Spielfeldhintergrund ins Canvas
-    var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
-
-/*/ Main-Methode, welche beim Laden der HTML-Seite getriggert wird
-function Main() {
-    var gameMenue = new Snake.Menue.StartMenue();
-    gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
-}//end Main*/
-
+  
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
@@ -45,7 +35,6 @@ function Main() {
                         newNode.setAttribute('rel', 'stylesheet');
                         newNode.setAttribute('type', 'text/css');
                         headNode.appendChild(newNode);
-                        console.log("erfolgreich");
                         createjs.Ticker.on("tick", stage);
                     }
                     else {
@@ -60,15 +49,14 @@ function Main() {
 
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame(levelId) {
-    
+
     var _level = new Snake.Levels.Level();
     //setzt die Geschwindigkeit je nach Id des Levels
     _level.setSpeed(levelId);
     var s = _level.getSpeed();
-    console.log("fps: "+_level.getSpeed());
-    var gameController = new Snake.Controlls.GameController();      //Whuuup whuuup so kurz :D
+    var gameController = new Snake.Controlls.GameController();
     gameController.init(s);
-    
-    
+
+
 }//end startGame
 

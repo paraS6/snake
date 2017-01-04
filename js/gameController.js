@@ -1,5 +1,5 @@
 // MVC-Klasse Controls
-Snake.Controlls = {};
+Snake.Controlls = Snake.Controlls || {};
 
         // verarbeitet die Interaktionen des Nutzers
         Snake.Controlls.GameController=function() {
@@ -8,9 +8,15 @@ Snake.Controlls = {};
                 KEYCODE_RIGHT = 39,
                 KEYCODE_UP = 38,
                 KEYCODE_DOWN = 40;
-            
-            // erstellt Instanzen folgender Klassen
-            var _field = new Snake.Views.PlayingFieldView();
+            const HEIGHT = stage.canvas.height - 40;   // Hoehe vom Spielfeld
+            const GRIDWIDTH= parseInt(WIDTH/CELL);
+            const GRIDHEIGHT = parseInt(HEIGHT/CELL);
+
+            const RIGHT = "right",
+                LEFT = "left",
+                UP = "up",
+                DOWN = "down";
+             // erstellt Instanzen folgender Klassen
             var _prisonSnakeView = new Snake.Views.PrisonSnakeView();
             var _scoreView = new Snake.Views.ScoreView();
             var _score = new Snake.Models.Score();
@@ -22,11 +28,7 @@ Snake.Controlls = {};
         
             var hitWall = false;
             var levelSuceeded = false;
-            var _frames = 0;
             var _counter = 1;
-            var keySet = false;
-            var minScore = _score.get();
-
             var prisonCounter = 1;
             var isNext = false;
 
@@ -58,7 +60,6 @@ Snake.Controlls = {};
                 var lF = this.levelFinished(_grid,_prisonSnake);
 
                 lF = false;
-                console.log(lF);
                 
                 createjs.Ticker.setFPS(5);
                 createjs.Ticker.addEventListener("tick", this.handleTick);
@@ -68,7 +69,6 @@ Snake.Controlls = {};
                     createjs.Ticker.setFPS(10);
                     createjs.Ticker.addEventListener("tick", this.handleTick);
                     createjs.Ticker.paused = false;
-                    console.log(lF);
                 }
               
             }
@@ -97,13 +97,11 @@ Snake.Controlls = {};
                 else{
                     //Anzeige des GameOverScreens falls Wand getroffen wird
                     if(hitWall) {
-                        console.log("tot" + this + that);
                         createjs.Ticker.removeEventListener("tick", that.handleTick);
                         gameOver.addGameOverView();
                     }
                     //Level geschafft dann wird Start-Screen für das nächste Level angezeigt    
                     else if(levelSuceeded){
-                        console.log("Geschafft!" + this + that);
                         createjs.Ticker.removeEventListener("tick", that.handleTick);
                         nextLevel.addNextLevelView();
                     }
@@ -117,8 +115,9 @@ Snake.Controlls = {};
                 //if(createjs.Ticker.getTicks(true)%2 == 0)
                 update();
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
-                _field.drawPlayingField();
-                _scoreView.drawScore(_score);
+
+                _scoreView.drawScore(_score.get());
+
                 _prisonSnakeView.drawSnake(_grid, _prisonSnake);
                 // nimmt Tastatureingabe auf
                 document.onkeydown = keyInput;
@@ -131,23 +130,23 @@ Snake.Controlls = {};
                 switch(event.keyCode) {
                     // setzt alle Richtungswechsel um, mit Ausnahme genau entgesetzter Steuerungsbefehle
                     case KEYCODE_LEFT:
-                        if(_prisonSnake.direction != "right" && isNext)
-                            _prisonSnake.direction = "left";
+                        if(_prisonSnake.direction != RIGHT && isNext)
+                            _prisonSnake.direction = LEFT;
                         isNext = false;
                         break;
                     case KEYCODE_RIGHT:
-                        if(_prisonSnake.direction != "left" && isNext)
-                            _prisonSnake.direction = "right";
+                        if(_prisonSnake.direction != LEFT && isNext)
+                            _prisonSnake.direction = RIGHT;
                         isNext = false;
                         break;
                     case KEYCODE_UP:
-                        if(_prisonSnake.direction != "down" && isNext)
-                            _prisonSnake.direction = "up";
+                        if(_prisonSnake.direction != DOWN && isNext)
+                            _prisonSnake.direction = UP;
                         isNext = false;
                         break;
                     case KEYCODE_DOWN:
-                        if(_prisonSnake.direction != "up" && isNext)
-                            _prisonSnake.direction = "down";
+                        if(_prisonSnake.direction != UP && isNext)
+                            _prisonSnake.direction = DOWN;
                         isNext = false;
                         break;
                 }
@@ -199,7 +198,6 @@ Snake.Controlls = {};
                         stage.removeAllChildren();
                         // Ticker wird pausiert --> damit wird Ticker-EventListener gelöscht in main()
                         return createjs.Ticker.paused = true;
-                        console.log("Level-Ticker:"+Ticker.paused);
                     }
 
                     // trackt, welche Items auf dem Grid liegen und entfernt diese nach vorgegebener Zeit
@@ -214,7 +212,6 @@ Snake.Controlls = {};
                         //_score.set(10);
                         // ...der Counter erhöht, der das Erscheinen von Items triggert und...
                         _counter++;
-                        console.log(_score.get());
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
                         _collectibles.setPrisoner(_grid);
 
@@ -252,7 +249,6 @@ Snake.Controlls = {};
                     if (_score.getKeyStatus()){
                         // setzt Tor auf die feste Stelle
                         _grid.set(GATE,9,0);
-                        console.log("Gate open!");
                     }
             
 
