@@ -207,6 +207,7 @@ Snake.Controlls = {};
                     if(_grid.get(nx, ny) == PRISONER){
                         var goodItemSound = new Snake.Sound.Soundregister();
                         goodItemSound.playAndLoad("good_item.wav");
+                        //soundCollection.playAndLoad("good_item.wav");
 
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny, d: _prisonSnake.direction};

@@ -5,7 +5,7 @@ Snake.Sound = {};
 
 Snake.Sound.Soundregister = function(){
 
-   /* //Pfadbeginn als String
+    //Pfadbeginn als String
     var filePath = "sfx/"
     // Sound Variablen (als Manifest) für Zuordnung zu Soundtrack
     var soundFiles = [
@@ -14,24 +14,16 @@ Snake.Sound.Soundregister = function(){
         {src: "level_3.mp3", id: "level3"},
 
         {src: "menu.mp3", id: "menu"},
-        {src: "gooditem.mp3", id: "goodItem" },
-        {src: "baditem.mp3", id: "badItem"},
-        {src: "keyitem.mp3", id: "keyItem"},
-        {src: "winning.mp3", id: "winning"},
-        {src: "gameover.mp3", id: "badItem"}
-    ];*/
+        {src: "good_item.wav", id: "goodItem" },
+        {src: "bad_item.wav", id: "badItem"},
+        //{src: "keyitem.mp3", id: "keyItem"},
+        {src: "win.wav", id: "winning"},
+        //{src: "gameover.mp3", id: "badItem"}
+    ];
+    createjs.Sound.registerSounds(soundFiles, filePath);
 
     this.playAndLoad = function (file) {
-
-        //EventListener hinzufügen, wenn Dateien geladen sind
-        createjs.Sound.addEventListener("fileload", playSound);
-        createjs.Sound.registerSound("sfx/"+file);
-    }
-     // Function zum abspielen des Sounds
-    function playSound (event) {
-
-        createjs.Sound.play(event.src);
-
+            createjs.Sound.play("sfx/"+file);
     }
 
     // Stop den kompletten Sound

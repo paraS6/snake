@@ -90,7 +90,7 @@ Snake.Menue.Level = function () {
         var _levelWindow1 = new createjs.Bitmap("img/tower_of_london_intro.png"); //Fenster erstellen
         var _levelWindow2 = new createjs.Bitmap("img/alcatraz_intro.png"); //Fenster erstellen
         var _levelWindow3 = new createjs.Bitmap("img/guantanamo_intro.png"); //Fenster erstellen
-
+        console.log("LEVEL:" + _levelId);
         if(_levelId==1){
             stage.addChild(_levelWindow1,_levelStarten);
             stage.update();
@@ -110,7 +110,7 @@ Snake.Menue.Level = function () {
             stage.removeAllChildren();
 
             startGame(_levelId);
-            _level++;
+            //_levelId++;
 
 
         });
@@ -185,7 +185,7 @@ Snake.Menue.NextLevel = function () {
 
     //var _highScore = new Snake.Menue.Buttons("img/highscore_button.png",0, 100); //zurueck Button erstellen
 
-    var _level = 2;
+    //var _level = 2;
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addNextLevelView = function () {
         
@@ -211,7 +211,7 @@ Snake.Menue.NextLevel = function () {
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
             var _levelWindow = new Snake.Menue.Level();
             _levelWindow.addLevelView(_level);
-
+            _level++;
 
         })//End Button Listeners
 
