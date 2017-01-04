@@ -1,5 +1,5 @@
 // MVC-Klasse Model
-Snake.Models = {};
+Snake.Models = Snake.Models || {};
     
 //Logik der Schlange
 //TODO eignene Dateien für die jeweiligen Models
@@ -85,7 +85,6 @@ Snake.Models.Score = function() {
             //this.set(0);
             // gibt an, dass der Schlüssel eingesammelt wurde --> Tor soll sich öffnen
             _keyCollected = true;
-            console.log("Key Collected");
         }
         
         
@@ -127,7 +126,11 @@ Snake.Models.PrisonSnake = function () {
 }//end PSnake
 
 Snake.Models.Collectibles = function () {
-    
+    var startTimeKnife;
+    var startTimeTuna;
+    var startTimeCigarettes;
+    var timer;
+
     var _counter; // erhöht sich beim Einsammeln eines Prisoners
     var _cnt = 1; // Zähler für die Präsenzdauer eines Items
     var _keySetOnGrid = false; // wurde der Schlüssel bereits aufs Grid gesetzt?
@@ -212,47 +215,68 @@ Snake.Models.Collectibles = function () {
 
         }
 
-     
-        //Variable speichert zufällige Position
+
+       //Variable speichert zufällige Position
         var randpos = empty[Math.floor(Math.random()*empty.length)];
         //zufälliges Item wird aufgerufen
         var randomItem = this.generateRandomItem();
+        this.startTimeItems(randomItem);
         //Item wird an zufällige leer Position gesetzt
         grid.set(randomItem, randpos.x, randpos.y);
       
         //this.remove(randomItem,randpos.x, randpos.y, grid);
         
     }//end setCollectibles
-
+    this.startTimeItems = function (id) {
+        switch(id) {
+            case CIGARETTES:
+                startTimeCigarettes = new Date();
+                break;
+            case TUNA:
+                startTimeTuna = new Date();
+                break;
+            case KNIFE:
+                startTimeKnife = new Date();        //TODO BUG wenn zwei gleiche Items angezeigt werden, wird der Timer des ersten überschrieben
+                break;
+            default:
+                break;
+        }
+    }
     // Durchläuft das Grid und löscht Items nach definierter Zeit vom Grid
     this.trackItems = function(grid) {
         // verschachtelte Schleife durchläuft das Feld
         for (var x = 0; x < grid.width; x++){
             for (var y = 0; y < grid.heigth; y++){
+
                 // Wenn ein Feld von einem Item belegt ist, wird folgende Aktion ausgeführt
                 switch(grid.get(x,y)){
                     case CIGARETTES:
+                        endTime = new Date();
                         // Counter wird im Takt der framerate hochgezählt
-                        _cnt++;
                         // nach x update-Durchläufen im Controller...
-                        if(_cnt%35 == 0){
+                        if(((endTime - startTimeCigarettes) /1000) >= 7){
                             //... wird die Zelle wieder auf leer gesetzt
                             grid.set(EMPTY,x,y);
+
+                            timer = (endTime - startTimeCigarettes) /1000;
+                            console.log("Cigarettes: "+timer);
                             //... und der Counter wieder auf Anfangswert gesetzt
-                            _cnt = 1;
                         }
                         break;
                     case TUNA:
-                        _cnt++;
-                        if(_cnt%35 == 0){
+                        endTime = new Date();
+                        if(((endTime - startTimeTuna) /1000) >= 7){
                             grid.set(EMPTY,x,y);
-                            _cnt = 1;
+                            timer = (endTime - startTimeTuna) /1000;
+                            console.log("Tuna: "+timer);
                         }
+                        break;
                     case KNIFE:
-                        _cnt++;
-                        if(_cnt%75 == 0){
+                        endTime = new Date();
+                        if(((endTime - startTimeKnife) /1000) >= 15){
                             grid.set(EMPTY,x,y);
-                            _cnt = 1;
+                            timer = (endTime - startTimeKnife) /1000;
+                            console.log("Knife: "+timer);
                         }
                     default:
                         break;

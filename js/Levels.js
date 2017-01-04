@@ -1,12 +1,11 @@
-Snake.Levels= {};
+Snake.Levels = Snake.Levels || {};
 
 //Eigenschaften der einzelnen Level
 Snake.Levels.Level = function () {
     
     var _speed = 0;
     var _id;
-    var _img;
-    
+   
     this.getId = function () {
         return _id;
     }//end getId

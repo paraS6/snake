@@ -1,18 +1,5 @@
 //MVC-Klasse Views
-Snake.Views = {};
-
-//TODO Views auslangern Separation of concern
-
-// Zeichnet das Spielfeld
-Snake.Views.PlayingFieldView = function () {
-        this.drawPlayingField = function () {
-            // fügt angegegebens Bild zur Stage hinzu
-            stage.addChild(playingfieldImg);
-
-        };
-        this.updatePlayingField = function () {
-        };
-}; //end PlayingFieldView
+Snake.Views = Snake.Views || {};
 
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
@@ -138,6 +125,8 @@ Snake.Views.PrisonSnakeView = function () {
         }//end drawSnake
 }; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
+    // lädt den Spielfeldhintergrund ins Canvas
+    var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
     var _scoreContainer = new createjs.Container();
     var _scoreTitle = new createjs.Text("Score", "50px pixel", "white"); //Ueberschrift
     var _scoreTXT;    // Scoreanzeige
