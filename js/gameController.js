@@ -116,7 +116,7 @@ Snake.Controlls = Snake.Controlls || {};
                 update();
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
 
-                _scoreView.drawScore(_score.get());
+                _scoreView.drawScore(_score);
 
                 _prisonSnakeView.drawSnake(_grid, _prisonSnake);
                 // nimmt Tastatureingabe auf
