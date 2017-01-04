@@ -65,8 +65,6 @@ function Main() {
 
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame(levelId) {
-    createjs.Sound.stop();
-
     var _level = new Snake.Levels.Level();
 
     if (levelId == 1) {
