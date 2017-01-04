@@ -35,8 +35,8 @@ Snake.Models.Grid = function(){
     },
 
     // Setter-Methode, um von außerhalb das Grid zu bearbeiten
-    this.set = function (val, x, y) {
-        this._grid[x][y] = val;
+    this.set = function (id, x, y) {
+        this._grid[x][y] = id;
     }, 
         
     // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
@@ -95,6 +95,17 @@ Snake.Models.Score = function() {
     this.getKeyStatus = function (){
         return _keyCollected;
     }
+    this.getTime = function (start, ende){
+        var t = parseInt((ende - start)/1000);
+        s = t%60;
+        m = parseInt(t/60);
+        if(s < 10){
+            var time = m+":0"+s;
+        }else{
+            var time = m+":"+s;
+        }
+        return time;
+    }//end getTime
 
 }// end Score
 

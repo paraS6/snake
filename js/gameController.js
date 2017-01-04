@@ -111,15 +111,16 @@ Snake.Controlls = {};
 
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {
-                // nimmt Tastatureingabe auf
-                document.onkeydown = keyInput;
+
                 // updatet das Spielfeld, setzt Laufrichtung der Schlange neu und überprüft, ob GameOver eingetreten ist
                 //if(createjs.Ticker.getTicks(true)%2 == 0)
                 update();
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
                 _field.drawPlayingField();
-                _scoreView.drawScore(_score.get());
+                _scoreView.drawScore(_score);
                 _prisonSnakeView.drawSnake(_grid, _prisonSnake);
+                // nimmt Tastatureingabe auf
+                document.onkeydown = keyInput;
                 stage.update();
 
             }; //end gameLoop
