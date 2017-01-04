@@ -69,15 +69,23 @@ Snake.Models.Score = function() {
         
 
         if(_grid.get(nx, ny) == TUNA){
+            var tunaSound = new Snake.Sound.Soundregister();
+            tunaSound.playAndLoad("good_item.wav");
             this.set(30);
         }
         else if(_grid.get(nx, ny) == CIGARETTES){
+            var cigaSound = new Snake.Sound.Soundregister();
+            cigaSound.playAndLoad("good_item.wav");
             this.set(20);
         }
         else if(_grid.get(nx,ny) == PRISONER){
+            var prisonerSound = new Snake.Sound.Soundregister();
+            prisonerSound.playAndLoad("good_item.wav");
             this.set(10);
         }
         else if(_grid.get(nx,ny) == KNIFE) {
+            var knifeSound = new Snake.Sound.Soundregister();
+            knifeSound.playAndLoad("bad_item.wav");
             this.set(-50);
         }
         // Sonderfall Schlüssel
@@ -89,7 +97,7 @@ Snake.Models.Score = function() {
 
             //Ton für geöfnetes Tor
             var keySound = new Snake.Sound.Soundregister();
-            keySound.playAndLoad("good_item.wav");
+            keySound.playAndLoad("key.mp3");
         }
         
         

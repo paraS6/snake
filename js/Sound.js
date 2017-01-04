@@ -16,9 +16,9 @@ Snake.Sound.Soundregister = function(){
         {src: "menu.mp3", id: "menu"},
         {src: "good_item.wav", id: "goodItem" },
         {src: "bad_item.wav", id: "badItem"},
-        //{src: "keyitem.mp3", id: "keyItem"},
+        {src: "key.mp3", id: "key"},
         {src: "win.wav", id: "winning"},
-        //{src: "gameover.mp3", id: "badItem"}
+        {src: "winning_complete.mp3", id: "winning_complete"}
     ];
     createjs.Sound.registerSounds(soundFiles, filePath);
 

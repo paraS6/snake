@@ -204,6 +204,9 @@ Snake.Menue.NextLevel = function () {
             // !!! neuer Button mit neuem Text (zB "Back To The Beginning") erforderlich !!!
             // Highscore-Button muss noch hinzugefügt werden
             stage.addChild(_victoryWindow, _firstLevelButton);
+            createjs.Sound.stop();
+            var winningSound = new Snake.Sound.Soundregister();
+            winningSound.playAndLoad("winning_complete.mp3");
 
         }
         stage.update();
