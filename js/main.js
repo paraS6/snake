@@ -33,8 +33,8 @@ function Main() {
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
         gameMenue.addMenueView();
-        var soundCollection = new Snake.Sound.Soundregister();
-        soundCollection.playAndLoad("menu.mp3");
+        var menuSound = new Snake.Sound.Soundregister();
+        menuSound.playAndLoad("menu.mp3");
 
         var loadWebFont = function() {
             var request = new XMLHttpRequest();
@@ -66,6 +66,7 @@ function Main() {
  //das eigentliche Spiel wird hier gestartet => urspruengliche start()
 function startGame(levelId) {
     var _level = new Snake.Levels.Level();
+    createjs.Sound.stop();
 
     if (levelId == 1) {
         var level1Sound = new Snake.Sound.Soundregister();

@@ -30,7 +30,7 @@ Snake.Menue.StartMenue = function() {
         //erstellt Startfenster den Spiels
         this.addMenueView = function () {
 
-            //_level = 1;
+            
 
             var startWindow = new createjs.Bitmap("img/spielstart.png"); //erstellt neues Menuefenster
 
@@ -154,7 +154,6 @@ Snake.Menue.Buttons = function (path, x, y) {
 Snake.Menue.GameOver = function () {
     var _restartButton = new Snake.Menue.Buttons("img/spiel_neu_starten.png", 0, 0); //Startbutton erstellen
     var _gameOverWindow = new Snake.Menue.StartMenue().menueWindow("GameOver ", 0, 0); //Fenster erstellen
-    //_level =1;
     var _highScore = new Snake.Menue.Buttons("img/highscore_button.png", 0, 100); //zurueck Button erstellen
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
@@ -162,6 +161,8 @@ Snake.Menue.GameOver = function () {
 
         stage.addChild(_gameOverWindow,_restartButton, _highScore);
         stage.update();
+
+        createjs.Sound.stop();
 
         //Button Listeners
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
@@ -191,20 +192,25 @@ Snake.Menue.NextLevel = function () {
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addNextLevelView = function () {
+
+        createjs.Sound.stop();
+
         
         // wenn die drei Level noch nicht durchgespielt wurden...
         if (_level<4){
             // ...werden nextLevelWindow und nextLevelButton angezeigt
             // !!! neuer Button mit neuem Text (zB "Next Level") erforderlich !!!
             stage.addChild(_nextLevelWindow,_nextLevelButton);
-            //_level++;
+            //Menuemusik abspielen
+            var menuSound = new Snake.Sound.Soundregister();
+            menuSound.playAndLoad("menu.mp3");
         }
         // wenn das Spiel siegreich beendet wurde...
         else {
             // !!! neuer Button mit neuem Text (zB "Back To The Beginning") erforderlich !!!
             // Highscore-Button muss noch hinzugefügt werden
             stage.addChild(_victoryWindow, _firstLevelButton);
-            createjs.Sound.stop();
+
             var winningSound = new Snake.Sound.Soundregister();
             winningSound.playAndLoad("winning_complete.mp3");
 
@@ -218,7 +224,7 @@ Snake.Menue.NextLevel = function () {
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
             var _levelWindow = new Snake.Menue.Level();
             _levelWindow.addLevelView(_level);
-            //_level++;
+            
 
         })//End Button Listeners
 
