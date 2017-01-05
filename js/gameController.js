@@ -178,8 +178,9 @@ Snake.Controlls = {};
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand oder Schlange selbst--> GameOver
                     if(_grid.get(nx, ny) == WALL || _grid.get(nx, ny) == SNAKE_HEAD){
-                        var badItemSound = new Snake.Sound.Soundregister();
-                        badItemSound.playAndLoad("bad_item.wav");
+                        createjs.Sound.stop();
+                        var gameOverSound = new Snake.Sound.Soundregister();
+                        gameOverSound.playAndLoad("gameover_sound.mp3");
                         hitWall = true;
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();

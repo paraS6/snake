@@ -162,8 +162,9 @@ Snake.Menue.GameOver = function () {
         stage.addChild(_gameOverWindow,_restartButton, _highScore);
         stage.update();
 
-        createjs.Sound.stop();
 
+        var gameOverSong = new Snake.Sound.Soundregister();
+        gameOverSong.playAndLoad("gameover_song.mp3");
         //Button Listeners
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
             //console.log("restart");
@@ -213,6 +214,8 @@ Snake.Menue.NextLevel = function () {
 
             var winningSound = new Snake.Sound.Soundregister();
             winningSound.playAndLoad("winning_complete.mp3");
+            var endsong = new Snake.Sound.Soundregister();
+            endsong.playAndLoad("gameover_song.mp3");
 
         }
         stage.update();
