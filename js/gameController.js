@@ -191,7 +191,7 @@ Snake.Controlls = {};
                     //Fall: Schlange verlässt das Spielfeld durch das Gate
                     if(_grid.get(nx, ny)== GATE){
                         var winningSound = new Snake.Sound.Soundregister();
-                        winningSound.playAndLoad("win.wav");
+                        winningSound.playAndLoad("win.mp3");
                         levelSuceeded = true;
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();

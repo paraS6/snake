@@ -17,7 +17,7 @@ Snake.Sound.Soundregister = function(){
         {src: "good_item.wav", id: "goodItem" },
         {src: "bad_item.wav", id: "badItem"},
         {src: "key.mp3", id: "key"},
-        {src: "win.wav", id: "winning"},
+        {src: "win.mp3", id: "winning"},
         {src: "winning_complete.mp3", id: "winning_complete"},
         {src: "gameover_sound.mp3", id: "gameover_sound"},
         {src: "gameover_song.mp3", id: "gameover_song"}

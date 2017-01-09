@@ -33,8 +33,8 @@ function Main() {
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
         gameMenue.addMenueView();
-        var menuSound = new Snake.Sound.Soundregister();
-        menuSound.playAndLoad("menu.mp3");
+        var menuSoundneu = new Snake.Sound.Soundregister();
+        menuSoundneu.playAndLoad("menu.mp3");
 
         var loadWebFont = function() {
             var request = new XMLHttpRequest();
