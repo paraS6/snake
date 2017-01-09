@@ -32,7 +32,15 @@ Snake.Menue.StartMenue = function() {
 
             stage.addChild(startWindow, _startButton, _instButton);
             stage.update();
-
+            //mit Spacebar weiter
+            document.onkeydown = function (event) {
+                if(event.keyCode == 32){
+                    console.log("space");
+                    var _levelWindow = new Snake.Menue.Level();
+                    stage.removeAllChildren();
+                    _levelWindow.addLevelView(_level);
+                }
+            }
             // Button Listeners
             _startButton.addEventListener("click", function (event) {   //startet Spiel
                 var _levelWindow = new Snake.Menue.Level();
@@ -46,6 +54,7 @@ Snake.Menue.StartMenue = function() {
                 _instWindow.addInstructionView();
 
             });
+
             //end ButtonListeners
 
     }//end addMenueView
@@ -102,7 +111,13 @@ Snake.Menue.Level = function () {
             stage.update();
         }
 
-
+        document.onkeydown = function (event) {
+            if(event.keyCode == 32){
+                stage.removeAllChildren();
+                startGame(_levelId);
+                _level++; 
+            }
+        }
         //Button Listeners
         _levelStarten.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren();
@@ -145,6 +160,15 @@ Snake.Menue.GameOver = function () {
 
         var gameOverSong = new Snake.Sound.Soundregister();
         gameOverSong.playAndLoad("gameover_song.mp3");
+        //mit spacebar weiter
+        document.onkeydown = function (event) {
+            if(event.keyCode == 32){
+                stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+                _level = 1;
+                var _levelWindow = new Snake.Menue.Level();
+                _levelWindow.addLevelView(_level);
+            }
+        }
         //Button Listeners
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
@@ -184,6 +208,27 @@ Snake.Menue.NextLevel = function () {
             //Menuemusik abspielen
             var menuSound = new Snake.Sound.Soundregister();
             menuSound.playAndLoad("menu.mp3");
+
+            //Button Listeners
+
+            _nextLevelButton.addEventListener("click", function (event) {   //startet Spiel
+                stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+
+                var _levelWindow = new Snake.Menue.Level();
+                _levelWindow.addLevelView(_level);
+
+
+            })
+            //mit Spacebar weiter
+            document.onkeydown = function (event) {
+                if(event.keyCode == 32){
+                    stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+
+                    var _levelWindow = new Snake.Menue.Level();
+                    _levelWindow.addLevelView(_level);
+
+                }
+            }
         }
         // wenn das Spiel siegreich beendet wurde...
         else {
@@ -196,32 +241,34 @@ Snake.Menue.NextLevel = function () {
             var endsong = new Snake.Sound.Soundregister();
             endsong.playAndLoad("gameover_song.mp3");
 
+            //mit Spacebar weiter
+            document.onkeydown = function (event) {
+                if(event.keyCode == 32){
+                    stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+                    _level = 1;
+
+                    console.log("LEVEL:" + _level);
+                    var _levelWindow = new Snake.Menue.Level();
+                    _levelWindow.addLevelView(_level);
+                }
+            }
+            //End Button Listeners
+            _firstLevelButton.addEventListener("click", function (event) {   //startet Spiel
+                stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
+                _level = 1;
+
+                console.log("LEVEL:" + _level);
+                var _levelWindow = new Snake.Menue.Level();
+                _levelWindow.addLevelView(_level);
+                //startGame(_level); //Spielfeld wird neu geladen mit erstem Level
+                //console.log("level "+_level);
+
+            })//End Button Listeners
         }
         stage.update();
 
 
-        //Button Listeners
-
-        _nextLevelButton.addEventListener("click", function (event) {   //startet Spiel
-            stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
-
-            var _levelWindow = new Snake.Menue.Level();
-            _levelWindow.addLevelView(_level);
 
 
-        })//End Button Listeners
-        _firstLevelButton.addEventListener("click", function (event) {   //startet Spiel
-            stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
-            _level = 1;
-
-            console.log("LEVEL:" + _level);
-            var _levelWindow = new Snake.Menue.Level();
-            _levelWindow.addLevelView(_level);
-            //startGame(_level); //Spielfeld wird neu geladen mit erstem Level
-
-
-            //console.log("level "+_level);
-
-        })//End Button Listeners
     }//end NextLevelView
 }//end NextLevel
