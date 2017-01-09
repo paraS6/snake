@@ -8,6 +8,7 @@ Snake.Views.PrisonSnakeView = function () {
     var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
     var knifeIMG = new createjs.Bitmap("img/item_knife.png");
     var keyIMG = new createjs.Bitmap("img/key.png");
+    var openDoor = new createjs.Bitmap("img/opendoor.png");
 
     this.createSprites = function (url) {
         //Spritesheet data
@@ -109,7 +110,7 @@ Snake.Views.PrisonSnakeView = function () {
                         // !!! Provisorisch markiert ein Messer das offene Tor !!!
                         case GATE:
                             var gate = new createjs.Bitmap;
-                            gate = knifeIMG.clone();
+                            gate = openDoor.clone();
                             gate.x = i*CELL;
                             gate.y = j*CELL;
                             stage.addChild(gate);

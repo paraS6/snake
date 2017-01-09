@@ -32,6 +32,9 @@ Snake.Controlls = Snake.Controlls || {};
             var prisonCounter = 1;
             var isNext = false;
 
+
+
+
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
             this.init = function (speed) {
                 var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
@@ -184,6 +187,9 @@ Snake.Controlls = Snake.Controlls || {};
                 }
                     // Fall: Schlange stößt gegen Spielfeldrand oder Schlange selbst--> GameOver
                     if(_grid.get(nx, ny) == WALL || _grid.get(nx, ny) == SNAKE_HEAD){
+                        createjs.Sound.stop();
+                        var gameOverSound = new Snake.Sound.Soundregister();
+                        gameOverSound.playAndLoad("gameover_sound.mp3");
                         hitWall = true;
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
@@ -193,6 +199,8 @@ Snake.Controlls = Snake.Controlls || {};
 
                     //Fall: Schlange verlässt das Spielfeld durch das Gate
                     if(_grid.get(nx, ny)== GATE){
+                        var winningSound = new Snake.Sound.Soundregister();
+                        winningSound.playAndLoad("win.mp3");
                         levelSuceeded = true;
                         // Canvas Stage wird geleert
                         stage.removeAllChildren();
@@ -206,6 +214,10 @@ Snake.Controlls = Snake.Controlls || {};
 
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
                     if(_grid.get(nx, ny) == PRISONER){
+                        var goodItemSound = new Snake.Sound.Soundregister();
+                        goodItemSound.playAndLoad("good_item.wav");
+                        //soundCollection.playAndLoad("good_item.wav");
+
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny, d: _prisonSnake.direction};
                         // ...der Score erhöht und...

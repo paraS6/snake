@@ -17,11 +17,25 @@
     const KEY = 8;
     const GATE = 9;
 
-  
+
+    // lädt den Spielfeldhintergrund ins Canvas
+    var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
+
+
+/*/ Main-Methode, welche beim Laden der HTML-Seite getriggert wird
+function Main() {
+    var gameMenue = new Snake.Menue.StartMenue();
+    gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
+}//end Main*/
+
+
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
         gameMenue.addMenueView();
+        var menuSoundneu = new Snake.Sound.Soundregister();
+        menuSoundneu.playAndLoad("menu.mp3");
+
         var loadWebFont = function() {
             var request = new XMLHttpRequest();
             request.open('GET', './css/index.css', true);
@@ -44,6 +58,7 @@
             }
         }
         loadWebFont();
+
     }//end Main
      
 
@@ -51,12 +66,25 @@
 function startGame(levelId) {
 
     var _level = new Snake.Levels.Level();
+    createjs.Sound.stop();
+
+    if (levelId == 1) {
+        var level1Sound = new Snake.Sound.Soundregister();
+        level1Sound.playAndLoad("level_1.mp3");
+    }
+    if (levelId == 2) {
+        var level2Sound = new Snake.Sound.Soundregister();
+        level2Sound.playAndLoad("level_2.mp3");
+    }
+    if (levelId == 3) {
+        var level3Sound = new Snake.Sound.Soundregister();
+        level3Sound.playAndLoad("level_3.mp3");
+    }
     //setzt die Geschwindigkeit je nach Id des Levels
     _level.setSpeed(levelId);
     var s = _level.getSpeed();
     var gameController = new Snake.Controlls.GameController();
     gameController.init(s);
-
 
 }//end startGame
 
