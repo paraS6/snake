@@ -118,6 +118,11 @@ function startGame(levelId) {
             xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xmlhttp.send("name=" + document.getElementById("name").value + "&punkte=" + document.getElementById("score").value);
 
+            // Sumbit-Event überschreiben
+            this.onsubmit = function() {
+                return false;
+            }
+
             return false;
         }
     }
