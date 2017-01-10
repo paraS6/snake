@@ -92,7 +92,6 @@ function startGame(levelId) {
     function addHighScoreToForm() {
         document.getElementById('highscore-container').style.display = "block";
         document.getElementById("highscore").style.display = "block";
-        document.getElementById("score").value = ""+scoreTime;
 
         document.getElementById("highscore").onsubmit = function () {
             if (window.XMLHttpRequest) {
@@ -116,7 +115,7 @@ function startGame(levelId) {
             xmlhttp.open("POST","http://janabo.de/prison-snake/highscore.php", true);
             // Request-Header für Formulardaten
             xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xmlhttp.send("name=" + document.getElementById("name").value + "&punkte=" + document.getElementById("score").value);
+            xmlhttp.send("name=" + document.getElementById("name").value + "&punkte=" + scoreTime);
 
             // Sumbit-Event überschreiben
             this.onsubmit = function() {
