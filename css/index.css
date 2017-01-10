@@ -16,6 +16,7 @@ canvas{
     margin: auto;
     display: flex;
     z-index: 0;
+
 }
 
 #highscore{
@@ -33,4 +34,26 @@ canvas{
 
 #name{
 
+}
+
+#footer{
+    width: 1000px;
+    margin: auto;
+    font-family: pixel, sans-serif;
+    color: white;
+}
+
+#footer p{
+    text-align: justify;
+}
+
+
+a:link, a:visited {
+    font-size: 0.8em;
+    color: white;
+    text-decoration:none;
+}
+
+a:hover{
+    color: rgb(222,237,50);
 }
