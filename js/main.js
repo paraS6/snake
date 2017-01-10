@@ -17,7 +17,7 @@
     const KEY = 8;
     const GATE = 9;
 
-
+    var scoreTime = 0;
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
 
@@ -69,6 +69,7 @@ function startGame(levelId) {
     createjs.Sound.stop();
 
     if (levelId == 1) {
+        scoreTime = 0;
         var level1Sound = new Snake.Sound.Soundregister();
         level1Sound.playAndLoad("level_1.mp3");
     }
@@ -88,3 +89,35 @@ function startGame(levelId) {
 
 }//end startGame
 
+    function addHighScoreToForm() {
+        document.getElementById('highscore-container').style.display = "block";
+        document.getElementById("highscore").style.display = "block";
+        document.getElementById("score").value = ""+scoreTime;
+
+        document.getElementById("highscore").onsubmit = function () {
+            if (window.XMLHttpRequest) {
+                // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                // AJAX mit IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+                //
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("highscore-container").style.display = "none";
+                    document.getElementById("highscore").style.display = "none";
+                    writeHighscore(xmlhttp.responseText);
+                }
+            }
+
+            xmlhttp.open("POST","http://janabo.de/prison-snake/highscore.php", true);
+            // Request-Header für Formulardaten
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xmlhttp.send("name=" + document.getElementById("name").value + "&punkte=" + document.getElementById("score").value);
+
+            return false;
+        }
+    }

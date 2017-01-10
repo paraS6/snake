@@ -105,6 +105,8 @@ Snake.Controlls = Snake.Controlls || {};
                     }
                     //Level geschafft dann wird Start-Screen für das nächste Level angezeigt    
                     else if(levelSuceeded){
+                        scoreTime += _score.getScoreTime(new Date());
+                        console.log(scoreTime);
                         createjs.Ticker.removeEventListener("tick", that.handleTick);
                         nextLevel.addNextLevelView();
                     }

@@ -131,7 +131,7 @@ Snake.Views.ScoreView = function () {
     var _scoreContainer = new createjs.Container();
     var _scoreTitle = new createjs.Text("Score", "50px pixel", "white"); //Ueberschrift
     var _scoreTXT;    // Scoreanzeige
-    var startTime = new Date();
+
     var _scoreTime;
     var _b = _scoreTitle.getBounds(); // gibt Breite des Textfeldes der Überschrift zurück
     var _b2; // gibt Breite des Textfeldes des Scores zurück
@@ -140,7 +140,7 @@ Snake.Views.ScoreView = function () {
 
     this.drawScore  = function (score) {
         var _score = score.get();
-        var _time = score.getTime(startTime, new Date());
+        var _time = score.getTime(new Date());
 
         _scoreTime = new createjs.Text(_time, "40px pixel", "white");
         _scoreTime.x = WIDTH + ((stage.canvas.width-WIDTH)-_scoreTime.getBounds().width)/2 ;

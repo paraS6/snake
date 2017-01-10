@@ -19,10 +19,20 @@
     <script type="text/javascript" src="js/Levels.js"></script>
     <script type="text/javascript" src="js/Sound.js"></script>
 
-    <form id="highscore">
-        <input type="hidden" name="punkte" value="100">
-        <label for="name">Name: </label> <input id="name" type="text" name="name">
-        <input type="submit">
-    </form>
+    <a href="#" onclick="javascript:addHighScoreToForm();">Highscore Eintragen</a>
+
+    <div id="highscore-container">
+        <table>
+            <thead><tr><th>#</th><th>Name</th><th>Bestzeit</th></tr></thead>
+            <tbody></tbody>
+        </table>
+
+        <form id="highscore">
+            <input id="score" type="hidden" name="punkte" value="100">
+            <label for="name">Name: </label> <input id="name" type="text" name="name">
+            <input type="submit">
+        </form>
+    </div>
+
 </body>
 </html>

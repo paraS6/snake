@@ -170,6 +170,9 @@ Snake.Menue.GameOver = function () {
             }
         }
         //Button Listeners
+        _highScore.addEventListener("click", function (event) {   //startet Spiel
+            Snake.Menue.Highscore();
+        })
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
             _level = 1;
@@ -191,7 +194,7 @@ Snake.Menue.NextLevel = function () {
     var _firstLevelButton = new Snake.Menue.Buttons("img/spiel_neu_starten.png", 0, 0); //Startbutton erstellen um von vorne beginnen zu können
     var _victoryWindow = new Snake.Menue.StartMenue().menueWindow("Congratulations!", 0, 0); //Fenster erstellen für Sieg-Screen
 
-    //var _highScore = new Snake.Menue.Buttons("img/highscore_button.png",0, 100); //zurueck Button erstellen
+    var _highScore = new Snake.Menue.Buttons("img/highscore_button.png",0, 100); //zurueck Button erstellen
 
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
@@ -234,7 +237,7 @@ Snake.Menue.NextLevel = function () {
         else {
             // !!! neuer Button mit neuem Text (zB "Back To The Beginning") erforderlich !!!
             // Highscore-Button muss noch hinzugefügt werden
-            stage.addChild(_victoryWindow, _firstLevelButton);
+            stage.addChild(_victoryWindow, _firstLevelButton, _highScore);
 
             var winningSound = new Snake.Sound.Soundregister();
             winningSound.playAndLoad("winning_complete.mp3");
@@ -253,6 +256,9 @@ Snake.Menue.NextLevel = function () {
                 }
             }
             //End Button Listeners
+            _highScore.addEventListener("click", function (event) {   //startet Spiel
+                Snake.Menue.Highscore();
+            })
             _firstLevelButton.addEventListener("click", function (event) {   //startet Spiel
                 stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
                 _level = 1;
@@ -264,11 +270,47 @@ Snake.Menue.NextLevel = function () {
                 //console.log("level "+_level);
 
             })//End Button Listeners
+
+            addHighScoreToForm();
         }
         stage.update();
-
-
-
-
     }//end NextLevelView
 }//end NextLevel
+
+Snake.Menue.Highscore = function() {
+    if (window.XMLHttpRequest) {
+        // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {
+        // AJAX mit IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function() {
+        //
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            writeHighscore(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.open("GET","http://janabo.de/prison-snake/highscore.php");
+    xmlhttp.send();
+}
+
+function writeHighscore(json) {
+    var liste = JSON.parse(json);
+
+    var tbody = '';
+    for(i = 0; i < liste.length; i++) {
+        tbody += '<tr>' +
+            '<td>' + (i + 1) + '.</td>' +
+            '<td>' + liste[i].name + '</td>' +
+            '<td>' + liste[i].punkte + '</td>' +
+            '</tr>';
+    }
+
+    document.getElementsByTagName("tbody")[0].innerHTML = tbody;
+    document.getElementsByTagName("table")[0].style.display = 'block';
+    document.getElementById('highscore-container').style.display = 'block';
+}

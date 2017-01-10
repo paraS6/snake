@@ -52,6 +52,7 @@ Snake.Models.Score = function() {
     // TODO: über Variable initialisieren
     var _score = 0;
     var _keyCollected = false;
+    var startTime = new Date();
 
     // erhöht den Spielstand nach speziellen Ereignissen im gameController
     // TODO: Funktion ermöglichen, um unterschiedliche Collectibles unterschiedlich zu bewerten
@@ -108,8 +109,8 @@ Snake.Models.Score = function() {
     this.getKeyStatus = function (){
         return _keyCollected;
     }
-    this.getTime = function (start, ende){
-        var t = parseInt((ende - start)/1000);
+    this.getTime = function (ende){
+        var t = parseInt((ende - startTime)/1000);
         s = t%60;
         m = parseInt(t/60);
         if(s < 10){
@@ -119,6 +120,9 @@ Snake.Models.Score = function() {
         }
         return time;
     }//end getTime
+    this.getScoreTime = function (ende) {
+        return parseInt((ende - startTime)/1000);
+    }
 
 }// end Score
 
