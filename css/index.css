@@ -19,7 +19,7 @@ canvas{
 }
 
 #highscore-container, #highscore,
-#highscore-container table {
+#highscore-container div table {
     display: none;
     font-family: pixel;
     color: white;
@@ -30,8 +30,21 @@ canvas{
     top: 0;
     left: 50%;
     margin-left: -500px;
-    background-color: black;
     width: 1000px;
     height: 600px;
     z-index: 2;
+    background-image: url("../img/highscore.png");
+    background-size: contain;
+}
+
+#highscore-container table{
+    position: absolute;
+    width: 1000px;
+    height: auto;
+    left: 50%;
+    margin-left: -500px;
+}
+#highscore-container div{
+    margin: auto;
+    width: 1000px;
 }
