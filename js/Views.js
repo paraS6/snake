@@ -64,9 +64,6 @@ Snake.Views.PrisonSnakeView = function () {
                                     dummy[dummyCounter].s.x=i*CELL;
                                     dummy[dummyCounter].s.y=j*CELL;
                                     stage.addChild(dummy[dummyCounter].s);
-                                    //console.log("Direction: "+ _prisonSnake._queue[dummyCounter].d);
-                                    //console.log("SnakeXXX: "+ _prisonSnake._queue[dummyCounter].x);
-                                    //console.log("SnakeYYY: "+ _prisonSnake._queue[dummyCounter].y);
                                 }
                             }
                             break;
@@ -107,7 +104,6 @@ Snake.Views.PrisonSnakeView = function () {
                             key.y = j*CELL;
                             stage.addChild(key);  
                             break;
-                        // !!! Provisorisch markiert ein Messer das offene Tor !!!
                         case GATE:
                             var gate = new createjs.Bitmap;
                             gate = openDoor.clone();
@@ -145,7 +141,6 @@ Snake.Views.ScoreView = function () {
         _scoreTime = new createjs.Text(_time, "40px pixel", "white");
         _scoreTime.x = WIDTH + ((stage.canvas.width-WIDTH)-_scoreTime.getBounds().width)/2 ;
         _scoreTime.y = stage.canvas.height * 0.75;
-        /*_scoreBg.graphics.beginFill("black").drawRect(WIDTH,0,stage.canvas.width-WIDTH, stage.canvas.height);*/
         //Text zentrieren
         _scoreTitle.x = WIDTH + ((stage.canvas.width-WIDTH)-_b.width)/2 ;
         _scoreTitle.y = stage.canvas.height/4;

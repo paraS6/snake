@@ -20,15 +20,7 @@
     var scoreTime = 0;
     // lädt den Spielfeldhintergrund ins Canvas
     var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
-
-
-/*/ Main-Methode, welche beim Laden der HTML-Seite getriggert wird
-function Main() {
-    var gameMenue = new Snake.Menue.StartMenue();
-    gameMenue.addMenueView();   //Das Startfenster wird gezeichnten
-}//end Main*/
-
-
+    
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();

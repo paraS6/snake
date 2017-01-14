@@ -117,7 +117,6 @@ Snake.Controlls = Snake.Controlls || {};
             this.gameLoop = function () {
 
                 // updatet das Spielfeld, setzt Laufrichtung der Schlange neu und überprüft, ob GameOver eingetreten ist
-                //if(createjs.Ticker.getTicks(true)%2 == 0)
                 update();
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
 
@@ -166,7 +165,6 @@ Snake.Controlls = Snake.Controlls || {};
                 // speichert X-/Y-Koordinaten des letzten Schlangenelements zwischen
                 var nx = _prisonSnake.last.x;
                 var ny = _prisonSnake.last.y;
-                //console.log(this._grid.get(nx,ny));
 
                 // zieht das Schlangenende jeweils eins hinter sich her
                 switch(_prisonSnake.direction) {
@@ -218,12 +216,9 @@ Snake.Controlls = Snake.Controlls || {};
                     if(_grid.get(nx, ny) == PRISONER){
                         var goodItemSound = new Snake.Sound.Soundregister();
                         goodItemSound.playAndLoad("good_item.wav");
-                        //soundCollection.playAndLoad("good_item.wav");
 
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny, d: _prisonSnake.direction};
-                        // ...der Score erhöht und...
-                        //_score.set(10);
                         // ...der Counter erhöht, der das Erscheinen von Items triggert und...
                         _counter++;
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt

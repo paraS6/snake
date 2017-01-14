@@ -2,7 +2,6 @@
 Snake.Models = Snake.Models || {};
     
 //Logik der Schlange
-//TODO eignene Dateien für die jeweiligen Models
 Snake.Models.Grid = function(){
     
     
@@ -91,11 +90,10 @@ Snake.Models.Score = function() {
         }
         // Sonderfall Schlüssel
         else if(_grid.get(nx,ny) == KEY) {
-            //this.set(0);
             // gibt an, dass der Schlüssel eingesammelt wurde --> Tor soll sich öffnen
             _keyCollected = true;
 
-            console.log("Key Collected");
+            //console.log("Key Collected");
 
             //Ton für geöfnetes Tor
             var keySound = new Snake.Sound.Soundregister();
@@ -288,7 +286,7 @@ Snake.Models.Collectibles = function () {
                             grid.set(EMPTY,x,y);
 
                             timer = (endTime - startTimeCigarettes) /1000;
-                            console.log("Cigarettes: "+timer);
+                            //console.log("Cigarettes: "+timer);
                             //... und der Counter wieder auf Anfangswert gesetzt
                         }
                         break;
@@ -297,7 +295,7 @@ Snake.Models.Collectibles = function () {
                         if(((endTime - startTimeTuna) /1000) >= 7){
                             grid.set(EMPTY,x,y);
                             timer = (endTime - startTimeTuna) /1000;
-                            console.log("Tuna: "+timer);
+                            //console.log("Tuna: "+timer);
                         }
                         break;
                     case KNIFE:
@@ -305,7 +303,7 @@ Snake.Models.Collectibles = function () {
                         if(((endTime - startTimeKnife) /1000) >= 15){
                             grid.set(EMPTY,x,y);
                             timer = (endTime - startTimeKnife) /1000;
-                            console.log("Knife: "+timer);
+                            //console.log("Knife: "+timer);
                         }
                     default:
                         break;
@@ -313,20 +311,6 @@ Snake.Models.Collectibles = function () {
             }
          }
     };
-    
-    
-    /*
-    this.remove = function (randomItem, x, y,grid) {
-
-            _cnt++;
-            console.log("Remove Counter: "+_cnt);
-            if(_cnt >= 3){
-                    
-                grid.set(EMPTY,x,y);
-            }
-        
-
-    }*/
     
     //generiert ein zufälliges Item und gibt es zurück
     this.generateRandomItem = function () {
@@ -353,17 +337,4 @@ Snake.Models.Collectibles = function () {
         }
 
     }//end setRandomItem
-
-    /*
-    //bewirkt, dass jeweiliges Item zeitlich begrenzt auf dem Spielfeld erscheint
-    this.trackItem = function () {
-
-
-        if(grid.get(x,y) == TUNA){
-            _cnt++;
-            if(_cnt%25 == 0){
-                grid.set(x,y) == TUNA;
-            }
-        }
-    }*/
 }//end Snake.Models.Collectibles

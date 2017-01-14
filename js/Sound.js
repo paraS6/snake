@@ -22,15 +22,17 @@ Snake.Sound.Soundregister = function(){
         {src: "gameover_sound.mp3", id: "gameover_sound"},
         {src: "gameover_song.mp3", id: "gameover_song"}
     ];
+    //Sounds müssen registriert werden bevor sie abgespielt werden können
     createjs.Sound.registerSounds(soundFiles, filePath);
 
+    //Funktion zum abspielen der Sounds
     this.playAndLoad = function (file) {
             createjs.Sound.play("sfx/"+file);
-    }
+    }//Ende playAndLoad
 
-    // Stop den kompletten Sound
+    // Stop alle Sounds
     this.stop = function () {
         createjs.Sound.stop();
-    }
+    }//Ende Stop
 
-}
+}//Ende Soundregister
