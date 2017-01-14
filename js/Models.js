@@ -1,9 +1,12 @@
 // MVC-Klasse Model
 Snake.Models = Snake.Models || {};
-    
+
+// Festgelegter Wert, ab welchem Score der Schlüssel auf dem Feld erscheint
+const MINIMUMSCOREKEYAPPEAR = 400;
+
 //Logik der Schlange
 Snake.Models.Grid = function(){
-    
+
     
     width = null;
     heigth = null;
@@ -192,7 +195,7 @@ Snake.Models.Collectibles = function () {
     //ruft die Funktion zum Setzen des Keys auf sobald der Score über 500 ist
     this.keySetter = function (score, grid) {
         // !!zu Testzwecken wird der Wert auf 40 gesetzt!!
-        if(_keySetOnGrid == false && score >= 40){
+        if(_keySetOnGrid == false && score >= MINIMUMSCOREKEYAPPEAR){
             this.setKey(grid);
             // true = der Schlüssel wurde auf das Grid gesetzt
             _keySetOnGrid = true;
