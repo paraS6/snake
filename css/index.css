@@ -10,6 +10,9 @@
 
 body{
     background-color: black;
+    font-family: pixel, sans-serif;
+    color: white;
+
 }
 
 canvas{
@@ -21,7 +24,6 @@ canvas{
 #highscore-container, #highscore,
 #highscore-container table {
     display: none;
-    font-family: pixel;
     color: white;
 }
 
@@ -70,14 +72,36 @@ canvas{
     border-style: solid;
     border-bottom-width: 3px;
     background-color: black;
-    color: white;
-    font-family: pixel;
     font-size: 31px;
 }
 #highscore-container thead th:last-child, #highscore-container tbody td:last-child{
-    text-align: right;
+    text-align: left;
 }
 #highscore-container thead th:first-child, #highscore-container tbody td:first-child{
-    text-align: right;
+    text-align: left;
     padding-right: 10px;
+}
+
+
+#footer{
+    width: 1000px;
+    margin: auto;
+}
+
+#footer p{
+    text-align: justify;
+}
+
+
+a:link, a:visited {
+    color: white;
+    text-decoration: dashed;
+}
+
+a:hover {
+    color: rgb(222, 237, 50);
+}
+
+#credits{
+    text-align: center;
 }
