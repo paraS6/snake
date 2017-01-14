@@ -35,7 +35,7 @@ Snake.Menue.StartMenue = function() {
             //mit Spacebar weiter
             document.onkeydown = function (event) {
                 if(event.keyCode == 32){
-                    console.log("space");
+                    //console.log("space");
                     var _levelWindow = new Snake.Menue.Level();
                     stage.removeAllChildren();
                     _levelWindow.addLevelView(_level);
@@ -97,7 +97,7 @@ Snake.Menue.Level = function () {
         var _levelWindow1 = new createjs.Bitmap("img/tower_of_london_intro.png"); //Fenster erstellen
         var _levelWindow2 = new createjs.Bitmap("img/alcatraz_intro.png"); //Fenster erstellen
         var _levelWindow3 = new createjs.Bitmap("img/guantanamo_intro.png"); //Fenster erstellen
-        console.log("LEVEL:" + _levelId);
+        //console.log("LEVEL:" + _levelId);
         if(_levelId==1){
             stage.addChild(_levelWindow1,_levelStarten);
             stage.update();
@@ -250,7 +250,7 @@ Snake.Menue.NextLevel = function () {
                     stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
                     _level = 1;
 
-                    console.log("LEVEL:" + _level);
+                    //console.log("LEVEL:" + _level);
                     var _levelWindow = new Snake.Menue.Level();
                     _levelWindow.addLevelView(_level);
                 }
