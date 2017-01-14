@@ -22,16 +22,18 @@
     <a href="#" onclick="javascript:addHighScoreToForm();">Highscore Eintragen</a>
 
     <div id="highscore-container">
-        <div>
+        <div onclick="javascript:document.getElementsByTagName('table')[0].style.display = 'none';
+        document.getElementById('highscore').style.display = 'none';
+        document.getElementById('highscore-container').style.display = 'none';"></div>
         <table>
             <thead><tr><th>#</th><th>Name</th><th>Zeit</th></tr></thead>
             <tbody></tbody>
         </table>
-            </div>
+
 
         <form id="highscore">
-            <label for="name">Name: </label> <input id="name" type="text" name="name" required>
-            <input type="submit">
+            <fieldset><label for="name">Name: </label> <input id="name" type="text" name="name" maxlength="25" required></fieldset>
+            <input id="button" type="submit">
         </form>
     </div>
 
