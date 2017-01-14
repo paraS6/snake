@@ -278,6 +278,7 @@ Snake.Menue.NextLevel = function () {
 }//end NextLevel
 
 Snake.Menue.Highscore = function() {
+    //Erzeugung eines XMLHttpRequest-Objekts mit Fallback für IE 5-6
     if (window.XMLHttpRequest) {
         // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
         xmlhttp = new XMLHttpRequest();
@@ -287,20 +288,23 @@ Snake.Menue.Highscore = function() {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
+    //wenn response von Server kommt, wird Highscorefenster mit Tabelle angezeigt
     xmlhttp.onreadystatechange = function() {
         //
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             writeHighscore(xmlhttp.responseText);
         }
     }
-
+    //PHP-Script von Server aufrufen
     xmlhttp.open("GET","http://janabo.de/prison-snake/highscore.php");
     xmlhttp.send();
 }
-
+//
 function writeHighscore(json) {
+    //wandelt JSON-Objekt in JavsScript-Objekt um
     var liste = JSON.parse(json);
 
+    //durchläuft Listeneinträge
     var tbody = '';
     for(i = 0; i < liste.length; i++) {
         tbody += '<tr>' +
@@ -309,8 +313,9 @@ function writeHighscore(json) {
             '<td>' + liste[i].punkte + '</td>' +
             '</tr>';
     }
-
+    //fügt Daten der Highscore-Tabelle hinzu
     document.getElementsByTagName("tbody")[0].innerHTML = tbody;
+    //Tabelle und Highscore-Seite sichtbar machen
     document.getElementsByTagName("table")[0].style.display = 'block';
     document.getElementById('highscore-container').style.display = 'block';
 }

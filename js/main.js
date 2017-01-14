@@ -90,10 +90,13 @@ function startGame(levelId) {
 }//end startGame
 
     function addHighScoreToForm() {
+        //Highscore-Fenster und Formular sichtbar machen
         document.getElementById('highscore-container').style.display = "block";
         document.getElementById("highscore").style.display = "block";
 
+        //bei abschicken der Formulardaten
         document.getElementById("highscore").onsubmit = function () {
+            //Erzeugung eines XMLHttpRequest-Objekts mit Fallback für IE 5-6
             if (window.XMLHttpRequest) {
                 // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
                 xmlhttp = new XMLHttpRequest();
@@ -102,22 +105,24 @@ function startGame(levelId) {
                 // AJAX mit IE6, IE5
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-
+            //wenn readyState-Attibut des xmlhttp-objects sich verändert, wird das readystatechange-EVENT gefeuert
             xmlhttp.onreadystatechange = function() {
-                //
+                //readyState: 4: request finished and response is ready; status: 200: "OK"; When readyState is 4 and status is 200, the response is ready
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //Highscore-Seite verbergen
                     document.getElementById("highscore-container").style.display = "none";
                     document.getElementById("highscore").style.display = "none";
+                    //gibt einen DOMString zurück, der die response zu einem request enthält
                     writeHighscore(xmlhttp.responseText);
                 }
             }
-
+            //mittels POST-Objekt Formulardaten übermitteln
             xmlhttp.open("POST","http://janabo.de/prison-snake/highscore.php", true);
             // Request-Header für Formulardaten
             xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xmlhttp.send("name=" + document.getElementById("name").value + "&punkte=" + scoreTime);
 
-            // Sumbit-Event überschreiben
+            // Sumbit-Event überschreiben, damit man nicht bei mehrfachem Klick die gleichen Daten abschickt
             this.onsubmit = function() {
                 return false;
             }
