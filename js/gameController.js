@@ -19,8 +19,8 @@ Snake.Controlls = Snake.Controlls || {};
 
             // erstellt Instanzen folgender Klassen
             var _prisonSnakeView = new Snake.Views.PrisonSnakeView();
-            var _scoreView = new Snake.Views.ScoreView();
             var _score = new Snake.Models.Score();
+            var _scoreView = new Snake.Views.ScoreView();
             var gameOver = new Snake.Menue.GameOver();
             var nextLevel = new Snake.Menue.NextLevel();
             var _collectibles = new Snake.Models.Collectibles();

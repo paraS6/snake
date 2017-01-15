@@ -10,6 +10,7 @@ Snake.Views.PrisonSnakeView = function () {
     var knifeIMG = new createjs.Bitmap("img/item_knife.png");
     var keyIMG = new createjs.Bitmap("img/key.png");
     var openDoor = new createjs.Bitmap("img/opendoor.png");
+    var openDoorLevel3 = new createjs.Bitmap("img/opendoor_level3.png");
 
     //initialisiet die Spritesheets
     this.createSprites = function (url) {
@@ -129,16 +130,22 @@ Snake.Views.PrisonSnakeView = function () {
 }; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
     // lädt den Spielfeldhintergrund ins Canvas
-    var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
+    var playingfieldImg = new createjs.Bitmap("img/spielfeld_level1.png"); //Level 1 Spielfeld erzeugen
+    var playingfieldImgLevel2 = new createjs.Bitmap("img/spielfeld_level2.png"); //Level 2 Spielfeld erzeugen
+    var playingfieldImgLevel3 = new createjs.Bitmap("img/spielfeld_level3.png"); //Level 3 Spielfeld erzeugen
+
     var _scoreContainer = new createjs.Container();
     var _scoreTitle = new createjs.Text("Score", "50px pixel", "white"); //Ueberschrift
     var _scoreTXT;    // Scoreanzeige
+
+
 
     var _scoreTime;
     var _b = _scoreTitle.getBounds(); // gibt Breite des Textfeldes der Überschrift zurück
     var _b2; // gibt Breite des Textfeldes des Scores zurück
     var s = 0;
     var m = 0;
+
 
     this.drawScore  = function (score) {
         var _score = score.get();

@@ -64,7 +64,7 @@ Snake.Menue.StartMenue = function() {
 Snake.Menue.Instructions = function () {
  //Fenster erstellen
 
-    var _instClose = new Snake.Menue.Buttons("img/close.png", 540, -220); //zurueck Button erstellen
+    var _instClose = new Snake.Menue.Buttons("img/close.png", 540, -250); //zurueck Button erstellen
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
     this.addInstructionView = function () {
@@ -85,7 +85,7 @@ Snake.Menue.Instructions = function () {
     }//end addInstructionsView
 }//end Instructions
 
-//Klasse fuegt Instructionfenster hinzu
+//Klasse fuegt Level Intro Screen ein
 Snake.Menue.Level = function () {
     //Fenster erstellen
     var _levelStarten = new Snake.Menue.Buttons("img/level_starten.png", 0, 0); //Level starten Button erstellen
@@ -147,8 +147,8 @@ Snake.Menue.Buttons = function (path, x, y) {
 
 //GameOverScreen
 Snake.Menue.GameOver = function () {
-    var _restartButton = new Snake.Menue.Buttons("img/spiel_neu_starten.png", 0, 0); //Startbutton erstellen
-    var _gameOverWindow = new Snake.Menue.StartMenue().menueWindow("GameOver ", 0, 0); //Fenster erstellen
+    var _gameOverWindow = new createjs.Bitmap("img/gameover_screen.png"); //erstellt neues Menuefenster //Fenster erstellen
+    var _restartButton = new Snake.Menue.Buttons("img/spiel_neu_starten.png", 0, 20); //Startbutton erstellen
     var _highScore = new Snake.Menue.Buttons("img/highscore_button.png", 0, 100); //zurueck Button erstellen
 
     //Fenster, Buttons und Eventlistener fuer das Instructionfenster
