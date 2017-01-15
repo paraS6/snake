@@ -3,6 +3,7 @@ Snake.Views = Snake.Views || {};
 
 // Zeichnet alles Schlangenelemente
 Snake.Views.PrisonSnakeView = function () {
+    //einzelne Grafiken in Variablen speichern
     var prisonerIMG = new createjs.Bitmap("img/prisoner.png");
     var tunaIMG = new createjs.Bitmap("img/items_tuna.png");
     var cigIMG = new createjs.Bitmap("img/item_cigarettes.png");
@@ -10,6 +11,7 @@ Snake.Views.PrisonSnakeView = function () {
     var keyIMG = new createjs.Bitmap("img/key.png");
     var openDoor = new createjs.Bitmap("img/opendoor.png");
 
+    //initialisiet die Spritesheets
     this.createSprites = function (url) {
         //Spritesheet data
         var data = {
@@ -28,16 +30,20 @@ Snake.Views.PrisonSnakeView = function () {
         }
         var ss = new createjs.SpriteSheet(data);
         return ss;//Spritesheet zusammen bauen
-    }
+    }//end createSprites
+    
+    //Erstellung des Schlangenkopfs
     var dummy = [];
         dummy[0]={s: new createjs.Sprite(this.createSprites("img/sprites.png"), "right"), d: "right"};
 
+    //hinzufügen der Sprites für jedes Element der Schlange
     this.addPrisonerSprite = function(prisonSnake, counter){
         var _prisonSnake = prisonSnake;
         var _counter = counter;
         dummy[_counter] = {s: new createjs.Sprite(this.createSprites("img/level1_sprite_schwarz.png"), _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
-    }
+    }//end addPrisonerSprite
     
+        //zeichnet die Schlange auf das Grid    
         this.drawSnake = function (grid, prisonSnake) {
 
             var _grid = grid;

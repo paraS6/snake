@@ -6,7 +6,7 @@
     const WIDTH = stage.canvas.width - 200; //Breite vom Spielfeld, 200 Pxel für Scorebereich reserviert
     const CELL = 40;    //Zellengroesse
 
-     // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
+    // wenn im Grid[][] dieser Wert hinterlegt ist, befindet sich dort...
     const EMPTY = 0; // ein leeres Feld
     const WALL = 1; // Mauer, Rand
     const SNAKE_HEAD = 2; // der Kopf der Schlange
@@ -18,8 +18,7 @@
     const GATE = 9;
 
     var scoreTime = 0;
-    // lädt den Spielfeldhintergrund ins Canvas
-    var playingfieldImg = new createjs.Bitmap("img/spielfeld_finals_plus_score.png");
+   
     
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
@@ -121,4 +120,4 @@ function startGame(levelId) {
 
             return false;
         }
-    }
+    }//end addHighscoreToForm

@@ -57,15 +57,14 @@ Snake.Models.Score = function() {
     var startTime = new Date();
 
     // erhöht den Spielstand nach speziellen Ereignissen im gameController
-    // TODO: Funktion ermöglichen, um unterschiedliche Collectibles unterschiedlich zu bewerten
     this.set = function (newScore) {
         _score += newScore;
-    },
+    }//end set
         
-    // Setter-Funktion, um Spielstand in anderen Klassen abzufragen
+    // Getter-Funktion, um Spielstand in anderen Klassen abzufragen
     this.get = function () {
         return _score;
-    }
+    }//end get 
 
     //setzt den Score in Abhängigkeit des Collectibles
     this.setScore = function(_grid, nx, ny){
@@ -96,8 +95,6 @@ Snake.Models.Score = function() {
             // gibt an, dass der Schlüssel eingesammelt wurde --> Tor soll sich öffnen
             _keyCollected = true;
 
-            //console.log("Key Collected");
-
             //Ton für geöfnetes Tor
             var keySound = new Snake.Sound.Soundregister();
             keySound.playAndLoad("key.mp3");
@@ -109,7 +106,9 @@ Snake.Models.Score = function() {
     // Getter-Methode, gibt an, ob der Schlüssel schon eingesammelt wurde
     this.getKeyStatus = function (){
         return _keyCollected;
-    }
+    }//end getKeyStatus
+    
+    //gibt die Zeit zurück, die ein Collectible auf dem Grid erscheint
     this.getTime = function (ende){
         var t = parseInt((ende - startTime)/1000);
         s = t%60;
@@ -121,42 +120,44 @@ Snake.Models.Score = function() {
         }
         return time;
     }//end getTime
+    
     this.getScoreTime = function (ende) {
         return parseInt((ende - startTime)/1000);
-    }
+    }//end getScoreTime
 
 }// end Score
 
 
 
-// 
+//verarbeitet die Logik der Schlange
 Snake.Models.PrisonSnake = function () {
 
     direction =null; // Laufrichtung der Schlange
     last = null; // Pointer auf das letzte Element der Schlange
     _queue = null; // Array der Schlange als FIFO Queue
 
-    //
+    //initialisiert die Schlange
     this.init = function (d, x, y) {
        this.direction = d;
         this._queue = [];
         this.insert(x, y, d);
-    },
+    }// end init
 
     // fügt der Schlange ein neues Element hinzu, indem dieses mit unshift an ERSTER Stelle im Array eingefügt wird --> FIFO
     this.insert = function (x, y, d) {
         this._queue.unshift({x:x, y:y, d:d });
         this.last = this._queue[0];
-    },
+    }//end insert
 
     // Gibt das erste Element des Arrays (also der Schlangenschwanz) zurück
     this.remove =function () {
         return this._queue.pop();
-    }
+    }//end remove
 }//end PSnake
 
+//verarbeitet die Logik der Collectibles
 Snake.Models.Collectibles = function () {
-    var startTimeKnife;
+    var startTimeKnife; //gibt an wann das Collectible auf dem Grid erscheint
     var startTimeTuna;
     var startTimeCigarettes;
     var timer;
@@ -200,7 +201,7 @@ Snake.Models.Collectibles = function () {
             // true = der Schlüssel wurde auf das Grid gesetzt
             _keySetOnGrid = true;
         }
-    }
+    }//end keySetter
     
     
     
@@ -257,6 +258,8 @@ Snake.Models.Collectibles = function () {
         //this.remove(randomItem,randpos.x, randpos.y, grid);
         
     }//end setCollectibles
+    
+    //speichert die Erscheinungszeit des Items in einer Variablen
     this.startTimeItems = function (id) {
         switch(id) {
             case CIGARETTES:
@@ -266,12 +269,13 @@ Snake.Models.Collectibles = function () {
                 startTimeTuna = new Date();
                 break;
             case KNIFE:
-                startTimeKnife = new Date();        //TODO BUG wenn zwei gleiche Items angezeigt werden, wird der Timer des ersten überschrieben
+                startTimeKnife = new Date();        
                 break;
             default:
                 break;
         }
-    }
+    }//end startTimeItems
+    
     // Durchläuft das Grid und löscht Items nach definierter Zeit vom Grid
     this.trackItems = function(grid) {
         // verschachtelte Schleife durchläuft das Feld
@@ -313,19 +317,20 @@ Snake.Models.Collectibles = function () {
                 }
             }
          }
-    };
+    }//end trackItems
     
     //generiert ein zufälliges Item und gibt es zurück
     this.generateRandomItem = function () {
         var r = Math.floor((Math.random()*3)+4);
         return r;
-    }
+    }//end generateRandomItem
     
+    //gibt den Counter zurück
     this.getCounter = function (_counter) {
         return _counter;
     }//end getCounter
 
-
+    //setzt den Counter
     this.setCounter = function (counter) {
         _counter = counter;
     }//end setCounter

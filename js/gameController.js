@@ -16,7 +16,8 @@ Snake.Controlls = Snake.Controlls || {};
                 LEFT = "left",
                 UP = "up",
                 DOWN = "down";
-             // erstellt Instanzen folgender Klassen
+
+            // erstellt Instanzen folgender Klassen
             var _prisonSnakeView = new Snake.Views.PrisonSnakeView();
             var _scoreView = new Snake.Views.ScoreView();
             var _score = new Snake.Models.Score();
@@ -51,14 +52,15 @@ Snake.Controlls = Snake.Controlls || {};
             }//end init
             
             
-            
+            //initialiert den Ticker je nach Level in der jeweiligen Geschwindigkeit
             this.initTicker = function (_fps) {
                 // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
                 createjs.Ticker.setFPS(_fps);
                 createjs.Ticker.addEventListener("tick", this.handleTick);
                 createjs.Ticker.paused = false;
-            }
+            }//end initTicker
 
+            //initialisier die Level
             this.initLevel = function(){
                 var lF = this.levelFinished(_grid,_prisonSnake);
 
@@ -74,18 +76,19 @@ Snake.Controlls = Snake.Controlls || {};
                     createjs.Ticker.paused = false;
                 }
               
-            }
+            }//end initLevel
 
+            //prüft ob ein Level beendet wurde
             this.levelFinished = function (_grid,_prisonSnake) {
                 var lF = false;
                 
                 var score = _score.get();
                 
-                if (_prisonSnake.last == GATE && score > 500){
+                if (_prisonSnake.last == GATE && score > 400){
                     lF = true;
                 }
                 return lF;
-            }
+            }//end levelFinished
 
             
             var that = this;    //Hilfsvariable, um das richtige "this" zu referenzieren
