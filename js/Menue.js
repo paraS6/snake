@@ -190,9 +190,9 @@ Snake.Menue.GameOver = function () {
 //Screen für das nächste Level
 Snake.Menue.NextLevel = function () {
     var _nextLevelButton = new Snake.Menue.Buttons("img/naechstes_level.png", 0, 0); //Startbutton erstellen
-    var _nextLevelWindow = new Snake.Menue.StartMenue().menueWindow("Level Succeeded!", 0, 0); //Fenster erstellen für Zwischensequenzen der Levels
+    var _nextLevelWindow = new Snake.Menue.StartMenue().menueWindow("Ausbruch erfolgreich!", 0, 0); //Fenster erstellen für Zwischensequenzen der Levels
     var _firstLevelButton = new Snake.Menue.Buttons("img/spiel_neu_starten.png", 0, 0); //Startbutton erstellen um von vorne beginnen zu können
-    var _victoryWindow = new Snake.Menue.StartMenue().menueWindow("Congratulations!", 0, 0); //Fenster erstellen für Sieg-Screen
+    var _victoryWindow = new Snake.Menue.StartMenue().menueWindow("Du bist ein \rAusbrecherkoenig!", 0, 0); //Fenster erstellen für Sieg-Screen
 
     var _highScore = new Snake.Menue.Buttons("img/highscore_button.png",0, 100); //zurueck Button erstellen
 
@@ -235,7 +235,6 @@ Snake.Menue.NextLevel = function () {
         }
         // wenn das Spiel siegreich beendet wurde...
         else {
-            // !!! neuer Button mit neuem Text (zB "Back To The Beginning") erforderlich !!!
             // Highscore-Button muss noch hinzugefügt werden
             stage.addChild(_victoryWindow, _firstLevelButton, _highScore);
 
