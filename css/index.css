@@ -66,13 +66,10 @@ canvas{
 
 }
 #button{
-    width: 235px;
-    height: 50px;
-    border-bottom-color: white;
-    border-style: solid;
-    border-bottom-width: 3px;
-    background-color: black;
-    font-size: 31px;
+    background-image: url("../img/eintragen_button.png");
+    background-size: cover;
+    width: 300px;
+    height: 60px;
 }
 #highscore-container thead th:last-child, #highscore-container tbody td:last-child{
     text-align: left;
