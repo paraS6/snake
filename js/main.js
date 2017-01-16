@@ -18,8 +18,13 @@
     const GATE = 9;
 
     var scoreTime = 0;
-   
-    
+
+    //TODO: Schlange von links aus starten lassen
+    //TODO: keyEvent deaktivieren, wenn Highscore angezeigt wird
+    //TODO: Bug bei Items beheben => jedes Item braucht einen eigenen Timer
+    //TODO: CSS
+    //TODO: Highscore-Button auf Startseite einfügen
+    //TODO: Spritesheet korrigieren
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
@@ -81,9 +86,14 @@ function startGame(levelId) {
 }//end startGame
 
     function addHighScoreToForm() {
+        document.onkeydown = function (event) {
+            if (event.keyCode == 32) {
+            return false;}
+        };
         //Highscore-Fenster und Formular sichtbar machen
         document.getElementById('highscore-container').style.display = "block";
         document.getElementById("highscore").style.display = "block";
+        document.getElementsByTagName("h1")[0].style.display = 'block';
 
         //bei abschicken der Formulardaten
         document.getElementById("highscore").onsubmit = function () {
@@ -117,6 +127,7 @@ function startGame(levelId) {
             this.onsubmit = function() {
                 return false;
             };
+
 
             return false;
         };//end onSubmit
