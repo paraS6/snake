@@ -20,6 +20,8 @@
     var scoreTime = 0;
     var playingFieldImg;
     var dummyImg;
+    var doorImg;
+
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
         var gameMenue = new Snake.Menue.StartMenue();
@@ -65,25 +67,28 @@ function startGame(levelId) {
         level1Sound.playAndLoad("level_1.mp3");
         playingFieldImg = new createjs.Bitmap("img/spielfeld_level1.png"); //Level 1 Spielfeld erzeugen
         dummyImg = "img/level1_sprite_schwarz.png"; // Dateipfad für Spritesheet Level 1 deklarieren
+        doorImg = 1;
     }
     if (levelId == 2) {
         var level2Sound = new Snake.Sound.Soundregister();
         level2Sound.playAndLoad("level_2.mp3");
         playingFieldImg = new createjs.Bitmap("img/spielfeld_level2.png"); //Level 2 Spielfeld erzeugen
-        dummyImg = "img/level2_sprite_braun.png"; // Dateipfad für Spritesheet Level 1 deklarieren
+        dummyImg = "img/level2_sprite_braun.png"; // Dateipfad für Spritesheet Level 2 deklarieren
+        doorImg = 2;
     }
     if (levelId == 3) {
         var level3Sound = new Snake.Sound.Soundregister();
         level3Sound.playAndLoad("level_3.mp3");
         playingFieldImg = new createjs.Bitmap("img/spielfeld_level3.png"); //Level 3 Spielfeld erzeugen
-        dummyImg = "img/level3_sprite_braun.png"; // Dateipfad für Spritesheet Level 1 deklarieren
+        dummyImg = "img/level3_sprite_braun.png"; // Dateipfad für Spritesheet Level 3 deklarieren
+        doorImg = 3;
 
     }
     //setzt die Geschwindigkeit je nach Id des Levels
     _level.setSpeed(levelId);
     var s = _level.getSpeed();
     var gameController = new Snake.Controlls.GameController();
-    gameController.init(s, playingFieldImg, dummyImg);
+    gameController.init(s, playingFieldImg, dummyImg, doorImg);
 
 }//end startGame
 

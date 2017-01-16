@@ -10,6 +10,7 @@ Snake.Views.PrisonSnakeView = function () {
     var knifeIMG = new createjs.Bitmap("img/item_knife.png");
     var keyIMG = new createjs.Bitmap("img/key.png");
     var openDoor = new createjs.Bitmap("img/opendoor.png");
+    var openDoor3 = new createjs.Bitmap("img/opendoor_level3.png");
 
     //initialisiet die Spritesheets
     this.createSprites = function (url) {
@@ -45,10 +46,11 @@ Snake.Views.PrisonSnakeView = function () {
     };//end addPrisonerSprite
     
         //zeichnet die Schlange auf das Grid    
-        this.drawSnake = function (grid, prisonSnake) {
+        this.drawSnake = function (grid, prisonSnake, doorImg) {
 
             var _grid = grid;
             var _prisonSnake = prisonSnake;
+            var _doorImg = doorImg;
             // durchläuft das Array und gleicht ab, welches Feld wie besetzt ist
             for(var i = 0; i< _grid.width; i++){
                 for(var j = 0; j< _grid.heigth; j++){
@@ -93,7 +95,12 @@ Snake.Views.PrisonSnakeView = function () {
                             break;
                         case GATE:
                             var gate = new createjs.Bitmap();
-                            gate = openDoor.clone();
+                            if(_doorImg == 1 || _doorImg == 2){
+                                gate = openDoor.clone();
+                            }
+                            else if(_doorImg == 3){
+                                gate = openDoor3.clone();
+                            }
                             gate.x = i*CELL;
                             gate.y = j*CELL;
                             stage.addChild(gate);

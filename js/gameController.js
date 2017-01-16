@@ -34,13 +34,15 @@ Snake.Controlls = Snake.Controlls || {};
             var isNext = false;
             var _playingfieldImg;
             var _dummyImg;
+            var _doorImg;
 
 
 
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
-            this.init = function (speed, playingFieldImg, dummyImg) {
+            this.init = function (speed, playingFieldImg, dummyImg, doorImg) {
                 _playingfieldImg = playingFieldImg;
                 _dummyImg = dummyImg;
+                _doorImg = doorImg;
                 var startPosX = 3;
                 var startPosY = 3;
                 _grid.init(WALL, EMPTY, GRIDWIDTH, GRIDHEIGHT);
@@ -129,7 +131,7 @@ Snake.Controlls = Snake.Controlls || {};
 
                 _scoreView.drawScore(_score, _playingfieldImg);
 
-                _prisonSnakeView.drawSnake(_grid, _prisonSnake);
+                _prisonSnakeView.drawSnake(_grid, _prisonSnake, _doorImg);
                 // nimmt Tastatureingabe auf
                 document.onkeydown = keyInput;
                 stage.update();

@@ -102,6 +102,10 @@ a:hover {
     color: rgb(222, 237, 50);
 }
 
+#entwickler{
+    float: right;
+}
+
 #credits{
     text-align: center;
 }

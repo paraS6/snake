@@ -70,12 +70,12 @@ Snake.Models.Score = function() {
     this.setScore = function(_grid, nx, ny){
         
 
-        if(_grid.get(nx, ny) == TUNA){
+        if(_grid.get(nx, ny).ITEM == TUNA){
             var tunaSound = new Snake.Sound.Soundregister();
             tunaSound.playAndLoad("good_item.mp3");
             this.set(30);
         }
-        else if(_grid.get(nx, ny) == CIGARETTES){
+        else if(_grid.get(nx, ny).ITEM == CIGARETTES){
             var cigaSound = new Snake.Sound.Soundregister();
             cigaSound.playAndLoad("good_item.mp3");
             this.set(20);
@@ -85,7 +85,7 @@ Snake.Models.Score = function() {
             prisonerSound.playAndLoad("good_item.mp3");
             this.set(10);
         }
-        else if(_grid.get(nx,ny) == KNIFE) {
+        else if(_grid.get(nx,ny).ITEM == KNIFE) {
             var knifeSound = new Snake.Sound.Soundregister();
             knifeSound.playAndLoad("bad_item.wav");
             this.set(-50);
