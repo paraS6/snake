@@ -11,7 +11,7 @@ var paths = {
     styles: {
         src: 'css/*.css',
         dest: './build/css/'
-    },
+    }
 };
 
 // gulp.js einbauen
@@ -48,7 +48,16 @@ gulp.task('lint', function() {
 
 // JavaScript Dateien konkatenieren und Minimieren
 gulp.task('scripts', function(){
-    gulp.src(paths.scripts.src)
+    gulp.src([
+        'js/main.js',
+        'js/Menue.js',
+        'js/gameController.js',
+        'js/Sound.js',
+        'js/Levels.js',
+        'js/Views.js',
+        'js/Models.js'
+
+    ])
         .pipe(concat('min.js'))
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(uglify())
