@@ -126,7 +126,7 @@ Snake.Views.PrisonSnakeView = function () {
                                 stage.addChild(item);
                                 break;
                             case KNIFE:
-                                var item = new createjs.Bitmap;
+                                var item = new createjs.Bitmap();
                                 item = knifeIMG.clone();
                                 item.x = i*CELL;
                                 item.y = j*CELL;
@@ -148,8 +148,6 @@ Snake.Views.ScoreView = function () {
     var _scoreTime;
     var _b = _scoreTitle.getBounds(); // gibt Breite des Textfeldes der Überschrift zurück
     var _b2; // gibt Breite des Textfeldes des Scores zurück
-    var s = 0;
-    var m = 0;
 
 
     this.drawScore  = function (score, playingFieldImg) {

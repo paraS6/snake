@@ -66,24 +66,6 @@ Snake.Controlls = Snake.Controlls || {};
                 createjs.Ticker.paused = false;
             };//end initTicker
 
-            //initialisier die Level
-            this.initLevel = function(){
-                var lF = this.levelFinished(_grid,_prisonSnake);
-
-                lF = false;
-                
-                createjs.Ticker.setFPS(5);
-                createjs.Ticker.addEventListener("tick", this.handleTick);
-                createjs.Ticker.paused = false;
-
-                if(lF = true){
-                    createjs.Ticker.setFPS(10);
-                    createjs.Ticker.addEventListener("tick", this.handleTick);
-                    createjs.Ticker.paused = false;
-                }
-              
-            };//end initLevel
-
             //prüft ob ein Level beendet wurde
             this.levelFinished = function (_grid,_prisonSnake) {
                 var lF = false;
@@ -222,12 +204,13 @@ Snake.Controlls = Snake.Controlls || {};
                 
 
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
+                    var tail;
                     if(_grid.get(nx, ny) == PRISONER){
                         var goodItemSound = new Snake.Sound.Soundregister();
                         goodItemSound.playAndLoad("good_item.mp3");
 
                         // ...wird der Schwanz verlängert und...
-                        var tail = {x:nx, y:ny, d: _prisonSnake.direction};
+                        tail = {x:nx, y:ny, d: _prisonSnake.direction};
                         // ...der Counter erhöht, der das Erscheinen von Items triggert und...
                         _counter++;
                         // ...automatisch ein neu einzusammelndes Prisoner-Collectible gesetzt
@@ -243,7 +226,7 @@ Snake.Controlls = Snake.Controlls || {};
 
                     else{
                         // beim Laufen über leere Felder wird das letzte Schlangenelement immer wieder gelöscht und durch die aktualisierte Endposition ersetzt
-                        var tail = _prisonSnake.remove();
+                        tail = _prisonSnake.remove();
                         _grid.set(EMPTY, tail.x, tail.y);
                         tail.x = nx;
                         tail.y = ny;
