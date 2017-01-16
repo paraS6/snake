@@ -124,10 +124,7 @@ Snake.Models.Score = function() {
     this.getScoreTime = function (ende) {
         return parseInt((ende - startTime)/1000);
     };//end getScoreTime
-
 };// end Score
-
-
 
 //verarbeitet die Logik der Schlange
 Snake.Models.PrisonSnake = function () {
@@ -157,15 +154,9 @@ Snake.Models.PrisonSnake = function () {
 
 //verarbeitet die Logik der Collectibles
 Snake.Models.Collectibles = function () {
-    var startTimeKnife; //gibt an wann das Collectible auf dem Grid erscheint
-    var startTimeTuna;
-    var startTimeCigarettes;
-    var timer;
 
     var _counter; // erhöht sich beim Einsammeln eines Prisoners
-    var _cnt = 1; // Zähler für die Präsenzdauer eines Items
     var _keySetOnGrid = false; // wurde der Schlüssel bereits aufs Grid gesetzt?
-    
     
     // Setzt den Schlüssel auf das Spielfeld
     this.setKey = function (grid){
@@ -220,7 +211,6 @@ Snake.Models.Collectibles = function () {
                     empty.push({x: x, y: y});
                 }
             }
-
         }
 
         // Randomizer geht durch alle leeren Felder
@@ -250,31 +240,11 @@ Snake.Models.Collectibles = function () {
        //Variable speichert zufällige Position
         var randpos = empty[Math.floor(Math.random()*empty.length)];
         //zufälliges Item wird aufgerufen
-        var randomItem = this.generateRandomItem();
-        this.startTimeItems(randomItem);
+        var randomItem = {ITEM:this.generateRandomItem(), timer: new Date()};
         //Item wird an zufällige leer Position gesetzt
         grid.set(randomItem, randpos.x, randpos.y);
-      
-        //this.remove(randomItem,randpos.x, randpos.y, grid);
         
     };//end setCollectibles
-    
-    //speichert die Erscheinungszeit des Items in einer Variablen
-    this.startTimeItems = function (id) {
-        switch(id) {
-            case CIGARETTES:
-                startTimeCigarettes = new Date();
-                break;
-            case TUNA:
-                startTimeTuna = new Date();
-                break;
-            case KNIFE:
-                startTimeKnife = new Date();        
-                break;
-            default:
-                break;
-        }
-    };//end startTimeItems
     
     // Durchläuft das Grid und löscht Items nach definierter Zeit vom Grid
     this.trackItems = function(grid) {
@@ -283,34 +253,26 @@ Snake.Models.Collectibles = function () {
             for (var y = 0; y < grid.heigth; y++){
 
                 // Wenn ein Feld von einem Item belegt ist, wird folgende Aktion ausgeführt
-                switch(grid.get(x,y)){
+                switch(grid.get(x,y).ITEM){
                     case CIGARETTES:
                         endTime = new Date();
                         // Counter wird im Takt der framerate hochgezählt
                         // nach x update-Durchläufen im Controller...
-                        if(((endTime - startTimeCigarettes) /1000) >= 7){
+                        if(((endTime - grid.get(x,y).timer) /1000) >= 7){
                             //... wird die Zelle wieder auf leer gesetzt
                             grid.set(EMPTY,x,y);
-
-                            timer = (endTime - startTimeCigarettes) /1000;
-                            //console.log("Cigarettes: "+timer);
-                            //... und der Counter wieder auf Anfangswert gesetzt
                         }
                         break;
                     case TUNA:
                         endTime = new Date();
-                        if(((endTime - startTimeTuna) /1000) >= 7){
+                        if(((endTime - grid.get(x,y).timer) /1000) >= 7){
                             grid.set(EMPTY,x,y);
-                            timer = (endTime - startTimeTuna) /1000;
-                            //console.log("Tuna: "+timer);
                         }
                         break;
                     case KNIFE:
                         endTime = new Date();
-                        if(((endTime - startTimeKnife) /1000) >= 15){
+                        if(((endTime - grid.get(x,y).timer) /1000) >= 15){
                             grid.set(EMPTY,x,y);
-                            timer = (endTime - startTimeKnife) /1000;
-                            //console.log("Knife: "+timer);
                         }
                         break;
                     default:

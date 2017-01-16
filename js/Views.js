@@ -83,27 +83,7 @@ Snake.Views.PrisonSnakeView = function () {
                             stage.addChild(dummy2);
                             break;
                         // lädt die Bitmaps der Items
-                        case TUNA:
-                            var item = new createjs.Bitmap();
-                            item = tunaIMG.clone();
-                            item.x = i*CELL;
-                            item.y = j*CELL;
-                            stage.addChild(item);
-                            break;
-                        case CIGARETTES:
-                            var item = new createjs.Bitmap();
-                            item = cigIMG.clone();
-                            item.x = i*CELL;
-                            item.y = j*CELL;
-                            stage.addChild(item);
-                            break;
-                        case KNIFE:
-                            var item = new createjs.Bitmap;
-                            item = knifeIMG.clone();
-                            item.x = i*CELL;
-                            item.y = j*CELL;
-                            stage.addChild(item);
-                            break;
+
                         case KEY:
                             var key = new createjs.Bitmap();
                             key = keyIMG.clone();
@@ -123,6 +103,29 @@ Snake.Views.PrisonSnakeView = function () {
                         default:
                             break;
                     }
+                        switch (_grid.get(i, j).ITEM){
+                            case TUNA:
+                                var item = new createjs.Bitmap();
+                                item = tunaIMG.clone();
+                                item.x = i*CELL;
+                                item.y = j*CELL;
+                                stage.addChild(item);
+                                break;
+                            case CIGARETTES:
+                                var item = new createjs.Bitmap();
+                                item = cigIMG.clone();
+                                item.x = i*CELL;
+                                item.y = j*CELL;
+                                stage.addChild(item);
+                                break;
+                            case KNIFE:
+                                var item = new createjs.Bitmap;
+                                item = knifeIMG.clone();
+                                item.x = i*CELL;
+                                item.y = j*CELL;
+                                stage.addChild(item);
+                                break;
+                        }
 
                 }
             }
