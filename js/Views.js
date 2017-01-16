@@ -10,7 +10,6 @@ Snake.Views.PrisonSnakeView = function () {
     var knifeIMG = new createjs.Bitmap("img/item_knife.png");
     var keyIMG = new createjs.Bitmap("img/key.png");
     var openDoor = new createjs.Bitmap("img/opendoor.png");
-    var openDoorLevel3 = new createjs.Bitmap("img/opendoor_level3.png");
 
     //initialisiet die Spritesheets
     this.createSprites = function (url) {
@@ -38,10 +37,11 @@ Snake.Views.PrisonSnakeView = function () {
         dummy[0]={s: new createjs.Sprite(this.createSprites("img/sprites.png"), "right"), d: "right"};
 
     //hinzufügen der Sprites für jedes Element der Schlange
-    this.addPrisonerSprite = function(prisonSnake, counter){
+    this.addPrisonerSprite = function(prisonSnake, counter, dummyImg){
         var _prisonSnake = prisonSnake;
         var _counter = counter;
-        dummy[_counter] = {s: new createjs.Sprite(this.createSprites("img/level1_sprite_schwarz.png"), _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
+        var _dummyImg = dummyImg;
+        dummy[_counter] = {s: new createjs.Sprite(this.createSprites(_dummyImg), _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
     };//end addPrisonerSprite
     
         //zeichnet die Schlange auf das Grid    

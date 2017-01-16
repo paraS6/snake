@@ -33,13 +33,14 @@ Snake.Controlls = Snake.Controlls || {};
             var prisonCounter = 1;
             var isNext = false;
             var _playingfieldImg;
-
+            var _dummyImg;
 
 
 
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
-            this.init = function (speed, playingFieldImg) {
+            this.init = function (speed, playingFieldImg, dummyImg) {
                 _playingfieldImg = playingFieldImg;
+                _dummyImg = dummyImg;
                 var startPosX = 3;
                 var startPosY = 3;
                 _grid.init(WALL, EMPTY, GRIDWIDTH, GRIDHEIGHT);
@@ -234,7 +235,7 @@ Snake.Controlls = Snake.Controlls || {};
                         _collectibles.setCounter(_counter);
 
                         _prisonSnake.insert(tail.x, tail.y, tail.d);
-                        _prisonSnakeView.addPrisonerSprite(_prisonSnake, prisonCounter);
+                        _prisonSnakeView.addPrisonerSprite(_prisonSnake, prisonCounter, _dummyImg);
                         prisonCounter++;
                     }
 
