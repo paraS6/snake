@@ -32,16 +32,19 @@ Snake.Controlls = Snake.Controlls || {};
             var _counter = 1;
             var prisonCounter = 1;
             var isNext = false;
+            var _playingfieldImg;
 
 
 
 
             //hier werden alle start-Funktionen vorm Aufruf des gameLoops aufgerufen (von startGame hierhin ausgelagert)
-            this.init = function (speed) {
-                var startPos = {x:Math.floor(GRIDWIDTH/2), y:(GRIDHEIGHT/2) -1};
+            this.init = function (speed, playingFieldImg) {
+                _playingfieldImg = playingFieldImg;
+                var startPosX = 3;
+                var startPosY = 3;
                 _grid.init(WALL, EMPTY, GRIDWIDTH, GRIDHEIGHT);
-                _prisonSnake.init("right", startPos.x, startPos.y);
-                _grid.set(SNAKE_HEAD, startPos.x, startPos.y);
+                _prisonSnake.init("right", startPosX, startPosY);
+                _grid.set(SNAKE_HEAD, startPosX, startPosY);
                 _collectibles.setPrisoner(_grid);
                 _collectibles.setCollectibles(_grid);
                 // Die Funktion handleTick wird 30 mal in der Sekunde aufgerufen
@@ -123,7 +126,7 @@ Snake.Controlls = Snake.Controlls || {};
                 update();
                 // führt alle View-Funktionen aus, welche die Model-Funktionen grafisch abbilden
 
-                _scoreView.drawScore(_score);
+                _scoreView.drawScore(_score, _playingfieldImg);
 
                 _prisonSnakeView.drawSnake(_grid, _prisonSnake);
                 // nimmt Tastatureingabe auf

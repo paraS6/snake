@@ -129,11 +129,6 @@ Snake.Views.PrisonSnakeView = function () {
         };//end drawSnake
 }; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
-    // lädt den Spielfeldhintergrund ins Canvas
-    var playingfieldImg = new createjs.Bitmap("img/spielfeld_level1.png"); //Level 1 Spielfeld erzeugen
-    var playingfieldImgLevel2 = new createjs.Bitmap("img/spielfeld_level2.png"); //Level 2 Spielfeld erzeugen
-    var playingfieldImgLevel3 = new createjs.Bitmap("img/spielfeld_level3.png"); //Level 3 Spielfeld erzeugen
-
     var _scoreContainer = new createjs.Container();
     var _scoreTitle = new createjs.Text("Score", "50px pixel", "white"); //Ueberschrift
     var _scoreTXT;    // Scoreanzeige
@@ -147,9 +142,10 @@ Snake.Views.ScoreView = function () {
     var m = 0;
 
 
-    this.drawScore  = function (score) {
+    this.drawScore  = function (score, playingFieldImg) {
         var _score = score.get();
         var _time = score.getTime(new Date());
+        var _playingFieldImg = playingFieldImg;
 
         _scoreTime = new createjs.Text(_time, "40px pixel", "white");
         _scoreTime.x = WIDTH + ((stage.canvas.width-WIDTH)-_scoreTime.getBounds().width)/2 ;
@@ -166,7 +162,7 @@ Snake.Views.ScoreView = function () {
         _scoreTXT.y = stage.canvas.height/4+60;
         // Background, Titel und Score zum Canvas hinzufügen
 
-        _scoreContainer.addChild(playingfieldImg, _scoreTitle, _scoreTXT, _scoreTime);
+        _scoreContainer.addChild(_playingFieldImg, _scoreTitle, _scoreTXT, _scoreTime);
         stage.addChild(_scoreContainer);
     };//end drawScore
  

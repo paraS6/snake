@@ -18,7 +18,7 @@
     const GATE = 9;
 
     var scoreTime = 0;
-   
+    var playingFieldImg;
     
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {
@@ -63,20 +63,23 @@ function startGame(levelId) {
         scoreTime = 0;
         var level1Sound = new Snake.Sound.Soundregister();
         level1Sound.playAndLoad("level_1.mp3");
+        playingFieldImg = new createjs.Bitmap("img/spielfeld_level1.png"); //Level 1 Spielfeld erzeugen
     }
     if (levelId == 2) {
         var level2Sound = new Snake.Sound.Soundregister();
         level2Sound.playAndLoad("level_2.mp3");
+        playingFieldImg = new createjs.Bitmap("img/spielfeld_level2.png"); //Level 2 Spielfeld erzeugen
     }
     if (levelId == 3) {
         var level3Sound = new Snake.Sound.Soundregister();
         level3Sound.playAndLoad("level_3.mp3");
+        playingFieldImg = new createjs.Bitmap("img/spielfeld_level3.png"); //Level 3 Spielfeld erzeugen
     }
     //setzt die Geschwindigkeit je nach Id des Levels
     _level.setSpeed(levelId);
     var s = _level.getSpeed();
     var gameController = new Snake.Controlls.GameController();
-    gameController.init(s);
+    gameController.init(s, playingFieldImg);
 
 }//end startGame
 
