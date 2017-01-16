@@ -8,11 +8,11 @@ Snake.Levels.Level = function () {
    
     this.getId = function () {
         return _id;
-    }//end getId
+    };//end getId
     
     this.setId = function (id) {
         _id = id;
-    }//end setId
+    };//end setId
     
     
     //setzt fps in Abhängigkeit der Level über eine ID
@@ -28,10 +28,10 @@ Snake.Levels.Level = function () {
         else if(_id == 3){
             _speed = 9;
         }
-    }//end setSpeed
+    };//end setSpeed
     
     //gibt die akutelle Geschwindigkeit zurück
     this.getSpeed = function () {
         return _speed;
-    }//end getSpeed
-}
+    };//end getSpeed
+};// end Snake.Level.Levels

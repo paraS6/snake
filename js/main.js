@@ -46,8 +46,8 @@
                         alert("Die angegebene Schriftart existiert nicht! Bitte versuchen sie es erneut!");
                     }
                 }
-            }
-        }
+            };
+        };
         loadWebFont();
 
     }//end Main
@@ -106,7 +106,7 @@ function startGame(levelId) {
                     //gibt einen DOMString zurück, der die response zu einem request enthält
                     writeHighscore(xmlhttp.responseText);
                 }
-            }
+            };
             //mittels POST-Objekt Formulardaten übermitteln
             xmlhttp.open("POST","http://janabo.de/prison-snake/highscore.php", true);
             // Request-Header für Formulardaten
@@ -116,8 +116,8 @@ function startGame(levelId) {
             // Sumbit-Event überschreiben, damit man nicht bei mehrfachem Klick die gleichen Daten abschickt
             this.onsubmit = function() {
                 return false;
-            }
+            };
 
             return false;
-        }
+        };//end onSubmit
     }//end addHighscoreToForm

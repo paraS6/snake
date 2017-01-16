@@ -28,10 +28,10 @@ Snake.Views.PrisonSnakeView = function () {
                 right2: [5, 7],
                 up2: [13, 15]
             }
-        }
+        };
         var ss = new createjs.SpriteSheet(data);
         return ss;//Spritesheet zusammen bauen
-    }//end createSprites
+    };//end createSprites
     
     //Erstellung des Schlangenkopfs
     var dummy = [];
@@ -42,7 +42,7 @@ Snake.Views.PrisonSnakeView = function () {
         var _prisonSnake = prisonSnake;
         var _counter = counter;
         dummy[_counter] = {s: new createjs.Sprite(this.createSprites("img/level1_sprite_schwarz.png"), _prisonSnake._queue[_counter].d), d:_prisonSnake._queue[_counter].d};
-    }//end addPrisonerSprite
+    };//end addPrisonerSprite
     
         //zeichnet die Schlange auf das Grid    
         this.drawSnake = function (grid, prisonSnake) {
@@ -62,7 +62,7 @@ Snake.Views.PrisonSnakeView = function () {
                                     //Wenn das richtige Queue Element gefunden ist, wird zu diesem Count ein Sprite in Blickrichtung erstellt
                                     if(_prisonSnake._queue[dummyCounter].d != dummy[dummyCounter].d){
                                         var spriteVariation = "2";
-                                        if(dummyCounter%2==0){  //jeder zweite Prisoner in der Schlange benutzt versetzte Sprites, dadurch entsteht Bewegung
+                                        if(dummyCounter%2===0){  //jeder zweite Prisoner in der Schlange benutzt versetzte Sprites, dadurch entsteht Bewegung
                                             spriteVariation = "";
                                         }
                                         dummy[dummyCounter].s.gotoAndPlay(_prisonSnake._queue[dummyCounter].d+spriteVariation);
@@ -76,7 +76,7 @@ Snake.Views.PrisonSnakeView = function () {
                             break;
                         // lädt die Bitmap des Schlangenelements und setzt es auf das Spielfeld
                         case PRISONER:
-                            var dummy2 = new createjs.Bitmap;
+                            var dummy2 = new createjs.Bitmap();
                             dummy2 = prisonerIMG.clone();
                             dummy2.x=i*CELL;
                             dummy2.y=j*CELL;
@@ -84,14 +84,14 @@ Snake.Views.PrisonSnakeView = function () {
                             break;
                         // lädt die Bitmaps der Items
                         case TUNA:
-                            var item = new createjs.Bitmap;
+                            var item = new createjs.Bitmap();
                             item = tunaIMG.clone();
                             item.x = i*CELL;
                             item.y = j*CELL;
                             stage.addChild(item);
                             break;
                         case CIGARETTES:
-                            var item = new createjs.Bitmap;
+                            var item = new createjs.Bitmap();
                             item = cigIMG.clone();
                             item.x = i*CELL;
                             item.y = j*CELL;
@@ -105,14 +105,14 @@ Snake.Views.PrisonSnakeView = function () {
                             stage.addChild(item);
                             break;
                         case KEY:
-                            var key = new createjs.Bitmap;
+                            var key = new createjs.Bitmap();
                             key = keyIMG.clone();
                             key.x = i*CELL;
                             key.y = j*CELL;
                             stage.addChild(key);  
                             break;
                         case GATE:
-                            var gate = new createjs.Bitmap;
+                            var gate = new createjs.Bitmap();
                             gate = openDoor.clone();
                             gate.x = i*CELL;
                             gate.y = j*CELL;
@@ -126,7 +126,7 @@ Snake.Views.PrisonSnakeView = function () {
 
                 }
             }
-        }//end drawSnake
+        };//end drawSnake
 }; //end PrisonSnakeView
 Snake.Views.ScoreView = function () {
     // lädt den Spielfeldhintergrund ins Canvas
@@ -168,6 +168,6 @@ Snake.Views.ScoreView = function () {
 
         _scoreContainer.addChild(playingfieldImg, _scoreTitle, _scoreTXT, _scoreTime);
         stage.addChild(_scoreContainer);
-    }//end drawScore
+    };//end drawScore
  
 }; //end ScoreView

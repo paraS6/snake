@@ -1,16 +1,16 @@
-
+// Pfade für Dtaien
 var paths = {
     images: {
         src: 'img/*',
-        dest: 'build/img/'
+        dest: './build/img/'
     },
     scripts: {
-        src: 'js/*',
-        dest: 'build/js/'
+        src: 'js/*.js',
+        dest: './build/js/'
     },
     styles: {
-        src: 'css/*',
-        dest: 'build/css/'
+        src: 'css/*.css',
+        dest: './build/css/'
     },
 };
 
@@ -23,11 +23,7 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 
 
-
-var changeEvent = function(evt) {
-    gutil.log('File', gutil.colors.cyan(evt.path.replace(new RegExp('/.*(?=/' + basePaths.src + ')/'), '')), 'was', gutil.colors.magenta(evt.type));
-};
-
+// CSS Datei minimieren
 gulp.task('css', function() {
     return gulp.src(paths.styles.src)
         .pipe(cleanCSS({debug: true}, function(details) {
@@ -37,6 +33,7 @@ gulp.task('css', function() {
         .pipe(gulp.dest(paths.styles.dest));
 });
 
+// Bilder verlustfrei
 gulp.task('images', function() {
     gulp.src(paths.images.src)
         .pipe(imagemin())
@@ -44,11 +41,12 @@ gulp.task('images', function() {
 });
 
 gulp.task('lint', function() {
-    return gulp.src('js/*.js')
+    return gulp.src(paths.scripts.src)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
+// JavaScript Dateien konkatenieren und Minimieren
 gulp.task('scripts', function(){
     gulp.src(paths.scripts.src)
         .pipe(concat('min.js'))
@@ -57,12 +55,12 @@ gulp.task('scripts', function(){
         .pipe(gulp.dest(paths.scripts.dest));
 });
 
-// Watch Files For Changes
+// Dateien beobachten bei Änderungen
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
     gulp.watch('css/*.css', ['css']);
-    gulp.watch(paths.images.src, ['images']);
+    gulp.watch('img/*', ['images']);
 });
 
-// Default Task
+// Default Task, wird beim Befehl "gulp" ausgeführt
 gulp.task('default', ['css', 'images', 'lint', 'scripts', 'watch']);

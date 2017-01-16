@@ -25,7 +25,7 @@ Snake.Models.Grid = function(){
             this._grid.push([]);
             // Zeilen auf Y-Achse als 2. Dimension im Array
             for(var y = 0; y < r; y++){
-                if(x ==0 || y == 0 || x == c-1 || y == r-1){
+                if(x === 0 || y === 0 || x == c-1 || y == r-1){
                     this._grid[x].push(w);
                 }
                 else{
@@ -44,8 +44,8 @@ Snake.Models.Grid = function(){
     // Getter-Methode, um von außerhalb auf das Grid zuzugreifen
     this.get = function (x, y) {
         return this._grid[x][y];
-    }
-}//end Grid
+    };
+};//end Grid
 
 // Logik der Spielstandberechnung
 Snake.Models.Score = function() {
@@ -59,12 +59,12 @@ Snake.Models.Score = function() {
     // erhöht den Spielstand nach speziellen Ereignissen im gameController
     this.set = function (newScore) {
         _score += newScore;
-    }//end set
+    };//end set
         
     // Getter-Funktion, um Spielstand in anderen Klassen abzufragen
     this.get = function () {
         return _score;
-    }//end get 
+    };//end get
 
     //setzt den Score in Abhängigkeit des Collectibles
     this.setScore = function(_grid, nx, ny){
@@ -101,12 +101,12 @@ Snake.Models.Score = function() {
         }
         
         
-    }//end setScore
+    };//end setScore
 
     // Getter-Methode, gibt an, ob der Schlüssel schon eingesammelt wurde
     this.getKeyStatus = function (){
         return _keyCollected;
-    }//end getKeyStatus
+    };//end getKeyStatus
     
     //gibt die Zeit zurück, die ein Collectible auf dem Grid erscheint
     this.getTime = function (ende){
@@ -119,13 +119,13 @@ Snake.Models.Score = function() {
             var time = m+":"+s;
         }
         return time;
-    }//end getTime
+    };//end getTime
     
     this.getScoreTime = function (ende) {
         return parseInt((ende - startTime)/1000);
-    }//end getScoreTime
+    };//end getScoreTime
 
-}// end Score
+};// end Score
 
 
 
@@ -141,19 +141,19 @@ Snake.Models.PrisonSnake = function () {
        this.direction = d;
         this._queue = [];
         this.insert(x, y, d);
-    }// end init
+    };// end init
 
     // fügt der Schlange ein neues Element hinzu, indem dieses mit unshift an ERSTER Stelle im Array eingefügt wird --> FIFO
     this.insert = function (x, y, d) {
         this._queue.unshift({x:x, y:y, d:d });
         this.last = this._queue[0];
-    }//end insert
+    };//end insert
 
     // Gibt das erste Element des Arrays (also der Schlangenschwanz) zurück
     this.remove =function () {
         return this._queue.pop();
-    }//end remove
-}//end PSnake
+    };//end remove
+};//end PSnake
 
 //verarbeitet die Logik der Collectibles
 Snake.Models.Collectibles = function () {
@@ -191,17 +191,17 @@ Snake.Models.Collectibles = function () {
         _grid.set(KEY, randpos.x, randpos.y);
    
        
-    }//end setKey
+    };//end setKey
     
     //ruft die Funktion zum Setzen des Keys auf sobald der Score über 500 ist
     this.keySetter = function (score, grid) {
         // !!zu Testzwecken wird der Wert auf 40 gesetzt!!
-        if(_keySetOnGrid == false && score >= MINIMUMSCOREKEYAPPEAR){
+        if(_keySetOnGrid === false && score >= MINIMUMSCOREKEYAPPEAR){
             this.setKey(grid);
             // true = der Schlüssel wurde auf das Grid gesetzt
             _keySetOnGrid = true;
         }
-    }//end keySetter
+    };//end keySetter
     
     
     
@@ -227,7 +227,7 @@ Snake.Models.Collectibles = function () {
         var randpos = empty[Math.floor(Math.random() * empty.length)];
         // Über Setter-Methode wird ein Prisoner an eine zufällige leere Positon gesetzt
         _grid.set(PRISONER, randpos.x, randpos.y);
-    }//end setPrisoner
+    };//end setPrisoner
     
     //setzt ein zufälliges Item auf das Spielfeld
     this.setCollectibles = function(grid) {
@@ -257,7 +257,7 @@ Snake.Models.Collectibles = function () {
       
         //this.remove(randomItem,randpos.x, randpos.y, grid);
         
-    }//end setCollectibles
+    };//end setCollectibles
     
     //speichert die Erscheinungszeit des Items in einer Variablen
     this.startTimeItems = function (id) {
@@ -274,7 +274,7 @@ Snake.Models.Collectibles = function () {
             default:
                 break;
         }
-    }//end startTimeItems
+    };//end startTimeItems
     
     // Durchläuft das Grid und löscht Items nach definierter Zeit vom Grid
     this.trackItems = function(grid) {
@@ -312,37 +312,38 @@ Snake.Models.Collectibles = function () {
                             timer = (endTime - startTimeKnife) /1000;
                             //console.log("Knife: "+timer);
                         }
+                        break;
                     default:
                         break;
                 }
             }
          }
-    }//end trackItems
+    };//end trackItems
     
     //generiert ein zufälliges Item und gibt es zurück
     this.generateRandomItem = function () {
         var r = Math.floor((Math.random()*3)+4);
         return r;
-    }//end generateRandomItem
+    };//end generateRandomItem
     
     //gibt den Counter zurück
     this.getCounter = function (_counter) {
         return _counter;
-    }//end getCounter
+    };//end getCounter
 
     //setzt den Counter
     this.setCounter = function (counter) {
         _counter = counter;
-    }//end setCounter
+    };//end setCounter
 
     //ruft nachdem eine bestimmte Anzahl von Prisonern eingesammelt wurde die Funktion
     //zum Setzten eines zufälligen Items auf
     this.setRandomItem = function (grid) {
         this.getCounter(_counter);
-        if(_counter%6 == 0){
+        if(_counter%6 === 0){
             _counter = 1;
             this.setCollectibles(grid);
         }
 
-    }//end setRandomItem
-}//end Snake.Models.Collectibles
+    };//end setRandomItem
+};//end Snake.Models.Collectibles

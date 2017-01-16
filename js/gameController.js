@@ -49,7 +49,7 @@ Snake.Controlls = Snake.Controlls || {};
                 createjs.Ticker.addEventListener("tick", this.handleTick);
                 createjs.Ticker.RAF = true;
                 createjs.Ticker.paused = false;
-            }//end init
+            };//end init
             
             
             //initialiert den Ticker je nach Level in der jeweiligen Geschwindigkeit
@@ -58,7 +58,7 @@ Snake.Controlls = Snake.Controlls || {};
                 createjs.Ticker.setFPS(_fps);
                 createjs.Ticker.addEventListener("tick", this.handleTick);
                 createjs.Ticker.paused = false;
-            }//end initTicker
+            };//end initTicker
 
             //initialisier die Level
             this.initLevel = function(){
@@ -76,7 +76,7 @@ Snake.Controlls = Snake.Controlls || {};
                     createjs.Ticker.paused = false;
                 }
               
-            }//end initLevel
+            };//end initLevel
 
             //prüft ob ein Level beendet wurde
             this.levelFinished = function (_grid,_prisonSnake) {
@@ -88,7 +88,7 @@ Snake.Controlls = Snake.Controlls || {};
                     lF = true;
                 }
                 return lF;
-            }//end levelFinished
+            };//end levelFinished
 
             
             var that = this;    //Hilfsvariable, um das richtige "this" zu referenzieren
@@ -96,7 +96,7 @@ Snake.Controlls = Snake.Controlls || {};
             //Ueberpruefen des Tickers
             this.handleTick = function () {
                 // solange Ticker nicht pausiert wird, wird der gameLoop fortgesetzt
-                if(createjs.Ticker.paused == false){
+                if(createjs.Ticker.paused === false){
                     that.gameLoop();
                 }
                 // sobald pausiert wird (Schlange ist tot), wird Ticker entfernt und GameOver Screen eingeblendet
@@ -114,7 +114,7 @@ Snake.Controlls = Snake.Controlls || {};
                         nextLevel.addNextLevelView();
                     }
                 }
-            }//end handleTick
+            };//end handleTick
 
             //Pro Loop wird folgendes ausgefuehrt
             this.gameLoop = function () {
@@ -158,7 +158,7 @@ Snake.Controlls = Snake.Controlls || {};
                         break;
                 }
 
-            }; //end keyInput
+            } //end keyInput
 
         
             
@@ -267,8 +267,8 @@ Snake.Controlls = Snake.Controlls || {};
                     // Schlangenposition wird im Model aktualisiert
                      _grid.set(SNAKE_HEAD, tail.x, tail.y);
 
-            }; //end update
+            } //end update
             
             
-        }//end GameController
+        };//end GameController
     

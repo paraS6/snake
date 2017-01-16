@@ -21,7 +21,7 @@ Snake.Menue.StartMenue = function() {
             _mainbg.graphics.beginFill("black").drawRect(0,0,stage.canvas.width, stage.canvas.height); //Hintergrund
              _window.addChild(_mainbg, _title);
             return _window;
-        }//endMenueWindow
+        };//endMenueWindow
 
         //erstellt Startfenster den Spiels
         this.addMenueView = function () {
@@ -40,7 +40,7 @@ Snake.Menue.StartMenue = function() {
                     stage.removeAllChildren();
                     _levelWindow.addLevelView(_level);
                 }
-            }
+            };
             // Button Listeners
             _startButton.addEventListener("click", function (event) {   //startet Spiel
                 var _levelWindow = new Snake.Menue.Level();
@@ -49,7 +49,7 @@ Snake.Menue.StartMenue = function() {
 
             });
             _instButton.addEventListener("click", function (event) {    //fuehrt zum Instructionfenster
-                var _instWindow = new Snake.Menue.Instructions;
+                var _instWindow = new Snake.Menue.Instructions();
                 stage.removeAllChildren();
                 _instWindow.addInstructionView();
 
@@ -57,9 +57,9 @@ Snake.Menue.StartMenue = function() {
 
             //end ButtonListeners
 
-    }//end addMenueView
+    };//end addMenueView
     
-}//end StartMenue
+};//end StartMenue
 //Klasse fuegt Instructionfenster hinzu
 Snake.Menue.Instructions = function () {
  //Fenster erstellen
@@ -79,11 +79,11 @@ Snake.Menue.Instructions = function () {
             stage.removeChild(_instWindow, _instClose);   //erst alle Elemente von Stage entfernen
             var gameMenue = new Snake.Menue.StartMenue();
             gameMenue.addMenueView();
-        })
+        });
 
         //end Button Listeners
-    }//end addInstructionsView
-}//end Instructions
+    };//end addInstructionsView
+};//end Instructions
 
 //Klasse fuegt Level Intro Screen ein
 Snake.Menue.Level = function () {
@@ -117,7 +117,7 @@ Snake.Menue.Level = function () {
                 startGame(_levelId);
                 _level++; 
             }
-        }
+        };
         //Button Listeners
         _levelStarten.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren();
@@ -129,8 +129,8 @@ Snake.Menue.Level = function () {
         });
 
         //end Button Listeners
-    }//end addInstructionsView
-}//end Instructions
+    };//end addInstructionsView
+};//end Instructions
 
 //Klasse um neue Buttons zur erstellen
 Snake.Menue.Buttons = function (path, x, y) {
@@ -142,7 +142,7 @@ Snake.Menue.Buttons = function (path, x, y) {
     _bc.x = (stage.canvas.width-514*0.5)/2 + _x;
     _bc.y = (stage.canvas.height/2) + _y;
    return _bc;
-}//end Buttons
+};//end Buttons
 
 
 //GameOverScreen
@@ -168,11 +168,11 @@ Snake.Menue.GameOver = function () {
                 var _levelWindow = new Snake.Menue.Level();
                 _levelWindow.addLevelView(_level);
             }
-        }
+        };
         //Button Listeners
         _highScore.addEventListener("click", function (event) {   //startet Spiel
             Snake.Menue.Highscore();
-        })
+        });
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
             stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
             _level = 1;
@@ -180,10 +180,10 @@ Snake.Menue.GameOver = function () {
             _levelWindow.addLevelView(_level);
 
 
-        })//End Button Listeners
+        });//End Button Listeners
 
-    }//end addGameOverView
-}//end GameOver
+    };//end addGameOverView
+};//end GameOver
 
 
 
@@ -221,7 +221,7 @@ Snake.Menue.NextLevel = function () {
                 _levelWindow.addLevelView(_level);
 
 
-            })
+            });
             //mit Spacebar weiter
             document.onkeydown = function (event) {
                 if(event.keyCode == 32){
@@ -231,7 +231,7 @@ Snake.Menue.NextLevel = function () {
                     _levelWindow.addLevelView(_level);
 
                 }
-            }
+            };
         }
         // wenn das Spiel siegreich beendet wurde...
         else {
@@ -253,11 +253,11 @@ Snake.Menue.NextLevel = function () {
                     var _levelWindow = new Snake.Menue.Level();
                     _levelWindow.addLevelView(_level);
                 }
-            }
+            };
             //End Button Listeners
             _highScore.addEventListener("click", function (event) {   //startet Spiel
                 Snake.Menue.Highscore();
-            })
+            });
             _firstLevelButton.addEventListener("click", function (event) {   //startet Spiel
                 stage.removeAllChildren();   //erst alle Elemente von Stage entfernen
                 _level = 1;
@@ -268,13 +268,13 @@ Snake.Menue.NextLevel = function () {
                 //startGame(_level); //Spielfeld wird neu geladen mit erstem Level
                 //console.log("level "+_level);
 
-            })//End Button Listeners
+            });//End Button Listeners
 
             addHighScoreToForm();
         }
         stage.update();
-    }//end NextLevelView
-}//end NextLevel
+    };//end NextLevelView
+};//end NextLevel
 
 Snake.Menue.Highscore = function() {
     //Erzeugung eines XMLHttpRequest-Objekts mit Fallback für IE 5-6
@@ -293,11 +293,11 @@ Snake.Menue.Highscore = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             writeHighscore(xmlhttp.responseText);
         }
-    }
+    };
     //PHP-Script von Server aufrufen
     xmlhttp.open("GET","http://janabo.de/prison-snake/highscore.php");
     xmlhttp.send();
-}
+};
 //
 function writeHighscore(json) {
     //wandelt JSON-Objekt in JavsScript-Objekt um
