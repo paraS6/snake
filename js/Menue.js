@@ -7,7 +7,8 @@ var _level = 1;
 Snake.Menue.StartMenue = function() {
 
         var _startButton = new Snake.Menue.Buttons("img/spiel_starten_button.png", 0, 0); //Startbutton erstellen
-        var _instButton = new Snake.Menue.Buttons("img/anleitung_button.png", 0, 100); //Instructionbutton erstellen
+        var _instButton = new Snake.Menue.Buttons("img/anleitung_button.png", 0, 70); //Instructionbutton erstellen
+        var _highscoreButton = new Snake.Menue.Buttons("img/highscore_button.png", 0, 140); //Highscorebutton erstellen
 
         //erstellt ein MenueFenster mit Ueberschrift
         this.menueWindow = function (title, x, y) {
@@ -26,21 +27,22 @@ Snake.Menue.StartMenue = function() {
         //erstellt Startfenster den Spiels
         this.addMenueView = function () {
 
-            
 
             var startWindow = new createjs.Bitmap("img/spielstart.png"); //erstellt neues Menuefenster
 
-            stage.addChild(startWindow, _startButton, _instButton);
+            stage.addChild(startWindow, _startButton, _instButton, _highscoreButton);
             stage.update();
+
             //mit Spacebar weiter
             document.onkeydown = function (event) {
-                if(event.keyCode == 32){
+                if (event.keyCode == 32) {
                     //console.log("space");
                     var _levelWindow = new Snake.Menue.Level();
                     stage.removeAllChildren();
                     _levelWindow.addLevelView(_level);
                 }
             };
+
             // Button Listeners
             _startButton.addEventListener("click", function (event) {   //startet Spiel
                 var _levelWindow = new Snake.Menue.Level();
@@ -54,7 +56,9 @@ Snake.Menue.StartMenue = function() {
                 _instWindow.addInstructionView();
 
             });
-
+            _highscoreButton.addEventListener("click", function (event) {    //fuehrt zum Instructionfenster
+                Snake.Menue.Highscore();
+            });
             //end ButtonListeners
 
     };//end addMenueView
@@ -170,7 +174,7 @@ Snake.Menue.GameOver = function () {
             }
         };
         //Button Listeners
-        _highScore.addEventListener("click", function (event) {   //startet Spiel
+        _highScore.addEventListener("click", function (event) {   //öffnet Highscore
             Snake.Menue.Highscore();
         });
         _restartButton.addEventListener("click", function (event) {   //startet Spiel
@@ -316,5 +320,29 @@ function writeHighscore(json) {
     document.getElementsByTagName("tbody")[0].innerHTML = tbody;
     //Tabelle und Highscore-Seite sichtbar machen
     document.getElementsByTagName("table")[0].style.display = 'block';
+    document.getElementsByTagName("h2")[0].style.display = 'block';
+    document.getElementsByTagName("h1")[0].style.display = 'none';
     document.getElementById('highscore-container').style.display = 'block';
+    document.onkeydown = function (event) {
+        if (event.keyCode == 32) {
+            return false;}
+    };
+}
+
+function closeHighscore() {
+    document.getElementsByTagName('table')[0].style.display = 'none';
+    document.getElementById('highscore').style.display = 'none';
+    document.getElementById('highscore-container').style.display = 'none';
+    document.getElementsByTagName('h2')[0].style.display = 'none';
+    document.getElementsByTagName('h1')[0].style.display = 'none';
+    //mit Spacebar weiter
+    document.onkeydown = function (event) {
+        if (event.keyCode == 32) {
+            //console.log("space");
+            var _levelWindow = new Snake.Menue.Level();
+            stage.removeAllChildren();
+            _level = 1;
+            _levelWindow.addLevelView(_level);
+        }
+    };
 }
