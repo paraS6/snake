@@ -11,7 +11,7 @@ Snake.Sound.Soundregister = function(){
         {src: "level_3.mp3", id: "level3"},
 
         {src: "menu.mp3", id: "menu"},
-        {src: "good_item.wav", id: "goodItem" },
+        {src: "good_item.mp3", id: "goodItem" },
         {src: "bad_item.wav", id: "badItem"},
         {src: "key.mp3", id: "key"},
         {src: "win.mp3", id: "winning"},

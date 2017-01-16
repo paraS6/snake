@@ -221,7 +221,7 @@ Snake.Controlls = Snake.Controlls || {};
                     // Falls Schlange auf ein Prisoner-Collectible stößt....
                     if(_grid.get(nx, ny) == PRISONER){
                         var goodItemSound = new Snake.Sound.Soundregister();
-                        goodItemSound.playAndLoad("good_item.wav");
+                        goodItemSound.playAndLoad("good_item.mp3");
 
                         // ...wird der Schwanz verlängert und...
                         var tail = {x:nx, y:ny, d: _prisonSnake.direction};

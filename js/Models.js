@@ -72,17 +72,17 @@ Snake.Models.Score = function() {
 
         if(_grid.get(nx, ny) == TUNA){
             var tunaSound = new Snake.Sound.Soundregister();
-            tunaSound.playAndLoad("good_item.wav");
+            tunaSound.playAndLoad("good_item.mp3");
             this.set(30);
         }
         else if(_grid.get(nx, ny) == CIGARETTES){
             var cigaSound = new Snake.Sound.Soundregister();
-            cigaSound.playAndLoad("good_item.wav");
+            cigaSound.playAndLoad("good_item.mp3");
             this.set(20);
         }
         else if(_grid.get(nx,ny) == PRISONER){
             var prisonerSound = new Snake.Sound.Soundregister();
-            prisonerSound.playAndLoad("good_item.wav");
+            prisonerSound.playAndLoad("good_item.mp3");
             this.set(10);
         }
         else if(_grid.get(nx,ny) == KNIFE) {
