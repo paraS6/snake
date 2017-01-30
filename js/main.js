@@ -18,9 +18,9 @@
     const GATE = 9;
 
     var scoreTime = 0;
-    var playingFieldImg;
-    var dummyImg;
-    var doorImg;
+    var playingFieldImg;    //Variable für verschiedene Hintergründe
+    var dummyImg;           //Variable für verschiedene Prisoner
+    var doorImg;            //Variable für verschiedene Türen
 
     // Main-Methode, welche beim Laden der HTML-Seite getriggert wird
     function Main() {

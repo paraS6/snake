@@ -65,19 +65,6 @@ Snake.Controlls = Snake.Controlls || {};
                 createjs.Ticker.addEventListener("tick", this.handleTick);
                 createjs.Ticker.paused = false;
             };//end initTicker
-
-            //prüft ob ein Level beendet wurde
-            this.levelFinished = function (_grid,_prisonSnake) {
-                var lF = false;
-                
-                var score = _score.get();
-                
-                if (_prisonSnake.last == GATE && score > 400){
-                    lF = true;
-                }
-                return lF;
-            };//end levelFinished
-
             
             var that = this;    //Hilfsvariable, um das richtige "this" zu referenzieren
 

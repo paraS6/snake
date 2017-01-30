@@ -1,4 +1,4 @@
-// Pfade für Dtaien
+// Pfade für Dateien
 var paths = {
     images: {
         src: 'img/*',
@@ -14,7 +14,7 @@ var paths = {
     }
 };
 
-// gulp.js einbauen
+// gulp.js und Plug-Ins einbauen
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
 var imagemin = require('gulp-imagemin');
@@ -23,7 +23,7 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 
 
-// CSS Datei minimieren
+// CSS Datei minifizieren
 gulp.task('css', function() {
     return gulp.src(paths.styles.src)
         .pipe(cleanCSS({debug: true}, function(details) {
@@ -33,21 +33,23 @@ gulp.task('css', function() {
         .pipe(gulp.dest(paths.styles.dest));
 });
 
-// Bilder verlustfrei
+// Bilder verlustfrei komprimieren
 gulp.task('images', function() {
     gulp.src(paths.images.src)
         .pipe(imagemin())
         .pipe(gulp.dest(paths.images.dest))
 });
 
+//JS-Dateien überprüfen
 gulp.task('lint', function() {
     return gulp.src(paths.scripts.src)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
-// JavaScript Dateien konkatenieren und Minimieren
+// JavaScript Dateien konkatenieren und minifizieren
 gulp.task('scripts', function(){
+    // Reihenfolge beachten
     gulp.src([
         'js/main.js',
         'js/Menue.js',
@@ -64,7 +66,7 @@ gulp.task('scripts', function(){
         .pipe(gulp.dest(paths.scripts.dest));
 });
 
-// Dateien beobachten bei Änderungen
+// Dateien beobachten bei jeder Änderungen
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
     gulp.watch('css/*.css', ['css']);

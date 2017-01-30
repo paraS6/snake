@@ -67,6 +67,7 @@ Snake.Views.PrisonSnakeView = function () {
                                         if(dummyCounter%2===0){  //jeder zweite Prisoner in der Schlange benutzt versetzte Sprites, dadurch entsteht Bewegung
                                             spriteVariation = "";
                                         }
+                                        //Die richtige Animation anhängen
                                         dummy[dummyCounter].s.gotoAndPlay(_prisonSnake._queue[dummyCounter].d+spriteVariation);
                                         dummy[dummyCounter].d = _prisonSnake._queue[dummyCounter].d+spriteVariation;
                                     }

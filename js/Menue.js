@@ -269,8 +269,6 @@ Snake.Menue.NextLevel = function () {
                 console.log("LEVEL:" + _level);
                 var _levelWindow = new Snake.Menue.Level();
                 _levelWindow.addLevelView(_level);
-                //startGame(_level); //Spielfeld wird neu geladen mit erstem Level
-                //console.log("level "+_level);
 
             });//End Button Listeners
 
@@ -301,8 +299,7 @@ Snake.Menue.Highscore = function() {
     //PHP-Script von Server aufrufen
     xmlhttp.open("GET","http://janabo.de/prison-snake/highscore.php");
     xmlhttp.send();
-};
-//
+};//End Highscore
 function writeHighscore(json) {
     //wandelt JSON-Objekt in JavsScript-Objekt um
     var liste = JSON.parse(json);
@@ -327,7 +324,7 @@ function writeHighscore(json) {
         if (event.keyCode == 32) {
             return false;}
     };
-}
+}//End writeHighscore
 
 function closeHighscore() {
     document.getElementsByTagName('table')[0].style.display = 'none';

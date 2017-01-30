@@ -51,7 +51,6 @@ Snake.Models.Grid = function(){
 Snake.Models.Score = function() {
 
     // initialer Spielstand
-    // TODO: über Variable initialisieren
     var _score = 0;
     var _keyCollected = false;
     var startTime = new Date();
